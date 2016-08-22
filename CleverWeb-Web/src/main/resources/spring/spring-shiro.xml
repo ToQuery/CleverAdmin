@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- ================ Shiro start ================ -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="ShiroRealm" />
+    </bean>
+
+    <!-- 項目自定义的Realm -->
+    <bean id="ShiroRealm" class="com.cleverweb.web.shiro.ShiroRealm" />
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+
+        <property name="loginUrl" value="/login" />
+
+        <property name="successUrl" value="/main/index" />
+
+        <property name="unauthorizedUrl" value="/login" />
+
+        <property name="filterChainDefinitions">
+            <value>
+                /static/login/** 			= anon
+                /static/js/myjs/** 			= authc
+                /static/js/** 				= anon
+                /uploadFiles/uploadImgs/** 	= anon
+                /code.do 					= anon
+                /login_login	 			= anon
+                /app**/** 					= anon
+                /weixin/** 					= anon
+                /**							= authc
+            </value>
+        </property>
+    </bean>
+    <!-- ================ Shiro end ================ -->
+</beans>

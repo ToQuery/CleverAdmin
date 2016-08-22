@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ImgmsgMapper">
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into WEIXIN_IMGMSG(
+			KEYWORD,	
+			CREATETIME,	
+			STATUS,	
+			BZ,	
+			TITLE1,	
+			DESCRIPTION1,	
+			IMGURL1,	
+			TOURL1,	
+			TITLE2,	
+			DESCRIPTION2,	
+			IMGURL2,	
+			TOURL2,	
+			TITLE3,	
+			DESCRIPTION3,	
+			IMGURL3,	
+			TOURL3,	
+			TITLE4,	
+			DESCRIPTION4,	
+			IMGURL4,	
+			TOURL4,	
+			TITLE5,	
+			DESCRIPTION5,	
+			IMGURL5,	
+			TOURL5,	
+			TITLE6,	
+			DESCRIPTION6,	
+			IMGURL6,	
+			TOURL6,	
+			TITLE7,	
+			DESCRIPTION7,	
+			IMGURL7,	
+			TOURL7,	
+			TITLE8,	
+			DESCRIPTION8,	
+			IMGURL8,	
+			TOURL8,	
+			IMGMSG_ID
+		) values (
+			#{KEYWORD},	
+			#{CREATETIME},	
+			#{STATUS},	
+			#{BZ},	
+			#{TITLE1},	
+			#{DESCRIPTION1},	
+			#{IMGURL1},	
+			#{TOURL1},	
+			#{TITLE2},	
+			#{DESCRIPTION2},	
+			#{IMGURL2},	
+			#{TOURL2},	
+			#{TITLE3},	
+			#{DESCRIPTION3},	
+			#{IMGURL3},	
+			#{TOURL3},	
+			#{TITLE4},	
+			#{DESCRIPTION4},	
+			#{IMGURL4},	
+			#{TOURL4},	
+			#{TITLE5},	
+			#{DESCRIPTION5},	
+			#{IMGURL5},	
+			#{TOURL5},	
+			#{TITLE6},	
+			#{DESCRIPTION6},	
+			#{IMGURL6},	
+			#{TOURL6},	
+			#{TITLE7},	
+			#{DESCRIPTION7},	
+			#{IMGURL7},	
+			#{TOURL7},	
+			#{TITLE8},	
+			#{DESCRIPTION8},	
+			#{IMGURL8},	
+			#{TOURL8},	
+			#{IMGMSG_ID}
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from WEIXIN_IMGMSG
+		where 
+			IMGMSG_ID = #{IMGMSG_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  WEIXIN_IMGMSG
+			set 
+				KEYWORD = #{KEYWORD},
+				STATUS = #{STATUS},
+				BZ = #{BZ},
+				TITLE1 = #{TITLE1},
+				DESCRIPTION1 = #{DESCRIPTION1},
+				IMGURL1 = #{IMGURL1},
+				TOURL1 = #{TOURL1},
+				TITLE2 = #{TITLE2},
+				DESCRIPTION2 = #{DESCRIPTION2},
+				IMGURL2 = #{IMGURL2},
+				TOURL2 = #{TOURL2},
+				TITLE3 = #{TITLE3},
+				DESCRIPTION3 = #{DESCRIPTION3},
+				IMGURL3 = #{IMGURL3},
+				TOURL3 = #{TOURL3},
+				TITLE4 = #{TITLE4},
+				DESCRIPTION4 = #{DESCRIPTION4},
+				IMGURL4 = #{IMGURL4},
+				TOURL4 = #{TOURL4},
+				TITLE5 = #{TITLE5},
+				DESCRIPTION5 = #{DESCRIPTION5},
+				IMGURL5 = #{IMGURL5},
+				TOURL5 = #{TOURL5},
+				TITLE6 = #{TITLE6},
+				DESCRIPTION6 = #{DESCRIPTION6},
+				IMGURL6 = #{IMGURL6},
+				TOURL6 = #{TOURL6},
+				TITLE7 = #{TITLE7},
+				DESCRIPTION7 = #{DESCRIPTION7},
+				IMGURL7 = #{IMGURL7},
+				TOURL7 = #{TOURL7},
+				TITLE8 = #{TITLE8},
+				DESCRIPTION8 = #{DESCRIPTION8},
+				IMGURL8 = #{IMGURL8},
+				TOURL8 = #{TOURL8},
+			IMGMSG_ID = IMGMSG_ID
+			where 
+				IMGMSG_ID = #{IMGMSG_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			KEYWORD,	
+			CREATETIME,	
+			STATUS,	
+			BZ,	
+			TITLE1,	
+			DESCRIPTION1,	
+			IMGURL1,	
+			TOURL1,	
+			TITLE2,	
+			DESCRIPTION2,	
+			IMGURL2,	
+			TOURL2,	
+			TITLE3,	
+			DESCRIPTION3,	
+			IMGURL3,	
+			TOURL3,	
+			TITLE4,	
+			DESCRIPTION4,	
+			IMGURL4,	
+			TOURL4,	
+			TITLE5,	
+			DESCRIPTION5,	
+			IMGURL5,	
+			TOURL5,	
+			TITLE6,	
+			DESCRIPTION6,	
+			IMGURL6,	
+			TOURL6,	
+			TITLE7,	
+			DESCRIPTION7,	
+			IMGURL7,	
+			TOURL7,	
+			TITLE8,	
+			DESCRIPTION8,	
+			IMGURL8,	
+			TOURL8,	
+			IMGMSG_ID
+		from 
+			WEIXIN_IMGMSG
+		where 
+			IMGMSG_ID = #{IMGMSG_ID}
+	</select>
+	
+	<!-- 匹配关键词 -->
+	<select id="findByKw" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			*
+		from 
+			WEIXIN_IMGMSG
+		where 
+			KEYWORD = #{KEYWORD}
+		<if test="IMGMSG_ID != null and IMGMSG_ID != ''">
+			and IMGMSG_ID != #{IMGMSG_ID} 
+		</if>
+		<if test="STATUS == null or STATUS == ''">
+			and STATUS = '1' 
+		</if>
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.KEYWORD,	
+				a.CREATETIME,	
+				a.STATUS,	
+				a.BZ,	
+				a.TITLE1,	
+				a.DESCRIPTION1,	
+				a.IMGURL1,	
+				a.TOURL1,	
+				a.TITLE2,	
+				a.DESCRIPTION2,	
+				a.IMGURL2,	
+				a.TOURL2,	
+				a.TITLE3,	
+				a.DESCRIPTION3,	
+				a.IMGURL3,	
+				a.TOURL3,	
+				a.TITLE4,	
+				a.DESCRIPTION4,	
+				a.IMGURL4,	
+				a.TOURL4,	
+				a.TITLE5,	
+				a.DESCRIPTION5,	
+				a.IMGURL5,	
+				a.TOURL5,	
+				a.TITLE6,	
+				a.DESCRIPTION6,	
+				a.IMGURL6,	
+				a.TOURL6,	
+				a.TITLE7,	
+				a.DESCRIPTION7,	
+				a.IMGURL7,	
+				a.TOURL7,	
+				a.TITLE8,	
+				a.DESCRIPTION8,	
+				a.IMGURL8,	
+				a.TOURL8,	
+				a.IMGMSG_ID
+		from 
+				WEIXIN_IMGMSG a
+			where
+				1=1
+		<if test="pd.KEYWORD != null and pd.KEYWORD != ''"><!-- 关键词检索 -->
+			and a.KEYWORD LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+		</if>
+		<if test="pd.STATUS!=null and pd.STATUS!='' and pd.STATUS!=0"><!-- 状态检索 -->
+			and a.STATUS = #{pd.STATUS} 
+		</if>
+		order by a.CREATETIME desc
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.KEYWORD,	
+				a.CREATETIME,	
+				a.STATUS,	
+				a.BZ,	
+				a.TITLE1,	
+				a.DESCRIPTION1,	
+				a.IMGURL1,	
+				a.TOURL1,	
+				a.TITLE2,	
+				a.DESCRIPTION2,	
+				a.IMGURL2,	
+				a.TOURL2,	
+				a.TITLE3,	
+				a.DESCRIPTION3,	
+				a.IMGURL3,	
+				a.TOURL3,	
+				a.TITLE4,	
+				a.DESCRIPTION4,	
+				a.IMGURL4,	
+				a.TOURL4,	
+				a.TITLE5,	
+				a.DESCRIPTION5,	
+				a.IMGURL5,	
+				a.TOURL5,	
+				a.TITLE6,	
+				a.DESCRIPTION6,	
+				a.IMGURL6,	
+				a.TOURL6,	
+				a.TITLE7,	
+				a.DESCRIPTION7,	
+				a.IMGURL7,	
+				a.TOURL7,	
+				a.TITLE8,	
+				a.DESCRIPTION8,	
+				a.IMGURL8,	
+				a.TOURL8,	
+				a.IMGMSG_ID
+		from 
+				WEIXIN_IMGMSG a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from WEIXIN_IMGMSG
+		where 
+			IMGMSG_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- FH QQ 313596790 -->
+</mapper>

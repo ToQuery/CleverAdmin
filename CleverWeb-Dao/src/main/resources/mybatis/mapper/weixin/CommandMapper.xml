@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommandMapper">
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into WEIXIN_COMMAND(
+			KEYWORD,	
+			COMMANDCODE,	
+			CREATETIME,	
+			STATUS,	
+			BZ,	
+			COMMAND_ID
+		) values (
+			#{KEYWORD},	
+			#{COMMANDCODE},	
+			#{CREATETIME},	
+			#{STATUS},	
+			#{BZ},	
+			#{COMMAND_ID}
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from WEIXIN_COMMAND
+		where 
+			COMMAND_ID = #{COMMAND_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  WEIXIN_COMMAND
+			set 
+				KEYWORD = #{KEYWORD},
+				COMMANDCODE = #{COMMANDCODE},
+				STATUS = #{STATUS},
+				BZ = #{BZ},
+			COMMAND_ID = COMMAND_ID
+			where 
+				COMMAND_ID = #{COMMAND_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			KEYWORD,	
+			COMMANDCODE,	
+			CREATETIME,	
+			STATUS,	
+			BZ,	
+			COMMAND_ID
+		from 
+			WEIXIN_COMMAND
+		where 
+			COMMAND_ID = #{COMMAND_ID}
+	</select>
+	
+	<!-- 匹配关键词 -->
+	<select id="findByKw" parameterType="pd" resultType="pd" useCache="false">
+		select 
+			COMMANDCODE
+		from 
+			WEIXIN_COMMAND
+		where 
+			KEYWORD = #{KEYWORD}
+		<if test="COMMAND_ID != null and COMMAND_ID != ''">
+			and COMMAND_ID != #{COMMAND_ID} 
+		</if>
+		<if test="STATUS == null or STATUS == ''">
+			and STATUS = '1' 
+		</if>
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a.KEYWORD,	
+				a.COMMANDCODE,	
+				a.CREATETIME,	
+				a.STATUS,	
+				a.BZ,	
+				a.COMMAND_ID
+		from 
+				WEIXIN_COMMAND a
+		where
+				1=1
+		<if test="pd.KEYWORD != null and pd.KEYWORD != ''"><!-- 关键词检索 -->
+			and a.KEYWORD LIKE CONCAT(CONCAT('%', #{pd.KEYWORD}),'%')
+		</if>
+		<if test="pd.STATUS!=null and pd.STATUS!='' and pd.STATUS!=0"><!-- 状态检索 -->
+			and a.STATUS = #{pd.STATUS} 
+		</if>
+		order by a.CREATETIME desc
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.KEYWORD,	
+				a.COMMANDCODE,	
+				a.CREATETIME,	
+				a.STATUS,	
+				a.BZ,	
+				a.COMMAND_ID
+		from 
+				WEIXIN_COMMAND a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from WEIXIN_COMMAND
+		where 
+			COMMAND_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+	<!-- FH QQ 313596790 -->
+</mapper>

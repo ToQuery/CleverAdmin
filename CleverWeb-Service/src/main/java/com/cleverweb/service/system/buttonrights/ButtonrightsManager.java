@@ -39,7 +39,7 @@ public interface ButtonrightsManager{
 	 * @param pd
 	 * @throws Exception
 	 */
-	public List<PageData> listAllBrAndQxname(PageData pd)throws Exception;
+	public List<PageData> listAllBrAndQxname(PageData pd);
 	
 }
 

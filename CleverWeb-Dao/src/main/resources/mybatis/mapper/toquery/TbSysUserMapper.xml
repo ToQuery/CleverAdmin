@@ -39,7 +39,13 @@
         from tb_sys_user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-
+    findAllByRoleId
+    <select id="findAllByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_user
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from tb_sys_user
     where user_id = #{userId,jdbcType=VARCHAR}

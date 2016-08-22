@@ -2,7 +2,8 @@ package com.cleverweb.dao;
 
 import com.cleverweb.core.repository.MyBatisRepository;
 import com.cleverweb.entity.po.TbSysUser;
-import com.cleverweb.entity.vo.TbSysUserRole;
+
+import java.util.List;
 
 @MyBatisRepository
 public interface TbSysUserMapper {
@@ -24,4 +25,12 @@ public interface TbSysUserMapper {
      * @return 用户信息
      */
     TbSysUser findByUserName(String userName);
+
+    /**
+     * 根据角色ID获取该角色下所有的用户
+     *
+     * @param roleId 角色ID
+     * @return 所有的用户
+     */
+    List<TbSysUser> findAllByRoleId(String roleId);
 }

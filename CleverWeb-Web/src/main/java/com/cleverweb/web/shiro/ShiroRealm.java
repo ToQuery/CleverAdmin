@@ -4,11 +4,10 @@ package com.cleverweb.web.shiro;
 import com.cleverweb.common.util.Const;
 import com.cleverweb.entity.po.TbSysRole;
 import com.cleverweb.entity.po.TbSysUser;
-import com.cleverweb.entity.vo.TbSysUserRole;
+import com.cleverweb.entity.vo.SysUserRole;
 import com.cleverweb.service.ISysRoleService;
 import com.cleverweb.service.ISysUserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -45,7 +44,7 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         Session session = SecurityUtils.getSubject().getSession();
         session.removeAttribute(Const.SESSION_SECURITY_CODE);    //清除登录验证码的session
-        TbSysUserRole userRole = new TbSysUserRole().convert(dbUser);
+        SysUserRole userRole = new SysUserRole().convert(dbUser);
         TbSysRole sysRole = sysRoleService.findByRoleId(dbUser.getRoleId());
         userRole.setRole(sysRole);
         session.setAttribute(Const.SESSION_USER, userRole);            //把用户信息放session中

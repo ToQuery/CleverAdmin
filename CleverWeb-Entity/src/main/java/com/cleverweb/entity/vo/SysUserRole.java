@@ -1,6 +1,5 @@
 package com.cleverweb.entity.vo;
 
-import com.alibaba.druid.support.json.JSONParser;
 import com.alibaba.fastjson.JSON;
 import com.cleverweb.entity.po.TbSysRole;
 import com.cleverweb.entity.po.TbSysUser;
@@ -8,14 +7,14 @@ import com.cleverweb.entity.po.TbSysUser;
 /**
  * Created by ToQuery on 2016-08-20.
  */
-public class TbSysUserRole extends TbSysUser {
+public class SysUserRole extends TbSysUser {
 
-    public TbSysUserRole() {
+    public SysUserRole() {
 
     }
 
-    public TbSysUserRole convert(TbSysUser sysUser) {
-        TbSysUserRole sysUserRole = JSON.parseObject(JSON.toJSONString(sysUser), this.getClass());
+    public SysUserRole convert(TbSysUser sysUser) {
+        SysUserRole sysUserRole = JSON.parseObject(JSON.toJSONString(sysUser), this.getClass());
         return sysUserRole;
     }
 

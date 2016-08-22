@@ -6,9 +6,8 @@ import com.cleverweb.common.util.RightsHelper;
 import com.cleverweb.core.entity.system.Menu;
 import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.entity.po.TbSysRole;
-import com.cleverweb.entity.vo.TbSysUserRole;
+import com.cleverweb.entity.vo.SysUserRole;
 import com.cleverweb.service.ISysUserService;
-import com.cleverweb.service.system.appuser.AppuserManager;
 import com.cleverweb.service.system.buttonrights.ButtonrightsManager;
 import com.cleverweb.service.system.fhbutton.FhbuttonManager;
 import com.cleverweb.service.system.menu.MenuManager;
@@ -46,8 +45,6 @@ public class IndexController extends BaseController {
     private ButtonrightsManager buttonrightsService;
     @Resource(name = "fhbuttonService")
     private FhbuttonManager fhbuttonService;
-    @Resource(name = "appuserService")
-    private AppuserManager appuserService;
 
     /**
      * 访问系统首页
@@ -60,7 +57,7 @@ public class IndexController extends BaseController {
         ModelAndView mv = new ModelAndView();
         PageData pd = this.getPageData();
         Session session = Jurisdiction.getSession();
-        TbSysUserRole sessionUserRole = (TbSysUserRole) session.getAttribute(Const.SESSION_USER);                //读取session中的用户信息(单独用户信息)
+        SysUserRole sessionUserRole = (SysUserRole) session.getAttribute(Const.SESSION_USER);                //读取session中的用户信息(单独用户信息)
         if (sessionUserRole == null) {
             RedirectView rdv = new RedirectView("/login");
             return new ModelAndView(rdv);
@@ -128,7 +125,7 @@ public class IndexController extends BaseController {
      *
      * @return
      */
-    public Map<String, String> getUQX(TbSysUserRole sessionUserRole) {
+    public Map<String, String> getUQX(SysUserRole sessionUserRole) {
         Map<String, String> map = new HashMap<String, String>();
         TbSysRole sysRole = sessionUserRole.getRole();
         map.put("adds", sysRole.getAddQx());    //增
@@ -137,9 +134,11 @@ public class IndexController extends BaseController {
         map.put("chas", sysRole.getChaQx());    //查
         List<PageData> buttonQXnamelist = new ArrayList<PageData>();
         if ("admin".equals(sessionUserRole.getUserName())) {
-            buttonQXnamelist = fhbuttonService.listAll(pd);                    //admin用户拥有所有按钮权限
+            buttonQXnamelist = fhbuttonService.listAll(null);                    //admin用户拥有所有按钮权限
         } else {
-            buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pd);    //此角色拥有的按钮权限标识列表
+            PageData pageData = new PageData();
+            pageData.put("ROLE_ID",sysRole.getRoleId());
+            buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pageData);    //此角色拥有的按钮权限标识列表
         }
         for (int i = 0; i < buttonQXnamelist.size(); i++) {
             map.put(buttonQXnamelist.get(i).getString("QX_NAME"), "1");        //按钮权限

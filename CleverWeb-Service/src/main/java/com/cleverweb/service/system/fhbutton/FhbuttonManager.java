@@ -40,7 +40,7 @@ public interface FhbuttonManager{
 	 * @param pd
 	 * @throws Exception
 	 */
-	public List<PageData> listAll(PageData pd)throws Exception;
+	public List<PageData> listAll(PageData pd);
 	
 	/**通过id获取数据
 	 * @param pd

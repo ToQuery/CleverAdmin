@@ -1,8 +1,10 @@
 package com.cleverweb.service;
 
+import com.cleverweb.common.util.PageData;
 import com.cleverweb.entity.po.TbSysUser;
-import com.cleverweb.entity.vo.TbSysUserRole;
 import com.github.pagehelper.Page;
+
+import java.util.List;
 
 /**
  * Created by ToQuery on 2016-08-20.
@@ -33,4 +35,11 @@ public interface ISysUserService {
      * @return
      */
     Page<TbSysUser> findListByPage(Page<TbSysUser> page);
+
+    /**
+     * 根据角色ID获取该角色下所有的用户
+     * @param roleId    角色ID
+     * @return  所有的用户
+     */
+    List<TbSysUser> findAllByRoleId(String roleId);
 }

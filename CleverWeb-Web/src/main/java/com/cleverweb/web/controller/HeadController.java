@@ -1,4 +1,4 @@
-package com.cleverweb.web.controller.system.head;
+package com.cleverweb.web.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.cleverweb.common.util.mail.SimpleMailSender;
-import com.cleverweb.service.system.appuser.AppuserManager;
+import com.cleverweb.service.ISysUserService;
 import com.cleverweb.service.system.fhsms.FhsmsManager;
 import org.apache.shiro.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,20 +24,18 @@ import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.common.util.Tools;
 
-/** 
- * 类名称：HeadController
- * 创建人：FH 313596790Q
- * 修改时间：2015年11月23日
- * @version
+/**
+ *
  */
 @Controller
 @RequestMapping(value="/head")
 public class HeadController extends BaseController {
+
+    @Autowired
+    private ISysUserService sysUserService;
 	
-	@Resource(name="userService")
-	private UserManager userService;	
-	@Resource(name="appuserService")
-	private AppuserManager appuserService;
+//	@Resource(name="userService")
+//	private UserManager userService;
 	@Resource(name="fhsmsService")
 	private FhsmsManager fhsmsService;
 	
@@ -56,7 +55,6 @@ public class HeadController extends BaseController {
 			pds = (PageData)session.getAttribute(Const.SESSION_userpds);
 			if(null == pds){
 				pd.put("USERNAME", Jurisdiction.getUsername());//当前登录者用户名
-				pds = userService.findByUsername(pd);
 				session.setAttribute(Const.SESSION_userpds, pds);
 			}
 			pdList.add(pds);
@@ -168,7 +166,6 @@ public class HeadController extends BaseController {
 				if("yes".endsWith(isAll)){
 					try {
 						List<PageData> userList = new ArrayList<PageData>();
-						userList = "appuser".equals(fmsg) ? appuserService.listAllUser(pd):userService.listAllUser(pd);
 						zcount = userList.size();
 						try {
 							for(int i=0;i<userList.size();i++){

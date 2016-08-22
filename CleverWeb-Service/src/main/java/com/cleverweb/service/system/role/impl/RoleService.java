@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.cleverweb.dao.DaoSupport;
 import com.cleverweb.core.entity.Page;
 import com.cleverweb.core.entity.system.Role;
-import com.cleverweb.service.system.user.UserManager;
 import com.cleverweb.common.util.PageData;
 
 /**	角色
@@ -75,7 +74,6 @@ public class RoleService implements RoleManager {
 	}
 	
 	/**通过id查找
-	 * @param roleId
 	 * @return
 	 * @throws Exception
 	 */

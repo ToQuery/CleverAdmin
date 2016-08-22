@@ -10,6 +10,9 @@ import javax.annotation.Resource;
 
 
 import com.alibaba.fastjson.JSON;
+import com.cleverweb.entity.po.TbSysUser;
+import com.cleverweb.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,17 +41,16 @@ import com.cleverweb.common.util.Tools;
 @Controller
 @RequestMapping(value="/role")
 public class RoleController extends BaseController {
-	
+
+	@Autowired
+	private ISysUserService sysUserService;
+
 	String menuUrl = "role.do"; //菜单地址(权限用)
 	@Resource(name="menuService")
 	private MenuManager menuService;
 	@Resource(name="roleService")
 	private RoleManager roleService;
-	@Resource(name="userService")
-	private UserManager userService;
-	@Resource(name="appuserService")
-	private AppuserManager appuserService;
-	
+
 	/** 进入权限首页
 	 * @param 
 	 * @return
@@ -195,9 +197,8 @@ public class RoleController extends BaseController {
 			if(roleList_z.size() > 0){
 				errInfo = "false";											//下级有数据时，删除失败
 			}else{
-				List<PageData> userlist = userService.listAllUserByRoldId(pd);			//此角色下的用户
-				List<PageData> appuserlist = appuserService.listAllAppuserByRorlid(pd);	//此角色下的会员
-				if(userlist.size() > 0 || appuserlist.size() > 0){						//此角色已被使用就不能删除
+				List<TbSysUser> userlist = sysUserService.findAllByRoleId(ROLE_ID);			//此角色下的用户
+				if(userlist.size() > 0 ){						//此角色已被使用就不能删除
 					errInfo = "false2";
 				}else{
 				roleService.deleteRoleById(ROLE_ID);	//执行删除

@@ -2,11 +2,12 @@ package com.cleverweb.service.impl;
 
 import com.cleverweb.dao.TbSysUserMapper;
 import com.cleverweb.entity.po.TbSysUser;
-import com.cleverweb.entity.vo.TbSysUserRole;
 import com.cleverweb.service.ISysUserService;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by ToQuery on 2016-08-20.
@@ -56,5 +57,16 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public Page<TbSysUser> findListByPage(Page<TbSysUser> page) {
         return null;
+    }
+
+    /**
+     * 根据角色ID获取该角色下所有的用户
+     *
+     * @param roleId 角色ID
+     * @return 所有的用户
+     */
+    @Override
+    public List<TbSysUser> findAllByRoleId(String roleId) {
+        return sysUserMapper.findAllByRoleId(roleId);
     }
 }

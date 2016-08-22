@@ -1,6 +1,21 @@
 package com.cleverweb.web.controller.system.tools;
 
 
+import com.cleverweb.common.util.AppUtil;
+import com.cleverweb.common.util.Const;
+import com.cleverweb.common.util.DelAllFile;
+import com.cleverweb.common.util.FileDownload;
+import com.cleverweb.common.util.Freemarker;
+import com.cleverweb.common.util.MapDistance;
+import com.cleverweb.common.util.PageData;
+import com.cleverweb.common.util.PathUtil;
+import com.cleverweb.web.controller.base.BaseController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -8,21 +23,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import com.cleverweb.common.util.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.cleverweb.web.controller.base.BaseController;
-import com.cleverweb.core.entity.Page;
-import com.cleverweb.core.entity.system.Role;
-import com.cleverweb.service.system.menu.MenuManager;
-import com.cleverweb.service.system.role.RoleManager;
-import com.cleverweb.service.system.user.UserManager;
 
 /** 
  * 类名称：ToolController 系统工具

@@ -58,7 +58,7 @@ public class ButtonrightsService implements ButtonrightsManager{
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public List<PageData> listAllBrAndQxname(PageData pd)throws Exception{
+	public List<PageData> listAllBrAndQxname(PageData pd){
 		return (List<PageData>)dao.findForList("ButtonrightsMapper.listAllBrAndQxname", pd);
 	}
 

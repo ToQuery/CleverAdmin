@@ -6,7 +6,7 @@ import com.cleverweb.common.util.ObjectExcelView;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.core.entity.Page;
 import com.cleverweb.service.system.fhbutton.FhbuttonManager;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;

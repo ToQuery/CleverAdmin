@@ -1,4 +1,4 @@
-package com.cleverweb.web.controller.base;
+package com.cleverweb.web.controller;
 
 
 import javax.servlet.http.HttpServletRequest;

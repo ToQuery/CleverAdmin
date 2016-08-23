@@ -21,10 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import com.cleverweb.core.entity.system.Menu;
 import com.cleverweb.core.entity.system.Role;
-import com.cleverweb.service.system.appuser.AppuserManager;
 import com.cleverweb.service.system.role.RoleManager;
 import com.cleverweb.service.system.menu.MenuManager;
 import com.cleverweb.common.util.AppUtil;

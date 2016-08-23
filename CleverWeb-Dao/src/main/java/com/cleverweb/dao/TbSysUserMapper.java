@@ -33,4 +33,10 @@ public interface TbSysUserMapper {
      * @return 所有的用户
      */
     List<TbSysUser> findAllByRoleId(String roleId);
+
+    /**
+     * 获取所有的用户
+     * @return  所有的用户
+     */
+    List<TbSysUser> findList();
 }

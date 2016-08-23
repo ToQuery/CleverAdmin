@@ -38,6 +38,8 @@
 			};
 			var zn = '${zTreeNodes}';
 			var zTreeNodes = eval(zn);
+			console.info(zTreeNodes);
+			debugger;
 			zTree = $("#leftTree").zTree(setting, zTreeNodes);
 		});
 	

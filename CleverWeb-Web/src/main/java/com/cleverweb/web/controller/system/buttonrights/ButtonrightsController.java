@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import com.cleverweb.core.entity.system.Role;
 import com.cleverweb.service.system.role.RoleManager;
 import com.cleverweb.common.util.AppUtil;

@@ -3,18 +3,15 @@ package com.cleverweb.web.controller;
 import com.cleverweb.common.util.Const;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.common.util.RightsHelper;
-import com.cleverweb.core.entity.system.Menu;
-import com.cleverweb.core.utils.Jurisdiction;
+import com.cleverweb.entity.po.TbSysButton;
 import com.cleverweb.entity.po.TbSysRole;
+import com.cleverweb.entity.vo.SysMenu;
 import com.cleverweb.entity.vo.SysUserRole;
+import com.cleverweb.service.ISysButtonService;
+import com.cleverweb.service.ISysMenuService;
+import com.cleverweb.service.ISysRoleButtonService;
 import com.cleverweb.service.ISysUserService;
-import com.cleverweb.service.system.buttonrights.ButtonrightsManager;
-import com.cleverweb.service.system.fhbutton.FhbuttonManager;
-import com.cleverweb.service.system.menu.MenuManager;
-import com.cleverweb.service.system.role.RoleManager;
-import com.cleverweb.web.controller.base.BaseController;
 import org.apache.logging.log4j.util.Strings;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,15 +33,13 @@ public class IndexController extends BaseController {
 
     @Autowired
     private ISysUserService sysUserService;
+    @Autowired
+    private ISysMenuService sysMenuService;
+    @Autowired
+    private ISysButtonService sysButtonService;
+    @Autowired
+    private ISysRoleButtonService sysRoleButtonService;
 
-    @Resource(name = "menuService")
-    private MenuManager menuService;
-    @Resource(name = "roleService")
-    private RoleManager roleService;
-    @Resource(name = "buttonrightsService")
-    private ButtonrightsManager buttonrightsService;
-    @Resource(name = "fhbuttonService")
-    private FhbuttonManager fhbuttonService;
 
     /**
      * 访问系统首页
@@ -53,10 +48,9 @@ public class IndexController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/main/{changeMenu}")
-    public ModelAndView login_index(@PathVariable("changeMenu") String changeMenu) {
+    public ModelAndView login_index(HttpSession session, @PathVariable("changeMenu") String changeMenu) {
         ModelAndView mv = new ModelAndView();
         PageData pd = this.getPageData();
-        Session session = Jurisdiction.getSession();
         SysUserRole sessionUserRole = (SysUserRole) session.getAttribute(Const.SESSION_USER);                //读取session中的用户信息(单独用户信息)
         if (sessionUserRole == null) {
             RedirectView rdv = new RedirectView("/login");
@@ -67,28 +61,30 @@ public class IndexController extends BaseController {
         String roleRights = sysRole != null ? sysRole.getRights() : "";                //角色权限(菜单权限)
         session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
         session.setAttribute(Const.SESSION_USERNAME, USERNAME);                //放入用户名到session
-        List<Menu> allmenuList = new ArrayList<Menu>();
-        if (null == session.getAttribute(USERNAME + Const.SESSION_allmenuList)) {
-            allmenuList = menuService.listAllMenuQx("0");                    //获取所有菜单
+        List<SysMenu> sysMenuList = (List<SysMenu>) session.getAttribute(USERNAME + Const.SESSION_allmenuList);
+        if (sysMenuList == null ) {
+            sysMenuList = sysMenuService.findListByParentId(0);
             if (Strings.isNotBlank(roleRights)) {
-                allmenuList = this.readMenu(allmenuList, roleRights);        //根据角色权限获取本权限的菜单列表
+                sysMenuList = this.readMenu(sysMenuList, roleRights);        //根据角色权限获取本权限的菜单列表
+            }else{
+                sysMenuList = new ArrayList<>();
             }
-            session.setAttribute(USERNAME + Const.SESSION_allmenuList, allmenuList);//菜单权限放入session中
-        } else {
-            allmenuList = (List<Menu>) session.getAttribute(USERNAME + Const.SESSION_allmenuList);
+            session.setAttribute(USERNAME + Const.SESSION_allmenuList, sysMenuList);//菜单权限放入session中
         }
+
+
         //切换菜单处理=====start
-        List<Menu> menuList = new ArrayList<Menu>();
+        List<SysMenu> menuList = new ArrayList<SysMenu>();
         if (null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))) {
-            List<Menu> menuList1 = new ArrayList<Menu>();
-            List<Menu> menuList2 = new ArrayList<Menu>();
+            List<SysMenu> menuList1 = new ArrayList<SysMenu>();
+            List<SysMenu> menuList2 = new ArrayList<SysMenu>();
             //拆分菜单
-            for (int i = 0; i < allmenuList.size(); i++) {
-                Menu menu = allmenuList.get(i);
-                if ("1".equals(menu.getMENU_TYPE())) {
-                    menuList1.add(menu);
+            for (int i = 0; i < sysMenuList.size(); i++) {
+                SysMenu sysMenu = sysMenuList.get(i);
+                if ("1".equals(sysMenu.getMenuType())) {
+                    menuList1.add(sysMenu);
                 } else {
-                    menuList2.add(menu);
+                    menuList2.add(sysMenu);
                 }
             }
             session.removeAttribute(USERNAME + Const.SESSION_menuList);
@@ -104,7 +100,7 @@ public class IndexController extends BaseController {
                 menuList = menuList2;
             }
         } else {
-            menuList = (List<Menu>) session.getAttribute(USERNAME + Const.SESSION_menuList);
+            menuList = (List<SysMenu>) session.getAttribute(USERNAME + Const.SESSION_menuList);
         }
         //切换菜单处理=====end
         if (null == session.getAttribute(USERNAME + Const.SESSION_QX)) {
@@ -128,20 +124,16 @@ public class IndexController extends BaseController {
     public Map<String, String> getUQX(SysUserRole sessionUserRole) {
         Map<String, String> map = new HashMap<String, String>();
         TbSysRole sysRole = sessionUserRole.getRole();
-        map.put("adds", sysRole.getAddQx());    //增
-        map.put("dels", sysRole.getDelQx());    //删
-        map.put("edits", sysRole.getEditQx());    //改
-        map.put("chas", sysRole.getChaQx());    //查
-        List<PageData> buttonQXnamelist = new ArrayList<PageData>();
-        if ("admin".equals(sessionUserRole.getUserName())) {
-            buttonQXnamelist = fhbuttonService.listAll(null);                    //admin用户拥有所有按钮权限
-        } else {
-            PageData pageData = new PageData();
-            pageData.put("ROLE_ID",sysRole.getRoleId());
-            buttonQXnamelist = buttonrightsService.listAllBrAndQxname(pageData);    //此角色拥有的按钮权限标识列表
+        map.put("add", sysRole.getAddQx());    //增
+        map.put("del", sysRole.getDelQx());    //删
+        map.put("edit", sysRole.getEditQx());    //改
+        map.put("cha", sysRole.getChaQx());    //查
+        List<TbSysButton> buttonList = sysButtonService.findList();
+        if (!"admin".equals(sessionUserRole.getUserName())) {
+            buttonList = sysButtonService.findListByRoleId(sysRole.getRoleId());    //此角色拥有的按钮权限标识列表
         }
-        for (int i = 0; i < buttonQXnamelist.size(); i++) {
-            map.put(buttonQXnamelist.get(i).getString("QX_NAME"), "1");        //按钮权限
+        for (int i = 0; i < buttonList.size(); i++) {
+            map.put(buttonList.get(i).getQxName(), "1");        //按钮权限
         }
         return map;
     }
@@ -149,18 +141,18 @@ public class IndexController extends BaseController {
     /**
      * 根据角色权限获取本权限的菜单列表(递归处理)
      *
-     * @param menuList：传入的总菜单
+     * @param sysMenuList：传入的总菜单
      * @param roleRights：加密的权限字符串
      * @return
      */
-    public List<Menu> readMenu(List<Menu> menuList, String roleRights) {
-        for (int i = 0; i < menuList.size(); i++) {
-            menuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, menuList.get(i).getMENU_ID()));
-            if (menuList.get(i).isHasMenu()) {        //判断是否有此菜单权限
-                this.readMenu(menuList.get(i).getSubMenu(), roleRights);//是：继续排查其子菜单
+    public List<SysMenu> readMenu(List<SysMenu> sysMenuList, String roleRights) {
+        for (int i = 0; i < sysMenuList.size(); i++) {
+            sysMenuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, sysMenuList.get(i).getMenuId()));
+            if (sysMenuList.get(i).isHasMenu()) {        //判断是否有此菜单权限
+                this.readMenu(sysMenuList.get(i).getSubMenu(), roleRights);//是：继续排查其子菜单
             }
         }
-        return menuList;
+        return sysMenuList;
     }
 
 

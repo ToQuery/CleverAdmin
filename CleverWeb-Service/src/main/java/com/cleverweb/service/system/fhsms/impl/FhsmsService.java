@@ -88,7 +88,7 @@ public class FhsmsService implements FhsmsManager {
      * @param pd
      * @throws Exception
      */
-    public PageData findFhsmsCount(String USERNAME) throws Exception {
+    public PageData findFhsmsCount(String USERNAME)  {
         return (PageData) dao.findForObject("FhsmsMapper.findFhsmsCount", USERNAME);
     }
 

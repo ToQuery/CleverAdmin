@@ -24,9 +24,14 @@
     user_id, user_name, password, nick_name, rights, role_id, status, bz, skin, email, 
     index_num, phone, last_time, last_ip, create_time
   </sql>
-    <sql id="Base_Column_List_Role" >
+    <sql id="Base_Column_List_Role">
         role_id, role_name, rights, parent_id, add_qx, del_qx, edit_qx, cha_qx
     </sql>
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_user
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -39,7 +44,6 @@
         from tb_sys_user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-    findAllByRoleId
     <select id="findAllByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>

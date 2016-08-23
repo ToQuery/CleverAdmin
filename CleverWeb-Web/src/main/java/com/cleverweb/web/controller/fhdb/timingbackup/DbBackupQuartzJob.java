@@ -6,7 +6,7 @@ import com.cleverweb.common.util.PageData;
 import com.cleverweb.common.util.Tools;
 import com.cleverweb.service.fhdb.brdb.impl.BRdbService;
 import com.cleverweb.service.fhdb.timingbackup.impl.TimingBackUpService;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;

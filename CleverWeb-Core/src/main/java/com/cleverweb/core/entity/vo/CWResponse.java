@@ -3,11 +3,11 @@ package com.cleverweb.core.entity.vo;
 /**
  * Created by ToQuery on 2016-08-20.
  */
-public class CWResponse {
+public class CWResponse<T> {
 
     private String code = "";
     private String msg = "";
-    private String body = "";
+    private T body ;
 
     public CWResponse() {
     }
@@ -17,7 +17,7 @@ public class CWResponse {
         this.msg = msg;
     }
 
-    public CWResponse(String code, String msg, String body) {
+    public CWResponse(String code, String msg, T body) {
         this.code = code;
         this.msg = msg;
         this.body = body;
@@ -39,11 +39,11 @@ public class CWResponse {
         this.msg = msg;
     }
 
-    public String getBody() {
+    public T getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(T body) {
         this.body = body;
     }
 }

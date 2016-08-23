@@ -1,7 +1,7 @@
 package com.cleverweb.web.controller.system.onlinemanager;
 
 import com.cleverweb.core.utils.Jurisdiction;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;

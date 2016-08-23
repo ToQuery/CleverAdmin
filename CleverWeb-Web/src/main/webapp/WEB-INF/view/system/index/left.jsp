@@ -48,12 +48,12 @@
 
 
 				<c:forEach items="${menuList}" var="menu1">
-				<c:if test="${menu1.hasMenu && '1' == menu1.MENU_STATE}">
-					<li class=""  id="lm${menu1.MENU_ID }">
+				<c:if test="${menu1.hasMenu && '1' == menu1.menuState}">
+					<li class=""  id="lm${menu1.menuId }">
 						<a style="cursor:pointer;" class="dropdown-toggle">
-							<i class="${menu1.MENU_ICON == null ? 'menu-icon fa fa-leaf black' : menu1.MENU_ICON}"></i>
+							<i class="${menu1.menuIcon == null ? 'menu-icon fa fa-leaf black' : menu1.menuIcon}"></i>
 							<span class="menu-text">
-								${menu1.MENU_NAME }
+								${menu1.menuName }
 							</span>
 							<c:if test="${'[]' != menu1.subMenu}"><b class="arrow fa fa-angle-down"></b></c:if>
 						</a>
@@ -61,22 +61,22 @@
 						<c:if test="${'[]' != menu1.subMenu}">
 						<ul class="submenu">
 						<c:forEach items="${menu1.subMenu}" var="menu2">
-							<c:if test="${menu2.hasMenu && '1' == menu2.MENU_STATE}">
-							<li class="" id="z${menu2.MENU_ID }">
-								<a style="cursor:pointer;" <c:if test="${not empty menu2.MENU_URL && '#' != menu2.MENU_URL}">target="mainFrame" onclick="siMenu('z${menu2.MENU_ID }','lm${menu1.MENU_ID }','${menu2.MENU_NAME }','${menu2.MENU_URL }')"</c:if><c:if test="${'[]' != menu2.subMenu}"> class="dropdown-toggle"</c:if>>
-									<i class="${menu2.MENU_ICON == null ? 'menu-icon fa fa-leaf black' : menu2.MENU_ICON}"></i>
-										${menu2.MENU_NAME }
+							<c:if test="${menu2.hasMenu && '1' == menu2.menuState}">
+							<li class="" id="z${menu2.menuId }">
+								<a style="cursor:pointer;" <c:if test="${not empty menu2.menuUrl && '#' != menu2.menuUrl}">target="mainFrame" onclick="siMenu('z${menu2.menuId }','lm${menu1.menuId }','${menu2.menuName }','${menu2.menuUrl }')"</c:if><c:if test="${'[]' != menu2.subMenu}"> class="dropdown-toggle"</c:if>>
+									<i class="${menu2.menuIcon == null ? 'menu-icon fa fa-leaf black' : menu2.menuIcon}"></i>
+										${menu2.menuName }
 									<c:if test="${'[]' != menu2.subMenu}"><b class="arrow fa fa-angle-down"></b></c:if>
 								</a>
 								<b class="arrow"></b>
 								<c:if test="${'[]' != menu2.subMenu}">
 								<ul class="submenu">
 									<c:forEach items="${menu2.subMenu}" var="menu3">
-									<c:if test="${menu3.hasMenu && '1' == menu3.MENU_STATE}">
-										<li class="" id="m${menu3.MENU_ID }">
-											<a style="cursor:pointer;" <c:if test="${not empty menu3.MENU_URL && '#' != menu3.MENU_URL}">target="mainFrame" onclick="siMenu('m${menu3.MENU_ID }','z${menu2.MENU_ID }','${menu3.MENU_NAME }','${menu3.MENU_URL }')"</c:if><c:if test="${'[]' != menu3.subMenu}"> class="dropdown-toggle"</c:if>>
-												<i class="${menu3.MENU_ICON == null ? 'menu-icon fa fa-leaf black' : menu3.MENU_ICON}"></i>
-													${menu3.MENU_NAME }
+									<c:if test="${menu3.hasMenu && '1' == menu3.menuState}">
+										<li class="" id="m${menu3.menuId }">
+											<a style="cursor:pointer;" <c:if test="${not empty menu3.menuUrl && '#' != menu3.menuUrl}">target="mainFrame" onclick="siMenu('m${menu3.menuId }','z${menu2.menuId }','${menu3.menuName }','${menu3.menuUrl }')"</c:if><c:if test="${'[]' != menu3.subMenu}"> class="dropdown-toggle"</c:if>>
+												<i class="${menu3.menuIcon == null ? 'menu-icon fa fa-leaf black' : menu3.menuIcon}"></i>
+													${menu3.menuName }
 												<c:if test="${'[]' != menu3.subMenu}"><b class="arrow fa fa-angle-down"></b></c:if>
 											</a>
 											<b class="arrow"></b>
@@ -84,16 +84,16 @@
 											<c:if test="${'[]' != menu3.subMenu}">
 											<ul class="submenu">
 												<c:forEach items="${menu3.subMenu}" var="menu4">
-												<c:if test="${menu4.hasMenu && '1' == menu4.MENU_STATE}">
-												<li class="" id="n${menu4.MENU_ID }">
+												<c:if test="${menu4.hasMenu && '1' == menu4.menuState}">
+												<li class="" id="n${menu4.menuId }">
 													<c:if test="${'[]' != menu4.subMenu}">
-													<a style="cursor:pointer;" target="mainFrame" target="mainFrame" onclick="siMenu('n${menu4.MENU_ID }','m${menu3.MENU_ID }','${menu4.MENU_NAME }','menu/otherlistMenu.do?MENU_ID=${menu4.MENU_ID }')">
+													<a style="cursor:pointer;" target="mainFrame" target="mainFrame" onclick="siMenu('n${menu4.menuId }','m${menu3.menuId }','${menu4.menuName }','menu/otherlistMenu.do?menuId=${menu4.menuId }')">
 													</c:if>
 													<c:if test="${'[]' == menu4.subMenu}">
-													<a style="cursor:pointer;" target="mainFrame" <c:if test="${not empty menu4.MENU_URL && '#' != menu4.MENU_URL}">target="mainFrame" onclick="siMenu('n${menu4.MENU_ID }','m${menu3.MENU_ID }','${menu4.MENU_NAME }','${menu4.MENU_URL }')"</c:if>>
+													<a style="cursor:pointer;" target="mainFrame" <c:if test="${not empty menu4.menuUrl && '#' != menu4.menuUrl}">target="mainFrame" onclick="siMenu('n${menu4.menuId }','m${menu3.menuId }','${menu4.menuName }','${menu4.menuUrl }')"</c:if>>
 													</c:if>
-														<i class="${menu4.MENU_ICON == null ? 'menu-icon fa fa-leaf black' : menu4.MENU_ICON}"></i>
-														${menu4.MENU_NAME }
+														<i class="${menu4.menuIcon == null ? 'menu-icon fa fa-leaf black' : menu4.menuIcon}"></i>
+														${menu4.menuName }
 													</a>
 													<b class="arrow"></b>
 												</li>

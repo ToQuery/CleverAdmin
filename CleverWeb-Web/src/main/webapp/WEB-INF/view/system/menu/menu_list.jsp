@@ -18,7 +18,7 @@
 	<script type="text/javascript">
 		//刷新ztree
 		function parentReload(){
-			if(null != ${MSG} && 'change' == ${MSG}){
+			if(null != '${MSG}' && 'change' == '${MSG}'){
 				parent.location.href="<%=basePath%>menu/listAllMenu.do?MENU_ID="+${MENU_ID};
 			}else{
 				//什么也不干

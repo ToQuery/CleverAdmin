@@ -4,7 +4,6 @@ import com.cleverweb.common.util.Const;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.common.util.Tools;
 import com.cleverweb.core.utils.Jurisdiction;
-import com.cleverweb.web.controller.base.BaseController;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;

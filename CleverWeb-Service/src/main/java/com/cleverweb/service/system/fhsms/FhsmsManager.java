@@ -50,9 +50,8 @@ public interface FhsmsManager{
 	
 	/**获取未读总数
 	 * @param pd
-	 * @throws Exception
 	 */
-	public PageData findFhsmsCount(String USERNAME)throws Exception;
+	public PageData findFhsmsCount(String USERNAME);
 	
 	/**批量删除
 	 * @param ArrayDATA_IDS

@@ -5,7 +5,6 @@ import com.cleverweb.core.entity.vo.CWResponse;
 import com.cleverweb.core.exception.LoginException;
 import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.service.ISysUserService;
-import com.cleverweb.web.controller.base.BaseController;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;

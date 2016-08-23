@@ -9,6 +9,8 @@ import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by ToQuery on 2016-08-21.
  */
@@ -31,13 +33,10 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     /**
-     * 分页查询权限数据
-     *
-     * @param page
+     * 获取所有权限信息
      * @return
      */
-    @Override
-    public Page<Role> findListByPage(Page<TbSysUser> page) {
-        return null;
+    public List<TbSysRole> findList(){
+        return sysRoleMapper.findList();
     }
 }

@@ -48,14 +48,15 @@ public class SysUserServiceImpl implements ISysUserService {
         sysUserMapper.deleteByPrimaryKey(userId);
     }
 
+
     /**
      * 分页查询数据
      *
-     * @param page
      * @return
      */
     @Override
-    public Page<TbSysUser> findListByPage(Page<TbSysUser> page) {
+    public Page<TbSysUser> findListByPage() {
+//        return sysUserMapper.findList();
         return null;
     }
 
@@ -68,5 +69,15 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public List<TbSysUser> findAllByRoleId(String roleId) {
         return sysUserMapper.findAllByRoleId(roleId);
+    }
+
+    /**
+     * 获取所有的用户
+     *
+     * @return 所有的用户
+     */
+    @Override
+    public List<TbSysUser> findList() {
+        return sysUserMapper.findList();
     }
 }

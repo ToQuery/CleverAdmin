@@ -6,7 +6,7 @@ import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.core.entity.Page;
 import com.cleverweb.service.system.dictionaries.DictionariesManager;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

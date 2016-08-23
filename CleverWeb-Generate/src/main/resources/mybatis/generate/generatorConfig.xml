@@ -40,9 +40,19 @@
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>-->
 
-        <table tableName="tb_sys_role" domainObjectName="TbSysRole" enableCountByExample="false"
+       <!-- <table tableName="tb_sys_role" domainObjectName="TbSysRole" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="tb_sys_menu" domainObjectName="TbSysMenu" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <!--<table tableName="tb_sys_button" domainObjectName="TbSysButton" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <table tableName="tb_sys_role_button" domainObjectName="TbSysRoleButton" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
+
     </context>
 
 

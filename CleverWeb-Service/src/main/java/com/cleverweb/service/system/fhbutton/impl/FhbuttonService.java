@@ -69,7 +69,7 @@ public class FhbuttonService implements FhbuttonManager {
      */
     @SuppressWarnings("unchecked")
     public List<PageData> listAll(PageData pd)  {
-        return (List<PageData>) dao.findForList("FhbuttonMapper.listAll",null);
+        return (List<PageData>) dao.findForList("FhbuttonMapper.listAll",pd);
     }
 
     /**

@@ -9,7 +9,7 @@ import com.cleverweb.common.util.Freemarker;
 import com.cleverweb.common.util.MapDistance;
 import com.cleverweb.common.util.PageData;
 import com.cleverweb.common.util.PathUtil;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

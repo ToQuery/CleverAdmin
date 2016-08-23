@@ -17,7 +17,6 @@
     </typeAliases>-->
 
     <typeAliases>
-        <typeAlias type="com.cleverweb.core.entity.system.User" alias="User"/>
         <typeAlias type="com.cleverweb.core.entity.system.Role" alias="Role"/>
         <typeAlias type="com.cleverweb.core.entity.system.Menu" alias="Menu"/>
         <typeAlias type="com.cleverweb.core.entity.system.Dictionaries" alias="Dictionaries"/>

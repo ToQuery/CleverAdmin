@@ -11,7 +11,10 @@ import com.alibaba.fastjson.JSON;
 import com.cleverweb.common.util.*;
 import com.cleverweb.core.entity.system.Menu;
 import com.cleverweb.core.utils.Jurisdiction;
+import com.cleverweb.entity.vo.SysMenu;
+import com.cleverweb.service.ISysMenuService;
 import com.cleverweb.service.system.menu.MenuManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 
 /**
- * 类名称：MenuController 菜单处理
- * 创建人：FH
- * 创建时间：2015年10月27日
+ * 菜单处理
  */
 @Controller
 @RequestMapping(value = "/menu")
@@ -33,6 +34,9 @@ public class MenuController extends BaseController {
     String menuUrl = "menu.do"; //菜单地址(权限用)
     @Resource(name = "menuService")
     private MenuManager menuService;
+
+    @Autowired
+    private ISysMenuService sysMenuService;
 
     /**
      * 显示菜单列表
@@ -144,19 +148,19 @@ public class MenuController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/toEdit")
-    public ModelAndView toEdit(String id) throws Exception {
-        ModelAndView mv = this.getModelAndView();
+    public ModelAndView toEdit(@RequestParam("MENU_ID") String menuId) throws Exception {
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
         try {
             pd = this.getPageData();
-            pd.put("MENU_ID", id);                //接收过来的要修改的ID
+            pd.put("MENU_ID", menuId);                //接收过来的要修改的ID
             pd = menuService.getMenuById(pd);    //读取此ID的菜单数据
             mv.addObject("pd", pd);                //放入视图容器
             pd.put("MENU_ID", pd.get("PARENT_ID").toString());            //用作读取父菜单信息
             mv.addObject("pds", menuService.getMenuById(pd));            //传入父菜单所有信息
             mv.addObject("MENU_ID", pd.get("PARENT_ID").toString());    //传入父菜单ID，作为子菜单的父菜单ID用
             mv.addObject("MSG", "edit");
-            pd.put("MENU_ID", id);            //复原本菜单ID
+            pd.put("MENU_ID", menuId);            //复原本菜单ID
             mv.addObject("QX", Jurisdiction.getHC());    //按钮权限
             mv.setViewName("system/menu/menu_edit");
         } catch (Exception e) {
@@ -241,17 +245,13 @@ public class MenuController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/listAllMenu")
-    public ModelAndView listAllMenu(Model model, String MENU_ID) throws Exception {
+    public ModelAndView listAllMenu(Model model, @RequestParam(value = "menuId", defaultValue = "0") int menuId) throws Exception {
         ModelAndView mv = this.getModelAndView();
-        try {
-            String json = JSON.toJSONString(menuService.listAllMenu("0"));
-            json = json.replaceAll("MENU_ID", "id").replaceAll("PARENT_ID", "pId").replaceAll("MENU_NAME", "name").replaceAll("subMenu", "nodes").replaceAll("hasMenu", "checked").replaceAll("MENU_URL", "url");
-            model.addAttribute("zTreeNodes", json);
-            mv.addObject("MENU_ID", MENU_ID);
-            mv.setViewName("system/menu/menu_ztree");
-        } catch (Exception e) {
-            logger.error(e.toString(), e);
-        }
+        List<SysMenu> sysMenuList = sysMenuService.findListByParentId(menuId);
+        String zTreeJSON = JSON.toJSONString(sysMenuList).replaceAll("menuId", "id").replaceAll("parentId", "pId").replaceAll("menuName", "name").replaceAll("subMenu", "nodes").replaceAll("hasMenu", "checked").replaceAll("menuUrl", "url");
+        model.addAttribute("zTreeNodes", zTreeJSON);
+        mv.addObject("MENU_ID", menuId);
+        mv.setViewName("system/menu/menu_ztree");
         return mv;
     }
 

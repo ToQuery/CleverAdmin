@@ -50,7 +50,7 @@
 									<option value=""></option>
 									<option value="">全部</option>
 									<c:forEach items="${roleList}" var="role">
-										<option value="${role.ROLE_ID }" <c:if test="${pd.ROLE_ID==role.ROLE_ID}">selected</c:if>>${role.ROLE_NAME }</option>
+										<option value="${role.roleId }" <c:if test="${pd.roleId==role.roleId}">selected</c:if>>${role.roleName }</option>
 									</c:forEach>
 								  	</select>
 								</td>
@@ -62,7 +62,6 @@
 							</tr>
 						</table>
 						<!-- 检索  -->
-					
 						<table id="simple-table" class="table table-striped table-bordered table-hover"  style="margin-top:5px;">
 							<thead>
 								<tr>
@@ -87,43 +86,46 @@
 							<c:choose>
 								<c:when test="${not empty userList}">
 									<c:if test="${QX.cha == 1 }">
-									<c:forEach items="${userList}" var="user" varStatus="vs">
-												
+										<c:forEach items="${userList}" var="user" varStatus="vs">
 										<tr>
 											<td class='center' style="width: 30px;">
-												<c:if test="${user.USERNAME != 'admin'}"><label><input type='checkbox' name='ids' value="${user.USER_ID }" id="${user.EMAIL }" alt="${user.PHONE }" title="${user.USERNAME }" class="ace"/><span class="lbl"></span></label></c:if>
-												<c:if test="${user.USERNAME == 'admin'}"><label><input type='checkbox' disabled="disabled" class="ace" /><span class="lbl"></span></label></c:if>
+												<c:if test="${user.userName != 'admin'}"><label><input type='checkbox' name='ids' value="${user.userId }" id="${user.email }" alt="${user.phone }" title="${user.userName }" class="ace"/><span class="lbl"></span></label></c:if>
+												<c:if test="${user.userName == 'admin'}"><label><input type='checkbox' disabled="disabled" class="ace" /><span class="lbl"></span></label></c:if>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class="center">${user.NUMBER }</td>
-											<td class="center"><a onclick="viewUser('${user.USERNAME}')" style="cursor:pointer;">${user.USERNAME }</a></td>
-											<td class="center">${user.NAME }</td>
-											<td class="center">${user.ROLE_NAME }</td>
-											<td class="center"><a title="发送电子邮件" style="text-decoration:none;cursor:pointer;" <c:if test="${QX.email == 1 }">onclick="sendEmail('${user.EMAIL }');"</c:if>>${user.EMAIL }&nbsp;<i class="ace-icon fa fa-envelope-o"></i></a></td>
-											<td class="center">${user.LAST_LOGIN}</td>
-											<td class="center">${user.IP}</td>
+											<td class="center">${user.indexNum }</td>
+											<td class="center"><a onclick="viewUser('${user.userName}')" style="cursor:pointer;">${user.userName }</a></td>
+											<td class="center">${user.nickName }</td>
+											<td class="center">
+												<c:forEach items="${roleList}" var="role">
+													<c:if test="${user.roleId==role.roleId}">${role.roleName }</c:if>
+												</c:forEach>
+											</td>
+											<td class="center"><a title="发送电子邮件" style="text-decoration:none;cursor:pointer;" <c:if test="${QX.email == 1 }">onclick="sendEmail('${user.email }');"</c:if>>${user.email }&nbsp;<i class="ace-icon fa fa-envelope-o"></i></a></td>
+											<td class="center">${user.lastTime}</td>
+											<td class="center">${user.lastIp}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.FHSMS == 1 }">
-													<a class="btn btn-xs btn-info" title='发送站内信' onclick="sendFhsms('${user.USERNAME }');">
+													<a class="btn btn-xs btn-info" title='发送站内信' onclick="sendFhsms('${user.userName }');">
 														<i class="ace-icon fa fa-envelope-o bigger-120" title="发送站内信"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.sms == 1 }">
-													<a class="btn btn-xs btn-warning" title='发送短信' onclick="sendSms('${user.PHONE }');">
+													<a class="btn btn-xs btn-warning" title='发送短信' onclick="sendSms('${user.phone }');">
 														<i class="ace-icon fa fa-envelope-o bigger-120" title="发送短信"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="editUser('${user.USER_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="editUser('${user.userId}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="delUser('${user.USER_ID }','${user.USERNAME }');">
+													<a class="btn btn-xs btn-danger" onclick="delUser('${user.userId }','${user.userName }');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -136,7 +138,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.FHSMS == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="sendFhsms('${user.USERNAME }');" class="tooltip-info" data-rel="tooltip" title="发送站内信">
+																<a style="cursor:pointer;" onclick="sendFhsms('${user.userName }');" class="tooltip-info" data-rel="tooltip" title="发送站内信">
 																	<span class="blue">
 																		<i class="ace-icon fa fa-envelope bigger-120"></i>
 																	</span>
@@ -145,7 +147,7 @@
 															</c:if>
 															<c:if test="${QX.sms == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="sendSms('${user.PHONE }');" class="tooltip-success" data-rel="tooltip" title="发送短信">
+																<a style="cursor:pointer;" onclick="sendSms('${user.phone }');" class="tooltip-success" data-rel="tooltip" title="发送短信">
 																	<span class="blue">
 																		<i class="ace-icon fa fa-envelope-o bigger-120"></i>
 																	</span>
@@ -154,7 +156,7 @@
 															</c:if>
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="editUser('${user.USER_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="editUser('${user.userId}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -163,7 +165,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="delUser('${user.USER_ID }','${user.USERNAME }');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="delUser('${user.userId }','${user.userName }');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>

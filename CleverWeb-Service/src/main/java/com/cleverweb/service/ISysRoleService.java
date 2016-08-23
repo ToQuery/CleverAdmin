@@ -5,6 +5,8 @@ import com.cleverweb.entity.po.TbSysRole;
 import com.cleverweb.entity.po.TbSysUser;
 import com.github.pagehelper.Page;
 
+import java.util.List;
+
 /**
  * Created by ToQuery on 2016-08-21.
  */
@@ -18,9 +20,10 @@ public interface ISysRoleService {
     TbSysRole findByRoleId(String roleId);
 
     /**
-     * 分页查询权限数据
-     * @param page
+     * 获取所有权限信息
      * @return
      */
-    Page<Role> findListByPage(Page<TbSysUser> page);
+    List<TbSysRole> findList();
+
+
 }

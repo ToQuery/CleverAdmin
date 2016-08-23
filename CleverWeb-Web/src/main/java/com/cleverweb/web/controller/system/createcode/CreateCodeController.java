@@ -4,7 +4,7 @@ import com.cleverweb.common.util.*;
 import com.cleverweb.core.entity.Page;
 import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.service.system.createcode.CreateCodeManager;
-import com.cleverweb.web.controller.base.BaseController;
+import com.cleverweb.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

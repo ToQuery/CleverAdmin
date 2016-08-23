@@ -42,19 +42,18 @@ function getHeadMsg(){
 		//beforeSend: validateData,
 		cache: false,
 		success: function(data){
-			 $.each(data.list, function(i, list){
-				 $("#user_info").html('<small>Welcome</small> '+list.NAME+'');//登陆者资料
-				 user = list.USERNAME;
-				 USER_ID = list.USER_ID;		//用户ID
-				 if(list.USERNAME != 'admin'){
-					 $("#systemset").hide();	//隐藏系统设置
-				 }
-			 });
-			 fhsmsCount = Number(data.fhsmsCount);
+			var dataBody = data.body;
+			user = dataBody.sysUser.userName;
+			 $("#user_info").html('<small>Welcome</small> '+ user +'');//登陆者资料
+			 USER_ID = dataBody.sysUser.userId;		//用户ID
+			 if(user != 'admin'){
+				 $("#systemset").hide();	//隐藏系统设置
+			 }
+			 fhsmsCount = Number(dataBody.fhsmsCount);
 			 $("#fhsmsCount").html(Number(fhsmsCount));	//站内信未读总数
-			 TFHsmsSound = data.FHsmsSound;				//站内信提示音效
-			 wimadress = data.wimadress;				//即时聊天服务器IP和端口
-			 oladress = data.oladress;					//在线管理和站内信服务器IP和端口
+			 TFHsmsSound = dataBody.FHsmsSound;				//站内信提示音效
+			 wimadress = dataBody.wimadress;				//即时聊天服务器IP和端口
+			 oladress = dataBody.oladress;					//在线管理和站内信服务器IP和端口
 			 online();									//连接在线
 		}
 	});

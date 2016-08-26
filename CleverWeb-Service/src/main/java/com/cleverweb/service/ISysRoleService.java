@@ -25,5 +25,9 @@ public interface ISysRoleService {
      */
     List<TbSysRole> findList();
 
-
+    /**
+     * 通过父级ID获取所有权限信息
+     * @return
+     */
+    List<TbSysRole> findByParentId(String parentId);
 }

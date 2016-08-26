@@ -43,7 +43,7 @@ public class LogoutController extends BaseController{
         subject.logout();
         pd = this.getPageData();
         pd.put("msg", pd.getString("msg"));
-        pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
+        pd.put("SYSNAME", systemName); //读取系统名称
         mv.setViewName("system/index/login");
         mv.addObject("pd", pd);
         return mv;

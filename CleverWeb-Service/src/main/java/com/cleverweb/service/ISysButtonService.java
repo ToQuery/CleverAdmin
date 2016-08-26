@@ -20,4 +20,10 @@ public interface ISysButtonService {
      * @return  角色下的所有按钮
      */
     List<TbSysButton> findListByRoleId(String roleId);
+
+    /**
+     * 保存按钮
+     * @param sysButton
+     */
+    void save(TbSysButton sysButton);
 }

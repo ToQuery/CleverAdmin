@@ -35,4 +35,14 @@ public class SysButtonServiceImpl implements ISysButtonService {
     public List<TbSysButton> findListByRoleId(String roleId) {
         return sysButtonMapper.findListByRoleId(roleId);
     }
+
+    /**
+     * 保存按钮
+     *
+     * @param sysButton
+     */
+    @Override
+    public void save(TbSysButton sysButton) {
+        sysButtonMapper.insert(sysButton);
+    }
 }

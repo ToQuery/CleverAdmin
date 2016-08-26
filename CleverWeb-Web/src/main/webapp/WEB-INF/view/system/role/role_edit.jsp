@@ -22,12 +22,12 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<form action="role/${msg}.do" name="form1" id="form1"  method="post">
-						<input type="hidden" name="ROLE_ID" id="id" value="${pd.ROLE_ID}"/>
-						<input name="PARENT_ID" id="parent_id" value="${pd.parent_id }" type="hidden">
+						<input type="hidden" name="roleId" id="id" value="${sysRole.roleId}"/>
+						<input name="PARENT_ID" id="parent_id" value="${sysRole.parentId }" type="hidden">
 							<div id="zhongxin" style="padding-top:13px;">
 							<table class="center" style="width:100%;">
 								<tr style="text-align: center;">
-									<td><input type="text" name="ROLE_NAME" id="roleName" placeholder="这里输入名称" value="${pd.ROLE_NAME}"  title="名称" style="width:99%;"/></td>
+									<td><input type="text" name="ROLE_NAME" id="roleName" placeholder="这里输入名称" value="${sysRole.roleName}"  title="名称" style="width:99%;"/></td>
 								</tr>
 								<tr>
 									<td style="text-align: center;padding-top:5px;">

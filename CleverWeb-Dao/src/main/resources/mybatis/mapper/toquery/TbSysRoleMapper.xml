@@ -20,6 +20,12 @@
         from tb_sys_role
 
     </select>
+    <select id="findByParentId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role
+        WHERE parent_id = #{parentId}
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>

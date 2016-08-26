@@ -1,0 +1,92 @@
+<ul class="pagination pull-right no-margin">
+    <li><a>共<font color=red>"+totalResult+"</font>条</a></li>
+    <li><input type="number" value="" id="toGoPage" style="width:50px;text-align:center;float:left" placeholder="页码"/>
+    </li>
+    <li style="cursor:pointer;"><a onclick="toTZ();" class="btn btn-mini btn-success">跳转</a></li>
+    <li style="cursor:pointer;"><a onclick="nextPage(1)">首页</a></li>
+    <li style="cursor:pointer;"><a onclick="nextPage(" +(currentPage-1)+")">上页</a></li>
+    <li class="active"><a><font color='white'>"+i+"</font></a></li>
+    <li style="cursor:pointer;"><a onclick="nextPage(" +i+")">"+i+"</a></li>
+    <li style="cursor:pointer;"><a onclick="nextPage(" +(currentPage+1)+")">下页</a></li>
+    <li style="cursor:pointer;"><a onclick="nextPage(" +totalPage+")">尾页</a></li>
+    <li><a>共"+totalPage+"页</a></li>
+    <li>
+        <select title='显示条数' style="width:55px;float:left;margin-top:1px;" onchange="changeCount(this.value)">
+            <option value='"+showCount+"'>"+showCount+"</option>
+            <option value='10'>10</option>
+            <option value='20'>20</option>
+        </select>
+    </li>
+</ul>
+<script type="text/javascript">
+    function nextPage(page) {
+        top.jzts();
+        if (true && document.forms[0]) {
+            var url = document.forms[0].getAttribute("action");
+            if (url.indexOf('?') > -1) {
+                url += "&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            } else {
+                url += "?" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            }
+            url = url + page + "&" + (entityOrField ? "showCount" : "page.showCount") + "=" + showCount + "";
+            document.forms[0].action = url;
+            document.forms[0].submit();
+        } else {
+            var url = document.location + '';
+            if (url.indexOf('?') > -1) {
+                if (url.indexOf('currentPage') > -1) {
+                    var reg = /currentPage=\d*/g;
+                    url = url.replace(reg, 'currentPage=');
+                } else {
+                    url += "&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+                }
+            } else {
+                url += "?" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            }
+            url = url + page + "&" + (entityOrField ? "showCount" : "page.showCount") + "=" + showCount + "";
+            document.location = url;
+        }
+    }
+
+    function changeCount(value) {
+        top.jzts();
+        if (true && document.forms[0]) {
+            var url = document.forms[0].getAttribute("action");
+            if (url.indexOf('?') > -1) {
+                url += "&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            } else {
+                url += "?" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            }
+            url = url + "1&" + (entityOrField ? "showCount" : "page.showCount") + "=" + value;
+            document.forms[0].action = url;
+            document.forms[0].submit();
+        } else {
+            var url = document.location + '';
+            if (url.indexOf('?') > -1) {
+                if (url.indexOf('currentPage') > -1) {
+                    var reg = /currentPage=\d*/g;
+                    url = url.replace(reg, 'currentPage=');
+                } else {
+                    url += "1&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+                }
+            } else {
+                url += "?" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
+            }
+            url = url + "&" + (entityOrField ? "showCount" : "page.showCount") + "=" + value;
+            document.location = url;
+        }
+    }
+
+    function toTZ() {
+        var toPaggeVlue = document.getElementById("toGoPage").value;
+        if (toPaggeVlue == '') {
+            document.getElementById("toGoPage").value = 1;
+            return;
+        }
+        if (isNaN(Number(toPaggeVlue))) {
+            document.getElementById("toGoPage").value = 1;
+            return;
+        }
+        nextPage(toPaggeVlue);
+    }
+</script>

@@ -35,8 +35,8 @@
 										<c:choose>
 										<c:when test="${not empty roleList}">
 										<c:forEach items="${roleList}" var="role" varStatus="vs">
-											<td style="width:100px;" class="center" <c:choose><c:when test="${pd.ROLE_ID == role.ROLE_ID}">bgcolor="#FFC926" onMouseOut="javascript:this.bgColor='#FFC926';"</c:when><c:otherwise>bgcolor="#E5E5E5" onMouseOut="javascript:this.bgColor='#E5E5E5';"</c:otherwise></c:choose>  onMouseMove="javascript:this.bgColor='#FFC926';" >
-												<a href="role.do?ROLE_ID=${role.ROLE_ID }" style="text-decoration:none; display:block;"><i class="menu-icon fa fa-users"></i><font color="#666666">${role.ROLE_NAME }</font></a>
+											<td style="width:100px;" class="center" <c:choose><c:when test="${roleId == role.roleId}">bgcolor="#FFC926" onMouseOut="javascript:this.bgColor='#FFC926';"</c:when><c:otherwise>bgcolor="#E5E5E5" onMouseOut="javascript:this.bgColor='#E5E5E5';"</c:otherwise></c:choose>  onMouseMove="javascript:this.bgColor='#FFC926';" >
+												<a href="role.do?roleId=${role.roleId }" style="text-decoration:none; display:block;"><i class="menu-icon fa fa-users"></i><font color="#666666">${role.roleName }</font></a>
 											</td>
 											<td style="width:5px;"></td>
 										</c:forEach>
@@ -57,23 +57,23 @@
 								<td><font color="#808080">本组：</font></td>
 								<td>
 								<c:if test="${QX.edit == 1 }">
-								<a class="btn btn-mini btn-info" onclick="editRole('${pd.ROLE_ID }');">修改组名称<i class="icon-arrow-right  icon-on-right"></i></a>
+								<a class="btn btn-mini btn-info" onclick="editRole('${roleId }');">修改组名称<i class="icon-arrow-right  icon-on-right"></i></a>
 								</c:if>
 									<c:choose>
-										<c:when test="${pd.ROLE_ID == '99'}">
+										<c:when test="${pd.roleId == '99'}">
 										</c:when>
 										<c:otherwise>
 										<c:if test="${QX.edit == 1 }">
-										<a class="btn btn-mini btn-purple" onclick="editRights('${pd.ROLE_ID }');"><i class="icon-pencil"></i>组菜单权限</a>
+										<a class="btn btn-mini btn-purple" onclick="editRights('${roleId }');"><i class="icon-pencil"></i>组菜单权限</a>
 										</c:if>
 										</c:otherwise>
 									</c:choose>
 									<c:choose> 
-										<c:when test="${pd.ROLE_ID == '1' or pd.ROLE_ID == '2'}">
+										<c:when test="${roleId == '1' or roleId == '2'}">
 										</c:when>
 										<c:otherwise>
 										 <c:if test="${QX.del == 1 }">
-										 <a class='btn btn-mini btn-danger' title="删除" onclick="delRole('${pd.ROLE_ID }','z','${pd.ROLE_NAME }');"><i class='ace-icon fa fa-trash-o bigger-130'></i></a>
+										 <a class='btn btn-mini btn-danger' title="删除" onclick="delRole('${roleId }','z','${sysRole.roleName }');"><i class='ace-icon fa fa-trash-o bigger-130'></i></a>
 										 </c:if>
 										</c:otherwise>
 									</c:choose>
@@ -102,12 +102,12 @@
 										
 										<tr>
 										<td class='center' style="width:30px;">${vs.index+1}</td>
-										<td id="ROLE_NAMETd${var.ROLE_ID }">${var.ROLE_NAME }</td>
+										<td id="ROLE_NAMETd${var.roleId }">${var.roleName }</td>
 										<c:if test="${QX.edit == 1 }">
-										<td style="width:30px;"><a onclick="roleButton('${var.ROLE_ID }','add_qx');" class="btn btn-warning btn-mini" title="分配新增权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
-										<td style="width:30px;"><a onclick="roleButton('${var.ROLE_ID }','del_qx');" class="btn btn-warning btn-mini" title="分配删除权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
-										<td style="width:30px;"><a onclick="roleButton('${var.ROLE_ID }','edit_qx');" class="btn btn-warning btn-mini" title="分配修改权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
-										<td style="width:30px;"><a onclick="roleButton('${var.ROLE_ID }','cha_qx');" class="btn btn-warning btn-mini" title="分配查看权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
+										<td style="width:30px;"><a onclick="roleButton('${var.roleId }','add_qx');" class="btn btn-warning btn-mini" title="分配新增权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
+										<td style="width:30px;"><a onclick="roleButton('${var.roleId }','del_qx');" class="btn btn-warning btn-mini" title="分配删除权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
+										<td style="width:30px;"><a onclick="roleButton('${var.roleId }','edit_qx');" class="btn btn-warning btn-mini" title="分配修改权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
+										<td style="width:30px;"><a onclick="roleButton('${var.roleId }','cha_qx');" class="btn btn-warning btn-mini" title="分配查看权限"><i class="ace-icon fa fa-wrench bigger-110 icon-only"></i></a></td>
 										</c:if>
 										<td style="width:155px;">
 										<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -116,15 +116,15 @@
 										</div>
 										</c:if>
 										<c:if test="${QX.edit == 1 }">
-										<a class="btn btn-mini btn-purple" onclick="editRights('${var.ROLE_ID }');"><i class="icon-pencil"></i>菜单权限</a>
-										<a class='btn btn-mini btn-info' title="编辑" onclick="editRole('${var.ROLE_ID }');"><i class='ace-icon fa fa-pencil-square-o bigger-130'></i></a>
+										<a class="btn btn-mini btn-purple" onclick="editRights('${var.roleId }');"><i class="icon-pencil"></i>菜单权限</a>
+										<a class='btn btn-mini btn-info' title="编辑" onclick="editRole('${var.roleId }');"><i class='ace-icon fa fa-pencil-square-o bigger-130'></i></a>
 										</c:if>
 										<c:choose> 
-											<c:when test="${var.ROLE_ID == '2' or var.ROLE_ID == '1'}">
+											<c:when test="${var.roleId == '2' or var.roleId == '1'}">
 											</c:when>
 											<c:otherwise>
 											 <c:if test="${QX.del == 1 }">
-											 <a class='btn btn-mini btn-danger' title="删除" onclick="delRole('${var.ROLE_ID }','c','${var.ROLE_NAME }');"><i class='ace-icon fa fa-trash-o bigger-130'></i></a>
+											 <a class='btn btn-mini btn-danger' title="删除" onclick="delRole('${var.roleId }','c','${var.roleName }');"><i class='ace-icon fa fa-trash-o bigger-130'></i></a>
 											 </c:if>
 											</c:otherwise>
 										</c:choose>
@@ -147,7 +147,7 @@
 							</table>
 							<div>
 							<c:if test="${QX.add == 1 }">
-								&nbsp;&nbsp;<a class="btn btn-sm btn-success" onclick="addRole('${pd.ROLE_ID }');">新增角色</a>
+								&nbsp;&nbsp;<a class="btn btn-sm btn-success" onclick="addRole('${pd.roleId }');">新增角色</a>
 							</c:if>
 							</div>
 							
@@ -201,12 +201,12 @@
 		}
 		
 		//修改
-		function editRole(ROLE_ID){
+		function editRole(roleId){
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>role/toEdit.do?ROLE_ID='+ROLE_ID;
+			 diag.URL = '<%=basePath%>role/toEdit.do?roleId='+roleId;
 			 diag.Width = 222;
 			 diag.Height = 100;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -220,10 +220,10 @@
 		}
 		
 		//删除
-		function delRole(ROLE_ID,msg,ROLE_NAME){
+		function delRole(roleId,msg,ROLE_NAME){
 			bootbox.confirm("确定要删除["+ROLE_NAME+"]吗?", function(result) {
 				if(result) {
-					var url = "<%=basePath%>role/delete.do?ROLE_ID="+ROLE_ID+"&guid="+new Date().getTime();
+					var url = "<%=basePath%>role/delete.do?roleId="+roleId+"&guid="+new Date().getTime();
 					top.jzts();
 					$.get(url,function(data){
 						if("success" == data.result){
@@ -268,12 +268,12 @@
 		}
 		
 		//菜单权限
-		function editRights(ROLE_ID){
+		function editRights(roleId){
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag = true;
 			 diag.Title = "菜单权限";
-			 diag.URL = '<%=basePath%>role/menuqx.do?ROLE_ID='+ROLE_ID;
+			 diag.URL = '<%=basePath%>role/menuqx.do?roleId='+roleId;
 			 diag.Width = 320;
 			 diag.Height = 450;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -283,7 +283,7 @@
 		}
 		
 		//按钮权限(增删改查)
-		function roleButton(ROLE_ID,msg){
+		function roleButton(roleId,msg){
 			top.jzts();
 			if(msg == 'add_qx'){
 				var Title = "授权新增权限(此角色下打勾的菜单拥有新增权限)";
@@ -297,7 +297,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag = true;
 			 diag.Title = Title;
-			 diag.URL = '<%=basePath%>role/b4Button.do?ROLE_ID='+ROLE_ID+'&msg='+msg;
+			 diag.URL = '<%=basePath%>role/b4Button.do?roleId='+roleId+'&msg='+msg;
 			 diag.Width = 330;
 			 diag.Height = 450;
 			 diag.CancelEvent = function(){ //关闭事件

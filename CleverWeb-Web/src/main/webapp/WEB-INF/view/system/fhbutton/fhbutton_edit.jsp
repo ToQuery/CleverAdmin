@@ -24,20 +24,20 @@
 					<div class="col-xs-12">
 					
 					<form action="fhbutton/${msg }.do" name="Form" id="Form" method="post">
-						<input type="hidden" name="FHBUTTON_ID" id="FHBUTTON_ID" value="${pd.FHBUTTON_ID}"/>
+						<input type="hidden" name="buttonId" id="FHBUTTON_ID" value="${pd.FHBUTTON_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">名称:</td>
-								<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="30" placeholder="这里输入名称" title="名称" style="width:98%;"/></td>
+								<td><input type="text" name="buttonName" id="NAME" value="${pd.NAME}" maxlength="30" placeholder="这里输入名称" title="名称" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">权限标识:</td>
-								<td><input oninput="changecode(this.value)" type="text" name="QX_NAME" id="QX_NAME" value="${pd.QX_NAME}" maxlength="50" placeholder="这里输入权限标识" title="权限标识" style="width:98%;"/></td>
+								<td><input oninput="changecode(this.value)" type="text" name="qxName" id="QX_NAME" value="${pd.QX_NAME}" maxlength="50" placeholder="这里输入权限标识" title="权限标识" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:79px;text-align: right;padding-top: 13px;">备注:</td>
-								<td><input type="text" name="BZ" id="BZ" value="${pd.BZ}" maxlength="255" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
+								<td><input type="text" name="remark" id="BZ" value="${pd.BZ}" maxlength="255" placeholder="这里输入备注" title="备注" style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:78px;height:130px;text-align: right;padding-top: 13px;">代码:</td>

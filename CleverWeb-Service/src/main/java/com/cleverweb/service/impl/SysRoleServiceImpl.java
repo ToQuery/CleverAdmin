@@ -39,4 +39,15 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public List<TbSysRole> findList(){
         return sysRoleMapper.findList();
     }
+
+    /**
+     * 通过父级ID获取所有权限信息
+     *
+     * @param parentId
+     * @return
+     */
+    @Override
+    public List<TbSysRole> findByParentId(String parentId) {
+        return sysRoleMapper.findByParentId(parentId);
+    }
 }

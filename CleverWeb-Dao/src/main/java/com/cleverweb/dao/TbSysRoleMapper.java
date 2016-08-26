@@ -24,4 +24,12 @@ public interface TbSysRoleMapper {
      * @return
      */
     List<TbSysRole> findList();
+
+    /**
+     * 通过父级ID获取所有权限信息
+     *
+     * @param parentId
+     * @return
+     */
+    List<TbSysRole> findByParentId(String parentId);
 }

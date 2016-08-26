@@ -1,19 +1,14 @@
 package com.cleverweb.web.controller.system.user;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
+import com.cleverweb.common.util.Const;
+import com.cleverweb.common.util.FileDownload;
+import com.cleverweb.common.util.PathUtil;
+import com.cleverweb.core.utils.Jurisdiction;
 import com.cleverweb.entity.po.TbSysRole;
 import com.cleverweb.entity.po.TbSysUser;
 import com.cleverweb.service.ISysRoleService;
 import com.cleverweb.service.ISysUserService;
+import com.cleverweb.web.controller.BaseController;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cleverweb.web.controller.BaseController;
-import com.cleverweb.core.entity.system.Role;
-import com.cleverweb.service.system.menu.MenuManager;
-import com.cleverweb.service.system.role.RoleManager;
-import com.cleverweb.common.util.Const;
-import com.cleverweb.common.util.FileDownload;
-import com.cleverweb.core.utils.Jurisdiction;
-import com.cleverweb.common.util.PathUtil;
+import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 系统用户管理
@@ -50,10 +44,6 @@ public class UserController extends BaseController {
     @Autowired
     private ISysRoleService sysRoleService;
 
-    @Resource(name = "roleService")
-    private RoleManager roleService;
-    @Resource(name = "menuService")
-    private MenuManager menuService;
 
     /**
      * 显示用户列表
@@ -71,7 +61,6 @@ public class UserController extends BaseController {
         mv.setViewName("system/user/user_list");
         mv.addObject("userList", userList);
         mv.addObject("roleList", roleList);
-//        mv.addObject("pd", pd);
         mv.addObject("QX", Jurisdiction.getHC());    //按钮权限
         return mv;
     }

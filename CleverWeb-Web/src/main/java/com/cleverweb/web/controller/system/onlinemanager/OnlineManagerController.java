@@ -30,8 +30,7 @@ public class OnlineManagerController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(){
-		logBefore(logger, "列表OnlineManager");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
+//		if(!Jurisdiction.buttonJurisdiction("", "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		mv.setViewName("system/onlinemanager/onlinemanager_list");
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限

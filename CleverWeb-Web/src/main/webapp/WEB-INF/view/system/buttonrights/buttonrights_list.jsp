@@ -29,11 +29,11 @@
 								<tr height="35">
 									<td style="width:50px;">角色组:</td>
 										<c:choose>
-										<c:when test="${not empty roleList}">
+										<c:when test="${not empty menuRoleList}">
 										<!-- 角色组循环 -->
-										<c:forEach items="${roleList}" var="role" varStatus="vs">
-											<td style="width:100px;" class="center" <c:choose><c:when test="${pd.ROLE_ID == role.ROLE_ID}">bgcolor="#FFC926" onMouseOut="javascript:this.bgColor='#FFC926';"</c:when><c:otherwise>bgcolor="#E5E5E5" onMouseOut="javascript:this.bgColor='#E5E5E5';"</c:otherwise></c:choose>  onMouseMove="javascript:this.bgColor='#FFC926';" >
-												<a href="buttonrights/list.do?ROLE_ID=${role.ROLE_ID }" style="text-decoration:none; display:block;"><i class="menu-icon fa fa-users"></i><font color="#666666">${role.ROLE_NAME }</font></a>
+										<c:forEach items="${menuRoleList}" var="menuRole" varStatus="vs">
+											<td style="width:100px;" class="center" <c:choose><c:when test="${sysRole.roleId == menuRole.roleId}">bgcolor="#FFC926" onMouseOut="javascript:this.bgColor='#FFC926';"</c:when><c:otherwise>bgcolor="#E5E5E5" onMouseOut="javascript:this.bgColor='#E5E5E5';"</c:otherwise></c:choose>  onMouseMove="javascript:this.bgColor='#FFC926';" >
+												<a href="buttonrights/list.do?roleId=${menuRole.roleId }" style="text-decoration:none; display:block;"><i class="menu-icon fa fa-users"></i><font color="#666666">${menuRole.roleName }</font></a>
 											</td>
 											<td style="width:5px;"></td>
 										</c:forEach>
@@ -54,32 +54,32 @@
 									<th class='center'>角色</th>
 									<c:if test="${QX.edit == 1 }">
 										<!-- 按钮循环 -->
-										<c:forEach items="${buttonlist}" var="fhbutton" varStatus="vsb">
-											<th class='center'>${fhbutton.NAME }</th>
+										<c:forEach items="${sysButtonList}" var="button" varStatus="vsb">
+											<th class='center'>${button.buttonName }</th>
 										</c:forEach>
 									</c:if>
 								</tr>
 								</thead>
 								<c:choose>
-									<c:when test="${not empty roleList_z}">
+									<c:when test="${not empty roleList}">
 										<c:if test="${QX.cha == 1 }">
 										<!-- 角色循环 -->
-										<c:forEach items="${roleList_z}" var="var" varStatus="vs">
+										<c:forEach items="${roleList}" var="role" varStatus="vs">
 										<tr>
 										<td class='center' style="width:30px;">${vs.index+1}</td>
-										<td class='center' id="ROLE_NAMETd${var.ROLE_ID }">${var.ROLE_NAME }</td>
+										<td class='center' id="ROLE_NAMETd${role.roleId }">${role.roleName }</td>
 										<c:if test="${QX.edit == 1 }">
 											<!-- 按钮循环 -->
-											<c:forEach items="${buttonlist}" var="fhbutton" varStatus="vsb">
+											<c:forEach items="${sysButtonList}" var="button" varStatus="vsb">
 												<!-- 关联表循环 -->
-												<c:forEach items="${roleFhbuttonlist}" var="varRb" varStatus="vsRb">
-													<c:if test="${var.ROLE_ID == varRb.ROLE_ID && fhbutton.FHBUTTON_ID == varRb.BUTTON_ID }">
+												<c:forEach items="${sysRoleButtonList}" var="roleButton" varStatus="vsRb">
+													<c:if test="${role.roleId == roleButton.roleId && button.buttonId == roleButton.buttonId }">
 														<c:set value="1" var="rbvalue"></c:set>
 													</c:if>
 												</c:forEach>
 												<td class='center' style="height: 20px;">
 													<label>
-														<input name="switch-field-1" onclick="upRb('${var.ROLE_ID}','${fhbutton.FHBUTTON_ID}')" class="ace ace-switch ace-switch-3" type="checkbox" <c:if test="${rbvalue == 1 }">checked="checked"</c:if> >
+														<input name="switch-field-1" onclick="upRb('${role.roleId}','${button.buttonId}')" class="ace ace-switch ace-switch-3" type="checkbox" <c:if test="${rbvalue == 1 }">checked="checked"</c:if> >
 														<span class="lbl"></span>
 													</label>
 												</td>
@@ -130,10 +130,10 @@
 		$(top.hangge());
 		
 		//处理按钮点击
-		function upRb(ROLE_ID,FHBUTTON_ID){
+		function upRb(roleId,buttonId){
 			$.ajax({
 				type: "POST",
-				url: "<%=basePath%>buttonrights/upRb.do?ROLE_ID="+ROLE_ID+"&BUTTON_ID="+FHBUTTON_ID+"&guid="+new Date().getTime(),
+				url: "<%=basePath%>buttonrights/upRb.do?roleId="+roleId+"&buttonId="+buttonId+"&guid="+new Date().getTime(),
 		    	data: encodeURI(""),
 				dataType:'json',
 				//beforeSend: validateData,

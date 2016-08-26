@@ -79,10 +79,10 @@
 					ids += tmpNode.id;
 				}
 			}
-			var ROLE_ID = "${ROLE_ID}";
+			var roleId = "${roleId}";
 			var url = "<%=basePath%>role/saveMenuqx.do";
 			var postData;
-			postData = {"ROLE_ID":ROLE_ID,"menuIds":ids};
+			postData = {"roleId":roleId,"menuIds":ids};
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
 			$.post(url,postData,function(data){

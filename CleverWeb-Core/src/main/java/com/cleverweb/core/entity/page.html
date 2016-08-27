@@ -21,7 +21,7 @@
 <script type="text/javascript">
     function nextPage(page) {
         top.jzts();
-        if (true && document.forms[0]) {
+        if (document.forms[0]) {
             var url = document.forms[0].getAttribute("action");
             if (url.indexOf('?') > -1) {
                 url += "&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";
@@ -50,7 +50,7 @@
 
     function changeCount(value) {
         top.jzts();
-        if (true && document.forms[0]) {
+        if ( document.forms[0]) {
             var url = document.forms[0].getAttribute("action");
             if (url.indexOf('?') > -1) {
                 url += "&" + (entityOrField ? "currentPage" : "page.currentPage") + "=";

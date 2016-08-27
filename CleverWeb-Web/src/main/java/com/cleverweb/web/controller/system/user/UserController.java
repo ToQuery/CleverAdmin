@@ -47,18 +47,16 @@ public class UserController extends BaseController {
 
     /**
      * 显示用户列表
-     *
-     * @return
-     * @throws Exception
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listUsers(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")int pageSize) throws Exception {
-        ModelAndView mv = new ModelAndView();
+                                  @RequestParam(value = "pageSize",defaultValue = "10")int pageSize)  {
+        ModelAndView mv = new ModelAndView("system/user/user_list");
         Page<TbSysUser> page = PageHelper.startPage(pageNum,pageSize);
         List<TbSysUser> userList = sysUserService.findList();    //列出用户列表
         List<TbSysRole> roleList = sysRoleService.findList();//列出所有系统用户角色
-        mv.setViewName("system/user/user_list");
+        mv.addObject("page", page);
+
         mv.addObject("userList", userList);
         mv.addObject("roleList", roleList);
         mv.addObject("QX", Jurisdiction.getHC());    //按钮权限

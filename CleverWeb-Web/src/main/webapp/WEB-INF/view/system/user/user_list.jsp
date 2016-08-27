@@ -30,9 +30,9 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-						
+
 						<!-- 检索  -->
-						<form action="user/listUsers" method="post" name="userForm" id="userForm">
+						<form action="user/list" method="get" name="userForm" id="userForm">
 						<table style="margin-top:5px;">
 							<tr>
 								<td>
@@ -79,10 +79,10 @@
 									<th class="center">操作</th>
 								</tr>
 							</thead>
-													
+
 							<tbody>
-								
-							<!-- 开始循环 -->	
+
+							<!-- 开始循环 -->
 							<c:choose>
 								<c:when test="${not empty userList}">
 									<c:if test="${QX.cha == 1 }">
@@ -177,7 +177,7 @@
 												</div>
 											</td>
 										</tr>
-									
+
 									</c:forEach>
 									</c:if>
 									<c:if test="${QX.cha == 0 }">
@@ -194,7 +194,7 @@
 							</c:choose>
 							</tbody>
 						</table>
-						
+
 					<div class="page-header position-relative">
 					<table style="width:100%;">
 						<tr>
@@ -209,12 +209,15 @@
 								<a title="批量删除" class="btn btn-mini btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" ><i class='ace-icon fa fa-trash-o bigger-120'></i></a>
 								</c:if>
 							</td>
-							<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
+							<td style="vertical-align:top;">
+								<div id="pageHelper" class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">
+								</div>
+							</td>
 						</tr>
 					</table>
 					</div>
 					</form>
-	
+
 						</div>
 						<!-- /.col -->
 					</div>
@@ -246,10 +249,21 @@
 	<script src="static/ace/js/chosen.jquery.js"></script>
 	<!--提示框-->
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
+    <script type="text/javascript" src="script/page.js"></script>
 	</body>
 
 <script type="text/javascript">
-$(top.hangge());
+var pageHelper = {};
+pageHelper.pageNum = ${page.getPageNum()};
+pageHelper.pageSize = ${page.getPageSize()};
+pageHelper.total = ${page.getTotal()};
+pageHelper.pages = ${page.getPages()};
+$(function(){
+    var pageHelperHtml = createHtml(pageHelper);
+    $("#pageHelper").html(pageHelperHtml);
+
+    top.hangge();
+});
 
 //检索
 function searchs(){
@@ -264,7 +278,7 @@ function delUser(userId,msg){
 			top.jzts();
 			var url = "<%=basePath%>user/deleteU.do?USER_ID="+userId+"&tm="+new Date().getTime();
 			$.get(url,function(data){
-				nextPage(${page.currentPage});
+				nextPage(${page.getPageNum()});
 			});
 		};
 	});
@@ -281,11 +295,11 @@ function add(){
 	 diag.Height = 510;
 	 diag.CancelEvent = function(){ //关闭事件
 		 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			 if('${page.currentPage}' == '0'){
+			 if('${page.getPageNum()}' == '0'){
 				 top.jzts();
 				 setTimeout("self.location=self.location",100);
 			 }else{
-				 nextPage(${page.currentPage});
+				 nextPage(${page.getPageNum()});
 			 }
 		}
 		diag.close();
@@ -304,7 +318,7 @@ function editUser(user_id){
 	 diag.Height = 510;
 	 diag.CancelEvent = function(){ //关闭事件
 		 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			nextPage(${page.currentPage});
+			nextPage(${page.getPageNum()});
 		}
 		diag.close();
 	 };
@@ -324,13 +338,13 @@ function makeAll(msg){
 				  if(document.getElementsByName('ids')[i].checked){
 				  	if(str=='') str += document.getElementsByName('ids')[i].value;
 				  	else str += ',' + document.getElementsByName('ids')[i].value;
-				  	
+
 				  	if(emstr=='') emstr += document.getElementsByName('ids')[i].id;
 				  	else emstr += ';' + document.getElementsByName('ids')[i].id;
-				  	
+
 				  	if(phones=='') phones += document.getElementsByName('ids')[i].alt;
 				  	else phones += ';' + document.getElementsByName('ids')[i].alt;
-				  	
+
 				  	if(username=='') username += document.getElementsByName('ids')[i].title;
 				  	else username += ';' + document.getElementsByName('ids')[i].title;
 				  }
@@ -338,7 +352,7 @@ function makeAll(msg){
 			if(str==''){
 				bootbox.dialog({
 					message: "<span class='bigger-110'>您没有选择任何内容!</span>",
-					buttons: 			
+					buttons:
 					{ "button":{ "label":"确定", "className":"btn-sm btn-success"}}
 				});
 				$("#zcheckbox").tips({
@@ -347,7 +361,7 @@ function makeAll(msg){
 		            bg:'#AE81FF',
 		            time:8
 		        });
-				
+
 				return;
 			}else{
 				if(msg == '确定要删除选中的数据吗?'){
@@ -361,7 +375,7 @@ function makeAll(msg){
 						cache: false,
 						success: function(data){
 							 $.each(data.list, function(i, list){
-									nextPage(${page.currentPage});
+									nextPage(${page.getPageNum()});
 							 });
 						}
 					});
@@ -425,10 +439,10 @@ function sendFhsms(username){
 $(function() {
 	//日期框
 	$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
-	
+
 	//下拉框
 	if(!ace.vars['touch']) {
-		$('.chosen-select').chosen({allow_single_deselect:true}); 
+		$('.chosen-select').chosen({allow_single_deselect:true});
 		$(window)
 		.off('resize.chosen')
 		.on('resize.chosen', function() {
@@ -452,7 +466,7 @@ $(function() {
 		});
 	}
 
-	
+
 	//复选框全选控制
 	var active_class = 'active';
 	$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
@@ -485,11 +499,11 @@ function fromExcel(){
 	 diag.Height = 150;
 	 diag.CancelEvent = function(){ //关闭事件
 		 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
-			 if('${page.currentPage}' == '0'){
+			 if('${page.getPageNum()}' == '0'){
 				 top.jzts();
 				 setTimeout("self.location.reload()",100);
 			 }else{
-				 nextPage(${page.currentPage});
+				 nextPage(${page.getPageNum()});
 			 }
 		}
 		diag.close();

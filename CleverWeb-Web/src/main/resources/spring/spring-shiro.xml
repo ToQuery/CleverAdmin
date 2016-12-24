@@ -5,21 +5,28 @@
 
     <!-- ================ Shiro start ================ -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="ShiroRealm" />
+        <property name="realm" ref="myShiroRealm"/>
     </bean>
 
     <!-- 項目自定义的Realm -->
-    <bean id="ShiroRealm" class="com.cleverweb.web.shiro.ShiroRealm" />
+    <bean id="myShiroRealm" class="com.cleverweb.web.shiro.ShiroRealm">
+        <!-- 密码加密验证方式-->
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="MD5"/>
+            </bean>
+        </property>
+    </bean>
 
     <!-- Shiro Filter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager" />
+        <property name="securityManager" ref="securityManager"/>
 
-        <property name="loginUrl" value="/login" />
+        <property name="loginUrl" value="/login"/>
 
-        <property name="successUrl" value="/main/index" />
+        <property name="successUrl" value="/main/index"/>
 
-        <property name="unauthorizedUrl" value="/login" />
+        <property name="unauthorizedUrl" value="/login"/>
 
         <property name="filterChainDefinitions">
             <value>

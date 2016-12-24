@@ -74,7 +74,7 @@
 						<div class="main_input_box">
 							<span class="add-on bg_lg">
 							<i><img height="37" src="static/login/user.png" /></i>
-							</span><input type="text" name="loginname" id="loginname" value="" placeholder="请输入用户名" />
+							</span><input type="text" name="loginname" id="loginname" value="admin" placeholder="请输入用户名" />
 						</div>
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 						<div class="main_input_box">
 							<span class="add-on bg_ly">
 							<i><img height="37" src="static/login/suo.png" /></i>
-							</span><input type="password" name="password" id="password" placeholder="请输入密码" value=""/>
+							</span><input type="password" name="password" id="password" placeholder="请输入密码" value="admin"/>
 						</div>
 					</div>
 				</div>

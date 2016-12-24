@@ -330,33 +330,33 @@ insert into `tb_sys_role` values ('d449195cd8e7491080688c58e11452eb', '总监', 
 insert into `tb_sys_role` values ('de9de2f006e145a29d52dfadda295353', '三级管理员', '2305280058220076998', '1', '0', '0', '0', '0');
 
 -- ----------------------------
--- table structure for sys_role_fhbutton
+-- table structure for tb_sys_role_button
 -- ----------------------------
-drop table if exists `sys_role_fhbutton`;
-create table `sys_role_fhbutton` (
+drop table if exists `tb_sys_role_button`;
+create table `tb_sys_role_button` (
   `rb_id` varchar(100) not null,
   `role_id` varchar(100) default null,
   `button_id` varchar(100) default null,
   primary key (`rb_id`),
   key `角色表外键` (`role_id`) using btree,
-  key `fbutton` (`button_id`),
-  constraint `fbutton` foreign key (`button_id`) references `tb_sys_button` (`button_id`) on delete cascade on update cascade,
-  constraint `frole` foreign key (`role_id`) references `sys_role` (`role_id`) on delete cascade on update cascade
+  key `button` (`button_id`),
+  constraint `button_fk` foreign key (`button_id`) references `tb_sys_button` (`button_id`) on delete cascade on update cascade,
+  constraint `role_fk` foreign key (`role_id`) references `tb_sys_role` (`role_id`) on delete cascade on update cascade
 ) engine=innodb default charset=utf8;
 
 -- ----------------------------
--- records of sys_role_fhbutton
+-- records of tb_sys_role_button
 -- ----------------------------
-insert into `sys_role_fhbutton` values ('14b5c28ea6ae4508b57d2d272ab3d5f1', '3264c8e83d0248bb9e3ea6195b4c0216', '46992ea280ba4b72b29dedb0d4bc0106');
-insert into `sys_role_fhbutton` values ('1743733f366240c693c4295b527d1b0e', 'de9de2f006e145a29d52dfadda295353', '4efa162fce8340f0bd2dcd3b11d327ec');
-insert into `sys_role_fhbutton` values ('3768e60edd1c4b5c9f1dd861188ae2f9', '3264c8e83d0248bb9e3ea6195b4c0216', 'cc51b694d5344d28a9aa13c84b7166cd');
-insert into `sys_role_fhbutton` values ('8231c216fb514b4188e4162e629c6237', '3264c8e83d0248bb9e3ea6195b4c0216', '4efa162fce8340f0bd2dcd3b11d327ec');
-insert into `sys_role_fhbutton` values ('9412d1d05162464c83658c7f89ab03f0', '68f8e4a39efe47c7bb869e9d15ab925d', '3542adfbda73410c976e185ffe50ad06');
-insert into `sys_role_fhbutton` values ('96567633dd3548c9b75d28f430adf5a3', '3264c8e83d0248bb9e3ea6195b4c0216', 'da7fd386de0b49ce809984f5919022b8');
-insert into `sys_role_fhbutton` values ('a1478f27c852459fa9cad04b642f4fb7', 'de9de2f006e145a29d52dfadda295353', '3542adfbda73410c976e185ffe50ad06');
-insert into `sys_role_fhbutton` values ('ba6696b8761044618e44c7e02c9ba89e', '68f8e4a39efe47c7bb869e9d15ab925d', 'cc51b694d5344d28a9aa13c84b7166cd');
-insert into `sys_role_fhbutton` values ('f0329033d0914faf8ea6e9ff252cc5e6', '68f8e4a39efe47c7bb869e9d15ab925d', '46992ea280ba4b72b29dedb0d4bc0106');
-insert into `sys_role_fhbutton` values ('f627982cc9d4479dbc03af726dc6ac58', 'de9de2f006e145a29d52dfadda295353', 'cc51b694d5344d28a9aa13c84b7166cd');
+insert into `tb_sys_role_button` values ('14b5c28ea6ae4508b57d2d272ab3d5f1', '3264c8e83d0248bb9e3ea6195b4c0216', '46992ea280ba4b72b29dedb0d4bc0106');
+insert into `tb_sys_role_button` values ('1743733f366240c693c4295b527d1b0e', 'de9de2f006e145a29d52dfadda295353', '4efa162fce8340f0bd2dcd3b11d327ec');
+insert into `tb_sys_role_button` values ('3768e60edd1c4b5c9f1dd861188ae2f9', '3264c8e83d0248bb9e3ea6195b4c0216', 'cc51b694d5344d28a9aa13c84b7166cd');
+insert into `tb_sys_role_button` values ('8231c216fb514b4188e4162e629c6237', '3264c8e83d0248bb9e3ea6195b4c0216', '4efa162fce8340f0bd2dcd3b11d327ec');
+insert into `tb_sys_role_button` values ('9412d1d05162464c83658c7f89ab03f0', '68f8e4a39efe47c7bb869e9d15ab925d', '3542adfbda73410c976e185ffe50ad06');
+insert into `tb_sys_role_button` values ('96567633dd3548c9b75d28f430adf5a3', '3264c8e83d0248bb9e3ea6195b4c0216', 'da7fd386de0b49ce809984f5919022b8');
+insert into `tb_sys_role_button` values ('a1478f27c852459fa9cad04b642f4fb7', 'de9de2f006e145a29d52dfadda295353', '3542adfbda73410c976e185ffe50ad06');
+insert into `tb_sys_role_button` values ('ba6696b8761044618e44c7e02c9ba89e', '68f8e4a39efe47c7bb869e9d15ab925d', 'cc51b694d5344d28a9aa13c84b7166cd');
+insert into `tb_sys_role_button` values ('f0329033d0914faf8ea6e9ff252cc5e6', '68f8e4a39efe47c7bb869e9d15ab925d', '46992ea280ba4b72b29dedb0d4bc0106');
+insert into `tb_sys_role_button` values ('f627982cc9d4479dbc03af726dc6ac58', 'de9de2f006e145a29d52dfadda295353', 'cc51b694d5344d28a9aa13c84b7166cd');
 
 -- ----------------------------
 -- table structure for tb_sys_user

@@ -4,18 +4,18 @@
 	
 	<!--表名 -->
 	<sql id="tableName">
-		TB_PICTURES
+		tb_pictures
 	</sql>
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		TITLE,	
-		NAME,	
-		PATH,	
-		CREATETIME,	
-		MASTER_ID,	
-		BZ,	
-		PICTURES_ID
+		title,
+		name,
+		path,
+		createtime,
+		master_id,
+		bz,
+		pictures_id
 	</sql>
 	
 	<!-- 字段值 -->
@@ -32,26 +32,26 @@
 	<!-- 列表 -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
-			a.TITLE,	
-			a.NAME,	
-			a.PATH,	
-			a.CREATETIME,	
-			a.MASTER_ID,	
-			a.BZ,	
-			a.PICTURES_ID
+			a.title,
+			a.name,
+			a.path,
+			a.createtime,
+			a.master_id,
+			a.bz,
+			a.pictures_id
 		from 
 			<include refid="tableName"></include> a
 		where 1 = 1
 		<if test="pd.KEYW != null and pd.KEYW != ''"><!-- 关键词检索 -->
 			and
 				(
-				 a.TITLE LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
-				 or 
-				 a.NAME LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%') 
+				 a.title LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
 				 or
-				 a.PICTURES_ID LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
+				 a.name LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
 				 or
-				 a.MASTER_ID LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
+				 a.pictures_id LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
+				 or
+				 a.master_id LIKE CONCAT(CONCAT('%', #{pd.KEYW}),'%')
 				)
 		</if>
 	</select>
@@ -69,23 +69,23 @@
 	<delete id="delete" parameterType="pd">
 		delete from <include refid="tableName"></include>
 		where 
-			PICTURES_ID = #{PICTURES_ID}
+			pictures_id = #{PICTURES_ID}
 	</delete>
 	
 	<!-- 修改 -->
 	<update id="edit" parameterType="pd">
 		update  <include refid="tableName"></include>
 			set 
-				TITLE = #{TITLE},
-				PATH = #{PATH},
+				title = #{TITLE},
+				path = #{PATH},
 				<if test="NAME != null and NAME != ''">
-				NAME = #{NAME},
+				name = #{NAME},
 				</if>
-				MASTER_ID = #{MASTER_ID},
-				BZ = #{BZ},
-			PICTURES_ID = PICTURES_ID
+				master_id = #{MASTER_ID},
+				bz = #{BZ},
+			pictures_id = PICTURES_ID
 			where 
-				PICTURES_ID = #{PICTURES_ID}
+				pictures_id = #{PICTURES_ID}
 	</update>
 	
 	<!-- 通过ID获取数据 -->
@@ -110,9 +110,9 @@
 	
 	<!-- 批量获取 -->
 	<select id="getAllById" parameterType="String" resultType="pd">
-		select PATH from <include refid="tableName"></include>
+		select path from <include refid="tableName"></include>
 		where 
-			PICTURES_ID in
+			pictures_id in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>
@@ -122,10 +122,9 @@
 	<update id="delTp" parameterType="pd">
 		update  <include refid="tableName"></include>
 			set 
-				PATH			= ''
+				path = ''
 			where 
-				PICTURES_ID = #{PICTURES_ID}
+				pictures_id = #{PICTURES_ID}
 	</update>
 	
-	<!-- fh QQ313596790(青苔) -->
 </mapper>

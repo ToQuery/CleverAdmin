@@ -1,5 +1,7 @@
 package com.cleverweb.entity.po;
 
+import java.util.Date;
+
 public class TbSysMessage {
     private String messageId;
 
@@ -7,11 +9,11 @@ public class TbSysMessage {
 
     private String type;
 
-    private String toUsername;
+    private String receiveId;
 
-    private String fromUsername;
+    private String sendId;
 
-    private String sendTime;
+    private Date sendTime;
 
     private String status;
 
@@ -41,28 +43,28 @@ public class TbSysMessage {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getToUsername() {
-        return toUsername;
+    public String getReceiveId() {
+        return receiveId;
     }
 
-    public void setToUsername(String toUsername) {
-        this.toUsername = toUsername == null ? null : toUsername.trim();
+    public void setReceiveId(String receiveId) {
+        this.receiveId = receiveId == null ? null : receiveId.trim();
     }
 
-    public String getFromUsername() {
-        return fromUsername;
+    public String getSendId() {
+        return sendId;
     }
 
-    public void setFromUsername(String fromUsername) {
-        this.fromUsername = fromUsername == null ? null : fromUsername.trim();
+    public void setSendId(String sendId) {
+        this.sendId = sendId == null ? null : sendId.trim();
     }
 
-    public String getSendTime() {
+    public Date getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(String sendTime) {
-        this.sendTime = sendTime == null ? null : sendTime.trim();
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
     }
 
     public String getStatus() {

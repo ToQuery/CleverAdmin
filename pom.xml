@@ -22,10 +22,45 @@
         <module>CleverWeb-Generate</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>Central Repository</id>
+            <name>Central Repository</name>
+            <url>http://central.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>Sonatype Releases Repository</id>
+            <name>Sonatype Releases Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>Spring Libs Repository</id>
+            <name>Spring Libs Repository</name>
+            <url>http://repo.spring.io/libs-milestone/</url>
+        </repository>
+        <repository>
+            <id>JBoss Releases Repository</id>
+            <name>JBoss Releases Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>XWiki Releases Repository</id>
+            <name>XWiki Releases Repository</name>
+            <url>http://maven.xwiki.org/releases/</url>
+        </repository>
+        <repository>
+            <id>Apache Releases Repository</id>
+            <name>Apache Releases Repository</name>
+            <url>https://repository.apache.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.2.3.RELEASE</spring.version>
+
+        <spring.secutity.version>4.2.1.RELEASE</spring.secutity.version>
 
         <!-- shiro 框架版本 -->
         <shrio.version>1.2.3</shrio.version>
@@ -119,6 +154,13 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.secutity.version}</version>
+        </dependency>
+
 
         <!-- shiro 框架 -->
         <dependency>

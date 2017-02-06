@@ -35,7 +35,7 @@ function sendFhsms(){
 	var CONTENT = $("#CONTENT").val();
 	$.ajax({
 		type: "POST",
-		url: locat+'/fhsms/save.do?tm='+new Date().getTime(),
+		url: locat+'/messages/save.do?tm='+new Date().getTime(),
     	data: {USERNAME:USERNAME,CONTENT:CONTENT},
 		dataType:'json',
 		//beforeSend: validateData,

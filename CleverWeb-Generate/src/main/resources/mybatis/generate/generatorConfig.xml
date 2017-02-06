@@ -25,18 +25,18 @@
         </javaTypeResolver>
         <!-- 生成模型的包名和位置 -->
         <javaModelGenerator targetPackage="com.cleverweb.entity.po"
-                            targetProject="D:\Project\ToQuery\CleverWeb\CleverWeb-Entity\src\main\java">
+                            targetProject="/home/toquery/project/CleverWeb/CleverWeb-Entity/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置 -->
         <sqlMapGenerator targetPackage="mybatis.mapper"
-                         targetProject="D:\Project\ToQuery\CleverWeb\CleverWeb-Dao\src\main\resources">
+                         targetProject="/home/toquery/project/CleverWeb/CleverWeb-Dao/src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.cleverweb.dao"
-                             targetProject="D:\Project\ToQuery\CleverWeb\CleverWeb-Dao\src\main\java">
+                             targetProject="/home/toquery/project/CleverWeb/CleverWeb-Dao/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名
@@ -53,11 +53,14 @@
         <!--<table tableName="tb_sys_button" domainObjectName="TbSysButton" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>-->
-        <table tableName="tb_sys_role_button" domainObjectName="TbSysRoleButton" enableCountByExample="false"
+      <!--  <table tableName="tb_sys_role_button" domainObjectName="TbSysRoleButton" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"></table>-->
+        <table tableName="tb_sys_message" domainObjectName="TbSysMessage" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"></table>
 
     </context>
 
 
-</generatorConfiguration>  
+</generatorConfiguration>

@@ -4,19 +4,19 @@
 	
 	<!--表名 -->
 	<sql id="tableName">
-		SYS_FHSMS
+		tb_sys_message
 	</sql>
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		CONTENT,	
-		TYPE,	
-		TO_USERNAME,	
-		FROM_USERNAME,	
-		SEND_TIME,	
-		STATUS,	
-		FHSMS_ID,
-		SANME_ID
+		content,
+		type,
+		to_username,
+		from_username,
+		send_time,
+		status,
+		message_id,
+		sanme_id
 	</sql>
 	
 	<!-- 字段值 -->
@@ -47,7 +47,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			FHSMS_ID = #{FHSMS_ID}
+			sms_id = #{FHSMS_ID}
 	</delete>
 	
 	<!-- 修改 状态-->
@@ -67,7 +67,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			FHSMS_ID = #{FHSMS_ID}
+			sms_id = #{FHSMS_ID}
 	</select>
 	
 	<!-- 列表 -->
@@ -113,7 +113,7 @@
 	<!-- 获取未读总数 -->
 	<select id="findFhsmsCount" parameterType="String" resultType="pd">
 		select 
-			count(FHSMS_ID) fhsmsCount
+			count(sms_id) fhsmsCount
 		from 
 		<include refid="tableName"></include>
 		where 
@@ -129,7 +129,7 @@
 		delete from
 		<include refid="tableName"></include>
 		where 
-			FHSMS_ID in
+			sms_id in
 		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
                  #{item}
 		</foreach>

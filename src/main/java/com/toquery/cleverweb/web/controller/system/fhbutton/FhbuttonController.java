@@ -3,7 +3,6 @@ package com.toquery.cleverweb.web.controller.system.fhbutton;
 import com.toquery.cleverweb.common.util.AppUtil;
 import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.utils.Jurisdiction;
-import com.toquery.cleverweb.common.util.ObjectExcelView;
 import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.service.ISysButtonService;
@@ -211,8 +210,8 @@ public class FhbuttonController extends BaseController {
             varList.add(vpd);
         }
         dataMap.put("varList", varList);
-        ObjectExcelView erv = new ObjectExcelView();
-        mv = new ModelAndView(erv, dataMap);
+//        ObjectExcelView erv = new ObjectExcelView();
+//        mv = new ModelAndView(erv, dataMap);
         return mv;
     }
 

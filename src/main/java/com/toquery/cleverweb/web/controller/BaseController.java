@@ -3,8 +3,8 @@ package com.toquery.cleverweb.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -23,7 +23,7 @@ public class BaseController {
 	@Value(value = "#{COMMON['system.name']}")
 	public String systemName = "";
 	
-	protected Logger logger = LogManager.getLogger();
+	protected Logger logger = LogManager.getLogger(BaseController.class);
 
 	private static final long serialVersionUID = 6357869213649815390L;
 	

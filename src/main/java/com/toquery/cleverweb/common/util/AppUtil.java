@@ -2,8 +2,8 @@ package com.toquery.cleverweb.common.util;
 
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.Map;
  * 修改日期：2015/11/2
  */
 public class AppUtil  {
-	
-	protected static Logger logger = LogManager.getLogger();
-	
+
+	protected static Logger logger = LogManager.getLogger(AppUtil.class);
+
 	/**检查参数是否完整
 	 * @param method
 	 * @param pd
@@ -24,18 +24,18 @@ public class AppUtil  {
 	 */
 	public static boolean checkParam(String method, PageData pd){
 		boolean result = false;
-		
+
 		int falseCount = 0;
 		String[] paramArray = new String[20];
 		String[] valueArray = new String[20];
 		String[] tempArray  = new String[20];  //临时数组
-		
+
 		if(method=="registered"){// 注册
 			paramArray = Const.APP_REGISTERED_PARAM_ARRAY;  //参数
 			valueArray = Const.APP_REGISTERED_VALUE_ARRAY;  //参数名称
-			
+
 		}else if(method=="getAppuserByUsernmae"){//根据用户名获取会员信息
-			paramArray = Const.APP_GETAPPUSER_PARAM_ARRAY;  
+			paramArray = Const.APP_GETAPPUSER_PARAM_ARRAY;
 			valueArray = Const.APP_GETAPPUSER_VALUE_ARRAY;
 		}
 		int size = paramArray.length;
@@ -54,10 +54,10 @@ public class AppUtil  {
 		} else {
 			result = true;
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 设置分页的参数
 	 * @param pd
@@ -74,7 +74,7 @@ public class AppUtil  {
 		pd.put("page_start", page_start);
 		return pd;
 	}
-	
+
 	/**设置list中的distance
 	 * @param list
 	 * @param pd
@@ -107,7 +107,7 @@ public class AppUtil  {
 		}
 		return listReturn;
 	}
-	
+
 	/**
 	 * @param pd
 	 * @param map

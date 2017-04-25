@@ -1,31 +1,29 @@
 package com.toquery.cleverweb.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
+import com.toquery.cleverweb.common.util.AppUtil;
+import com.toquery.cleverweb.common.util.Const;
+import com.toquery.cleverweb.common.util.PageData;
+import com.toquery.cleverweb.common.util.Tools;
 import com.toquery.cleverweb.common.util.mail.SimpleMailSender;
 import com.toquery.cleverweb.core.entity.vo.CWResponse;
+import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.entity.vo.SysUserRole;
 import com.toquery.cleverweb.service.ISysUserService;
 import com.toquery.cleverweb.service.system.fhsms.FhsmsManager;
 import org.apache.commons.collections.map.HashedMap;
-import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.toquery.cleverweb.common.util.AppUtil;
-import com.toquery.cleverweb.common.util.Const;
-import com.toquery.cleverweb.core.utils.Jurisdiction;
-import com.toquery.cleverweb.common.util.PageData;
-import com.toquery.cleverweb.common.util.Tools;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *

@@ -273,8 +273,8 @@ public class TimingBackUpController extends BaseController {
 			varList.add(vpd);
 		}
 		dataMap.put("varList", varList);
-		ObjectExcelView erv = new ObjectExcelView();
-		mv = new ModelAndView(erv,dataMap);
+//		ObjectExcelView erv = new ObjectExcelView();
+//		mv = new ModelAndView(erv,dataMap);
 		return mv;
 	}
 	

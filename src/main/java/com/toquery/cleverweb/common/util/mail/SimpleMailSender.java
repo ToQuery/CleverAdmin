@@ -1,13 +1,13 @@
 package com.toquery.cleverweb.common.util.mail;
 
 
-import javax.mail.*;
+/*import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Date;
-import java.util.Properties;
+import java.util.Properties;*/
 
 /**   
  * 邮件发送器   
@@ -20,7 +20,7 @@ public class SimpleMailSender {
   */    
     public boolean sendTextMail(MailSenderInfo mailInfo) throws Exception{    
       // 判断是否需要身份认证    
-      MyAuthenticator authenticator = null;    
+    /*  MyAuthenticator authenticator = null;
       Properties pro = mailInfo.getProperties();   
       if (mailInfo.isValidate()) {    
       // 如果需要身份认证，则创建一个密码验证器    
@@ -45,7 +45,7 @@ public class SimpleMailSender {
       String mailContent = mailInfo.getContent();    
       mailMessage.setText(mailContent);    
       // 发送邮件    
-      Transport.send(mailMessage); 
+      Transport.send(mailMessage); */
       return true;
     }    
        
@@ -54,7 +54,7 @@ public class SimpleMailSender {
       * @param mailInfo 待发送的邮件信息   
       */    
     public  boolean sendHtmlMail(MailSenderInfo mailInfo) throws Exception{    
-      // 判断是否需要身份认证    
+     /* // 判断是否需要身份认证
       MyAuthenticator authenticator = null;   
       Properties pro = mailInfo.getProperties();   
       //如果需要身份认证，则创建一个密码验证器     
@@ -87,7 +87,7 @@ public class SimpleMailSender {
       // 将MiniMultipart对象设置为邮件内容    
       mailMessage.setContent(mainPart);    
       // 发送邮件    
-      Transport.send(mailMessage);    
+      Transport.send(mailMessage);    */
       return true;    
     }    
  

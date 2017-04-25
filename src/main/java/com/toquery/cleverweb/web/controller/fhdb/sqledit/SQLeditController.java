@@ -157,8 +157,8 @@ public class SQLeditController extends BaseController {
 					varList.add(vpd);
 				}
 				dataMap.put("varList", varList);
-				ObjectExcelView erv = new ObjectExcelView();						//执行excel操作
-				mv = new ModelAndView(erv,dataMap);
+//				ObjectExcelView erv = new ObjectExcelView();						//执行excel操作
+//				mv = new ModelAndView(erv,dataMap);
 			}
 		} catch(Exception e){
 			logger.error(e.toString(), e);

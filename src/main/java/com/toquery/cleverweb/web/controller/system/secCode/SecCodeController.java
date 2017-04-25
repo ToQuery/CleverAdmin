@@ -1,26 +1,18 @@
 package com.toquery.cleverweb.web.controller.system.secCode;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.toquery.cleverweb.common.util.Const;
 
 /** 
  * 类名称：登录验证码
@@ -38,9 +30,9 @@ public class SecCodeController {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		String code = drawImg(output);
 		
-		Subject currentUser = SecurityUtils.getSubject();  
-		Session session = currentUser.getSession();
-		session.setAttribute(Const.SESSION_SECURITY_CODE, code);
+//		Subject currentUser = SecurityUtils.getSubject();
+//		Session session = currentUser.getSession();
+//		session.setAttribute(Const.SESSION_SECURITY_CODE, code);
 		
 		try {
 			ServletOutputStream out = response.getOutputStream();

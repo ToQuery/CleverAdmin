@@ -1,5 +1,6 @@
 package com.toquery.cleverweb.web.controller;
 
+import com.google.common.base.Strings;
 import com.toquery.cleverweb.common.util.Const;
 import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.common.util.RightsHelper;
@@ -11,7 +12,6 @@ import com.toquery.cleverweb.service.ISysButtonService;
 import com.toquery.cleverweb.service.ISysMenuService;
 import com.toquery.cleverweb.service.ISysRoleButtonService;
 import com.toquery.cleverweb.service.ISysUserService;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,7 +64,7 @@ public class IndexController extends BaseController {
         List<SysMenu> sysMenuList = (List<SysMenu>) session.getAttribute(USERNAME + Const.SESSION_allmenuList);
         if (sysMenuList == null ) {
             sysMenuList = sysMenuService.findListByParentId(0);
-            if (Strings.isNotBlank(roleRights)) {
+            if (!Strings.isNullOrEmpty(roleRights)) {
                 sysMenuList = this.readMenu(sysMenuList, roleRights);        //根据角色权限获取本权限的菜单列表
             }else{
                 sysMenuList = new ArrayList<>();

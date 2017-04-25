@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.toquery.cleverweb.dao.TbSysButtonMapper">
+    <resultMap id="BaseResultMap" type="com.toquery.cleverweb.entity.po.TbSysButton">
+        <id column="button_id" property="buttonId" jdbcType="VARCHAR"/>
+        <result column="button_name" property="buttonName" jdbcType="VARCHAR"/>
+        <result column="qx_name" property="qxName" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    button_id, button_name, qx_name, remark
+  </sql>
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_button
+    </select>
+
+    <select id="findListByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_button
+        LEFT JOIN tb_sys_role_button tsrb ON tb_sys_button.button_id = tsrb.button_id
+        WHERE tsrb.role_id = #{roleId}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_button
+        where button_id = #{buttonId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_sys_button
+    where button_id = #{buttonId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.toquery.cleverweb.entity.po.TbSysButton">
+    insert into tb_sys_button (button_id, button_name, qx_name, 
+      remark)
+    values (#{buttonId,jdbcType=VARCHAR}, #{buttonName,jdbcType=VARCHAR}, #{qxName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.toquery.cleverweb.entity.po.TbSysButton">
+        insert into tb_sys_button
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buttonId != null">
+                button_id,
+            </if>
+            <if test="buttonName != null">
+                button_name,
+            </if>
+            <if test="qxName != null">
+                qx_name,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buttonId != null">
+                #{buttonId,jdbcType=VARCHAR},
+            </if>
+            <if test="buttonName != null">
+                #{buttonName,jdbcType=VARCHAR},
+            </if>
+            <if test="qxName != null">
+                #{qxName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.toquery.cleverweb.entity.po.TbSysButton">
+        update tb_sys_button
+        <set>
+            <if test="buttonName != null">
+                button_name = #{buttonName,jdbcType=VARCHAR},
+            </if>
+            <if test="qxName != null">
+                qx_name = #{qxName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where button_id = #{buttonId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.toquery.cleverweb.entity.po.TbSysButton">
+    update tb_sys_button
+    set button_name = #{buttonName,jdbcType=VARCHAR},
+      qx_name = #{qxName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where button_id = #{buttonId,jdbcType=VARCHAR}
+  </update>
+</mapper>

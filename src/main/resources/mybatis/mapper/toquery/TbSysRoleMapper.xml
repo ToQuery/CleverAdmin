@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.toquery.cleverweb.dao.TbSysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.toquery.cleverweb.entity.po.TbSysRole">
+        <id column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="rights" property="rights" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="add_qx" property="addQx" jdbcType="VARCHAR"/>
+        <result column="del_qx" property="delQx" jdbcType="VARCHAR"/>
+        <result column="edit_qx" property="editQx" jdbcType="VARCHAR"/>
+        <result column="cha_qx" property="chaQx" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    role_id, role_name, rights, parent_id, add_qx, del_qx, edit_qx, cha_qx
+  </sql>
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role
+
+    </select>
+    <select id="findByParentId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role
+        WHERE parent_id = #{parentId}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_sys_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.toquery.cleverweb.entity.po.TbSysRole">
+    insert into tb_sys_role (role_id, role_name, rights, 
+      parent_id, add_qx, del_qx, 
+      edit_qx, cha_qx)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{rights,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{addQx,jdbcType=VARCHAR}, #{delQx,jdbcType=VARCHAR}, 
+      #{editQx,jdbcType=VARCHAR}, #{chaQx,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.toquery.cleverweb.entity.po.TbSysRole">
+        insert into tb_sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="rights != null">
+                rights,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="addQx != null">
+                add_qx,
+            </if>
+            <if test="delQx != null">
+                del_qx,
+            </if>
+            <if test="editQx != null">
+                edit_qx,
+            </if>
+            <if test="chaQx != null">
+                cha_qx,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="rights != null">
+                #{rights,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="addQx != null">
+                #{addQx,jdbcType=VARCHAR},
+            </if>
+            <if test="delQx != null">
+                #{delQx,jdbcType=VARCHAR},
+            </if>
+            <if test="editQx != null">
+                #{editQx,jdbcType=VARCHAR},
+            </if>
+            <if test="chaQx != null">
+                #{chaQx,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.toquery.cleverweb.entity.po.TbSysRole">
+        update tb_sys_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="rights != null">
+                rights = #{rights,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="addQx != null">
+                add_qx = #{addQx,jdbcType=VARCHAR},
+            </if>
+            <if test="delQx != null">
+                del_qx = #{delQx,jdbcType=VARCHAR},
+            </if>
+            <if test="editQx != null">
+                edit_qx = #{editQx,jdbcType=VARCHAR},
+            </if>
+            <if test="chaQx != null">
+                cha_qx = #{chaQx,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.toquery.cleverweb.entity.po.TbSysRole">
+    update tb_sys_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      rights = #{rights,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      add_qx = #{addQx,jdbcType=VARCHAR},
+      del_qx = #{delQx,jdbcType=VARCHAR},
+      edit_qx = #{editQx,jdbcType=VARCHAR},
+      cha_qx = #{chaQx,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.toquery.cleverweb.dao.TbSysRoleButtonMapper">
+    <resultMap id="BaseResultMap" type="com.toquery.cleverweb.entity.po.TbSysRoleButton">
+        <id column="rb_id" property="rbId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="button_id" property="buttonId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    rb_id, role_id, button_id
+  </sql>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role_button
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_sys_role_button
+        where rb_id = #{rbId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_sys_role_button
+    where rb_id = #{rbId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.toquery.cleverweb.entity.po.TbSysRoleButton">
+    insert into tb_sys_role_button (rb_id, role_id, button_id
+      )
+    values (#{rbId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{buttonId,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.toquery.cleverweb.entity.po.TbSysRoleButton">
+        insert into tb_sys_role_button
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rbId != null">
+                rb_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="buttonId != null">
+                button_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rbId != null">
+                #{rbId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="buttonId != null">
+                #{buttonId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.toquery.cleverweb.entity.po.TbSysRoleButton">
+        update tb_sys_role_button
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="buttonId != null">
+                button_id = #{buttonId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where rb_id = #{rbId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.toquery.cleverweb.entity.po.TbSysRoleButton">
+    update tb_sys_role_button
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      button_id = #{buttonId,jdbcType=VARCHAR}
+    where rb_id = #{rbId,jdbcType=VARCHAR}
+  </update>
+</mapper>

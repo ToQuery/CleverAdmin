@@ -1,0 +1,16 @@
+# 服务器配置
+server:
+  port: 8080
+  address:  # bind to a specific NIC
+  session:
+    timeout: 1800 # session timeout in seconds
+  context-parameters.*: # Servlet context init parameters, e.g. server.context-parameters.a=alpha
+  context-path: / # the context path, defaults to '/'
+  servlet-path: / # the servlet path, defaults to '/'
+
+
+spring:
+ mvc:
+  view:
+    prefix: /WEB-INF/view/
+    suffix: .jsp

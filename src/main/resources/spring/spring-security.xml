@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+    <http pattern="/login.jsp" security="none"/>
+    <http pattern="/index.jsp" security="none"/>
+    <http pattern="/error.jsp" security="none"/>
+
+    <http auto-config="true">
+        <!--intercept-url有拦截顺序,如果下面两个被反转了./**会一直 被匹配,/security/admin**就永远也不会执行。-->
+        <!--满足该条件的请求需要有ADMIN角色-->
+        <intercept-url pattern="/security/admin**" access="hasRole('ROLE_ADMIN')"/>
+        <!--pattern="/**" 对所有路径进行角色认证-->
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
+
+        <!--自定义登录页面是通过login-page属性来指定的。提到login-page我们不得不提另外几个属性。
+        1、username-parameter：表示登录时用户名使用的是哪个参数，默认是“j_username”。
+        2、password-parameter：表示登录时密码使用的是哪个参数，默认是“j_password”。
+        3、login-processing-url：表示登录时提交的地址，默认是“/j-spring-security-check”。这个只是Spring Security用来标记登录页面使用的提交地址，真正关于登录这个请求是不需要用户自己处理的。
+        4、authentication-success-handler-ref：使用了authentication-success-handler-ref之后认证成功后的处理就由指定的AuthenticationSuccessHandler来处理
+        5、authentication-failure-url：通过authentication-failure-url指定登录失败后的页面
+        6、authentication-failure-handler-ref：对应一个用于处理认证失败的AuthenticationFailureHandler实现类。指定了该属性，Spring Security在认证失败后会调用指定AuthenticationFailureHandler的onAuthenticationFailure方法对认证失败进行处理，此时authentication-failure-url属性将不再发生作用。
+        -->
+        <form-login
+                login-page="/login.jsp"
+                login-processing-url="/login.do"
+                username-parameter="username"
+                password-parameter="password"
+                authentication-failure-url="/error.jsp"
+        />
+
+        <!--要实现退出登录的功能我们需要在http元素下定义logout元素，这样Spring Security将自动为我们添加用于处理退出登录的过滤器LogoutFilter到FilterChain。
+        当我们指定了http元素的auto-config属性为true时logout定义是会自动配置的，此时我们默认退出登录的URL为“/logout”，
+        可以通过logout元素的logout-url属性来改变退出登录的默认地址。
+        1、logout-url:改变退出登录的默认地址,这里需要注意的一点是,spring security 3.x默认的注销拦截url为/j_spring_security_logout,而4.x则默认使用/logout
+        2、invalidate-session：表示是否要在退出登录后让当前session失效，默认为true。
+        3、delete-cookies:指定退出登录后需要删除的cookie名称，多个cookie之间以逗号分隔。
+        4、logout-success-url:指定成功退出登录后要重定向的URL。需要注意的是对应的URL应当是不需要登录就可以访问的。
+        5、success-handler-ref:指定用来处理成功退出登录的LogoutSuccessHandler的引用。
+        -->
+        <logout invalidate-session="true"
+                logout-success-url="/login.jsp"
+        />
+        <!--Spring Security 4默认启用了CSRF保护功能(false)，该功能在Spring Security 3时就已经存在默认是不启用,该功能防止跨站请求伪造攻击；
+        在提交请求时，该请求被CsrfFilter拦截，验证_csrf的token是否有效。
+        -->
+        <csrf disabled="true"/>
+
+    </http>
+    <authentication-manager>
+        <authentication-provider>
+            <!--具有角色的用户信息，ideal只有普通用户USER权限-->
+            <user-service>
+                <user name="ideal" password="ideal" authorities="ROLE_USER"/>
+                <user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

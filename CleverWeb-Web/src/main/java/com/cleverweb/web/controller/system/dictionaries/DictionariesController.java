@@ -164,7 +164,7 @@ public class DictionariesController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/listAllDict")
+    @RequestMapping(value = "/listalldict")
     public ModelAndView listAllDict(Model model, String DICTIONARIES_ID) throws Exception {
         ModelAndView mv = this.getModelAndView();
         PageData pd = new PageData();

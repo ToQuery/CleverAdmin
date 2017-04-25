@@ -3,26 +3,26 @@
 <mapper namespace="DictionariesMapper">
 	
 	<resultMap type="Dictionaries" id="dictResultMap">
-		<id column="DICTIONARIES_ID" property="DICTIONARIES_ID"/>
-		<result column="NAME" property="NAME"/>
-		<result column="PARENT_ID" property="PARENT_ID"/>
+		<id column="dictionaries_id" property="DICTIONARIES_ID"/>
+		<result column="name" property="NAME"/>
+		<result column="parent_id" property="PARENT_ID"/>
 	</resultMap>
 	
 	<!--表名 -->
 	<sql id="tableName">
-		SYS_DICTIONARIES
+		sys_dictionaries
 	</sql>
 	
 	<!-- 字段 -->
 	<sql id="Field">
-		NAME,	
-		NAME_EN,	
-		BIANMA,	
-		ORDER_BY,	
-		PARENT_ID,	
-		BZ,	
-		TBSNAME,	
-		DICTIONARIES_ID
+		name,
+		name_en,
+		bianma,
+		order_by,
+		parent_id,
+		bz,
+		tbsname,
+		dictionaries_id
 	</sql>
 	
 	<!-- 字段值 -->
@@ -78,7 +78,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			DICTIONARIES_ID = #{DICTIONARIES_ID}
+			dictionaries_id = #{DICTIONARIES_ID}
 	</select>
 	
 	<!-- 通过编码获取数据 -->
@@ -88,7 +88,7 @@
 		from 
 		<include refid="tableName"></include>
 		where 
-			BIANMA = #{BIANMA}
+			bianma = #{BIANMA}
 	</select>
 	
 	<!-- 列表 -->

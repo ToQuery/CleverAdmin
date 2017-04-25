@@ -245,7 +245,7 @@ public class MenuController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/listAllMenu")
+    @RequestMapping(value = "/listallmenu")
     public ModelAndView listAllMenu(Model model, @RequestParam(value = "menuId", defaultValue = "0") int menuId) throws Exception {
         ModelAndView mv = this.getModelAndView();
         List<SysMenu> sysMenuList = sysMenuService.findListByParentId(menuId);

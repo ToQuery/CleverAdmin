@@ -72,22 +72,22 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'><a href="javascript:goSondict('${var.DICTIONARIES_ID }')"><i class="ace-icon fa fa-share bigger-100"></i>&nbsp;${var.NAME}</a></td>
-											<td class='center'><a href="javascript:goSondict('${var.DICTIONARIES_ID }')">${var.NAME_EN}</a></td>
-											<td class='center'>${var.BIANMA}</td>
-											<td class='center'>${var.ORDER_BY}</td>
+											<td class='center'><a href="javascript:goSondict('${var.dictionaries_id }')"><i class="ace-icon fa fa-share bigger-100"></i>&nbsp;${var.name}</a></td>
+											<td class='center'><a href="javascript:goSondict('${var.dictionaries_id }')">${var.name_en}</a></td>
+											<td class='center'>${var.bianma}</td>
+											<td class='center'>${var.order_by}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
 													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.DICTIONARIES_ID}');">
+													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.dictionaries_id}');">
 														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
 													</a>
 													</c:if>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.DICTIONARIES_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.dictionaries_id}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -101,7 +101,7 @@
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<c:if test="${QX.edit == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.DICTIONARIES_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
+																<a style="cursor:pointer;" onclick="edit('${var.dictionaries_id}');" class="tooltip-success" data-rel="tooltip" title="修改">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																	</span>
@@ -110,7 +110,7 @@
 															</c:if>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.DICTIONARIES_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.dictionaries_id}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>

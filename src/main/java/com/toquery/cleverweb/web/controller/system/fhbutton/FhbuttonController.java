@@ -8,10 +8,11 @@ import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.service.ISysButtonService;
 import com.toquery.cleverweb.service.system.fhbutton.FhbuttonManager;
 import com.toquery.cleverweb.web.controller.BaseController;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -109,10 +110,10 @@ public class FhbuttonController extends BaseController {
     public ModelAndView list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                              @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         ModelAndView mv = new ModelAndView();
-        Page<TbSysButton> page = PageHelper.startPage(pageNum, pageSize);
-        List<TbSysButton> sysButtonList = sysButtonService.findList();
+        Pageable pageable = new PageRequest(pageNum, pageSize);
+        Page<TbSysButton> page = sysButtonService.findList(pageable);
         mv.setViewName("system/fhbutton/fhbutton_list");
-        mv.addObject("sysButtonList", sysButtonList);
+        mv.addObject("sysButtonList", page.getContent());
         mv.addObject("QX", Jurisdiction.getHC());    //按钮权限
         mv.addObject("page", page);
         return mv;

@@ -2,7 +2,7 @@ package com.toquery.cleverweb.service.system.menu.impl;
 
 import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.core.entity.system.Menu;
-import com.toquery.cleverweb.dao.DaoSupport;
+import com.toquery.cleverweb.dao.mybatis.DaoSupport;
 import com.toquery.cleverweb.service.system.menu.MenuManager;
 import org.springframework.stereotype.Service;
 

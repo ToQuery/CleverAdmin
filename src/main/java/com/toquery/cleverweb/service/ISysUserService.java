@@ -1,7 +1,8 @@
 package com.toquery.cleverweb.service;
 
 import com.toquery.cleverweb.entity.po.TbSysUser;
-import com.github.pagehelper.Page;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -51,5 +52,5 @@ public interface ISysUserService {
      *
      * @return  所有的用户
      */
-    List<TbSysUser> findList();
+    Page<TbSysUser> findList(Pageable pageable);
 }

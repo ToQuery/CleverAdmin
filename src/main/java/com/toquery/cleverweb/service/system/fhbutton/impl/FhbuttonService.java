@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import com.toquery.cleverweb.service.system.fhbutton.FhbuttonManager;
 import org.springframework.stereotype.Service;
 import com.toquery.cleverweb.core.entity.Page;
-import com.toquery.cleverweb.dao.DaoSupport;
+import com.toquery.cleverweb.dao.mybatis.DaoSupport;
 import com.toquery.cleverweb.common.util.PageData;
 
 /**

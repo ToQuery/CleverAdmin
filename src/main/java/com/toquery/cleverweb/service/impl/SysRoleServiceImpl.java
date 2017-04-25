@@ -1,8 +1,7 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.TbSysRoleMapper;
+import com.toquery.cleverweb.dao.ITbSysRoleDao;
 import com.toquery.cleverweb.entity.po.TbSysRole;
-import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.util.List;
 public class SysRoleServiceImpl implements ISysRoleService {
 
     @Autowired
-    private TbSysRoleMapper sysRoleMapper;
+    private ITbSysRoleDao sysRoleDao;
 
 
     /**
@@ -27,7 +26,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public TbSysRole findByRoleId(String roleId) {
-        return sysRoleMapper.selectByPrimaryKey(roleId);
+        return sysRoleDao.findOne(roleId);
     }
 
     /**
@@ -35,7 +34,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
      * @return
      */
     public List<TbSysRole> findList(){
-        return sysRoleMapper.findList();
+        return sysRoleDao.findAll();
     }
 
     /**
@@ -46,6 +45,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
      */
     @Override
     public List<TbSysRole> findByParentId(String parentId) {
-        return sysRoleMapper.findByParentId(parentId);
+        return sysRoleDao.findByParentId(parentId);
     }
 }

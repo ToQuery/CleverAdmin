@@ -1,7 +1,7 @@
 package com.toquery.cleverweb.service.system.fhsms.impl;
 
 import com.toquery.cleverweb.common.util.PageData;
-import com.toquery.cleverweb.dao.DaoSupport;
+import com.toquery.cleverweb.dao.mybatis.DaoSupport;
 import com.toquery.cleverweb.core.entity.Page;
 import com.toquery.cleverweb.service.system.fhsms.FhsmsManager;
 import org.springframework.stereotype.Service;

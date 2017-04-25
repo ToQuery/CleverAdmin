@@ -1,6 +1,8 @@
 package com.toquery.cleverweb.service;
 
 import com.toquery.cleverweb.entity.po.TbSysButton;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public interface ISysButtonService {
      * 获取所有的按钮
      * @return
      */
-    List<TbSysButton> findList();
+    Page<TbSysButton> findList(Pageable pageable);
 
     /**
      * 通过角色的ID获取该角色下的所有按钮

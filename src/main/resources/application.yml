@@ -14,16 +14,26 @@ server:
 
 
 spring:
+
 # PROFILES
   profiles:
     active:  # Comma-separated list (or list if using YAML) of active profiles.
     include:  # Unconditionally activate the specified comma separated profiles (or list of profiles if using YAML).
+
 # 配置数据原
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/cleverweb?useUnicode=true&characterEncoding=utf-8
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+
+#
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: update
+
 # redis配置
   redis:
     url: 127.0.0.1 # Connection URL, will override host, port and password (user will be ignored), e.g. redis://user:password@example.com:6379

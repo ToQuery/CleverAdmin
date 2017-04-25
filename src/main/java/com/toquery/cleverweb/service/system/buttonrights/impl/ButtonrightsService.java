@@ -1,7 +1,7 @@
 package com.toquery.cleverweb.service.system.buttonrights.impl;
 
 import com.toquery.cleverweb.common.util.PageData;
-import com.toquery.cleverweb.dao.DaoSupport;
+import com.toquery.cleverweb.dao.mybatis.DaoSupport;
 import com.toquery.cleverweb.service.system.buttonrights.ButtonrightsManager;
 import org.springframework.stereotype.Service;
 

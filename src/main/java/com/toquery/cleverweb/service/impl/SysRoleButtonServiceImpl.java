@@ -1,6 +1,6 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.TbSysRoleButtonMapper;
+import com.toquery.cleverweb.dao.ITbSysRoleButtonDao;
 import com.toquery.cleverweb.entity.po.TbSysRoleButton;
 import com.toquery.cleverweb.service.ISysRoleButtonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 public class SysRoleButtonServiceImpl implements ISysRoleButtonService {
 
     @Autowired
-    private TbSysRoleButtonMapper sysRoleButtonMapper;
+    private ITbSysRoleButtonDao sysRoleButtonDao;
 
     /**
      * 获取所有的关联关系
@@ -24,7 +24,7 @@ public class SysRoleButtonServiceImpl implements ISysRoleButtonService {
      */
     @Override
     public List<TbSysRoleButton> findList() {
-        return sysRoleButtonMapper.findList();
+        return sysRoleButtonDao.findAll();
     }
 
     /**
@@ -36,7 +36,7 @@ public class SysRoleButtonServiceImpl implements ISysRoleButtonService {
      */
     @Override
     public TbSysRoleButton findByRoleIdAndButtonId(String roleId, String buttonId) {
-        return sysRoleButtonMapper.findByRoleIdAndButtonId(roleId, buttonId);
+        return sysRoleButtonDao.findByRoleIdAndButtonId(roleId, buttonId);
     }
 
     /**
@@ -46,7 +46,7 @@ public class SysRoleButtonServiceImpl implements ISysRoleButtonService {
      */
     @Override
     public void deleteById(String rbId) {
-        sysRoleButtonMapper.deleteByPrimaryKey(rbId);
+        sysRoleButtonDao.delete(rbId);
     }
 
     /**
@@ -56,6 +56,6 @@ public class SysRoleButtonServiceImpl implements ISysRoleButtonService {
      */
     @Override
     public void save(TbSysRoleButton saveTbSysRoleButton) {
-        sysRoleButtonMapper.insert(saveTbSysRoleButton);
+        sysRoleButtonDao.save(saveTbSysRoleButton);
     }
 }

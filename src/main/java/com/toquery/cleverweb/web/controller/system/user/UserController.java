@@ -9,10 +9,11 @@ import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.service.ISysRoleService;
 import com.toquery.cleverweb.service.ISysUserService;
 import com.toquery.cleverweb.web.controller.BaseController;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -52,12 +53,12 @@ public class UserController extends BaseController {
     public ModelAndView listUsers(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
                                   @RequestParam(value = "pageSize",defaultValue = "10")int pageSize)  {
         ModelAndView mv = new ModelAndView("system/user/user_list");
-        Page<TbSysUser> page = PageHelper.startPage(pageNum,pageSize);
-        List<TbSysUser> userList = sysUserService.findList();    //列出用户列表
+        Pageable pageable = new PageRequest(pageNum, pageSize);
+        Page<TbSysUser> page = sysUserService.findList(pageable);    //列出用户列表
         List<TbSysRole> roleList = sysRoleService.findList();//列出所有系统用户角色
         mv.addObject("page", page);
 
-        mv.addObject("userList", userList);
+        mv.addObject("userList", page.getContent());
         mv.addObject("roleList", roleList);
         mv.addObject("QX", Jurisdiction.getHC());    //按钮权限
         return mv;

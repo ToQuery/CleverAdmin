@@ -1,9 +1,11 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.TbSysButtonMapper;
+import com.toquery.cleverweb.dao.ITbSysButtonDao;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.service.ISysButtonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +16,15 @@ import java.util.List;
 @Service
 public class SysButtonServiceImpl implements ISysButtonService {
     @Autowired
-    private TbSysButtonMapper sysButtonMapper;
+    private ITbSysButtonDao sysButtonDao;
     /**
      * 获取所有的按钮
      *
      * @return  所有的按钮
      */
     @Override
-    public List<TbSysButton> findList() {
-        return sysButtonMapper.findList();
+    public Page<TbSysButton> findList(Pageable pageable) {
+        return sysButtonDao.findAll(pageable);
     }
 
     /**
@@ -33,7 +35,7 @@ public class SysButtonServiceImpl implements ISysButtonService {
      */
     @Override
     public List<TbSysButton> findListByRoleId(String roleId) {
-        return sysButtonMapper.findListByRoleId(roleId);
+        return sysButtonDao.findByRoleId(roleId);
     }
 
     /**
@@ -43,6 +45,6 @@ public class SysButtonServiceImpl implements ISysButtonService {
      */
     @Override
     public void save(TbSysButton sysButton) {
-        sysButtonMapper.insert(sysButton);
+        sysButtonDao.save(sysButton);
     }
 }

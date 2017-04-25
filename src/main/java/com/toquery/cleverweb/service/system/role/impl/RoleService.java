@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import com.toquery.cleverweb.service.system.role.RoleManager;
 import org.springframework.stereotype.Service;
 
-import com.toquery.cleverweb.dao.DaoSupport;
+import com.toquery.cleverweb.dao.mybatis.DaoSupport;
 import com.toquery.cleverweb.core.entity.system.Role;
 import com.toquery.cleverweb.common.util.PageData;
 

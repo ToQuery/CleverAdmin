@@ -1,10 +1,11 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.TbSysUserMapper;
+import com.toquery.cleverweb.dao.ITbSysUserDao;
 import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.service.ISysUserService;
-import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class SysUserServiceImpl implements ISysUserService {
     @Autowired
-    private TbSysUserMapper sysUserMapper;
+    private ITbSysUserDao sysUserDao;
 
     /**
      * 通过用户名查找用户信息
@@ -25,7 +26,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public TbSysUser findByUserName(String userName) {
-        return sysUserMapper.findByUserName(userName);
+        return sysUserDao.findByUserName(userName);
     }
 
     /**
@@ -45,7 +46,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public void deleteByUserId(String userId) {
-        sysUserMapper.deleteByPrimaryKey(userId);
+        sysUserDao.delete(userId);
     }
 
 
@@ -68,7 +69,7 @@ public class SysUserServiceImpl implements ISysUserService {
      */
     @Override
     public List<TbSysUser> findAllByRoleId(String roleId) {
-        return sysUserMapper.findAllByRoleId(roleId);
+        return sysUserDao.findByRoleId(roleId);
     }
 
     /**
@@ -77,7 +78,7 @@ public class SysUserServiceImpl implements ISysUserService {
      * @return 所有的用户
      */
     @Override
-    public List<TbSysUser> findList() {
-        return sysUserMapper.findList();
+    public Page<TbSysUser> findList(Pageable pageable) {
+        return sysUserDao.findAll(pageable);
     }
 }

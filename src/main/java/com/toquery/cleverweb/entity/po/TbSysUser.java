@@ -1,8 +1,12 @@
 package com.toquery.cleverweb.entity.po;
 
-import java.util.Date;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import java.util.Date;
+@Entity
 public class TbSysUser {
+    @Id
     private String userId;
 
     private String userName;

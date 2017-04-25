@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.toquery.cleverweb.dao.DaoSupport;
 import com.toquery.cleverweb.service.information.pictures.PicturesManager;
 import com.toquery.cleverweb.core.entity.Page;
 import com.toquery.cleverweb.common.util.PageData;

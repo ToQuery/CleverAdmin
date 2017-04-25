@@ -1,7 +1,7 @@
 package com.toquery.cleverweb.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.toquery.cleverweb.dao.TbSysMenuMapper;
+import com.toquery.cleverweb.dao.ITbSysMenuDao;
 import com.toquery.cleverweb.entity.po.TbSysMenu;
 import com.toquery.cleverweb.entity.vo.SysMenu;
 import com.toquery.cleverweb.service.ISysMenuService;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class SysMenuServiceImpl implements ISysMenuService {
     @Autowired
-    private TbSysMenuMapper sysMenuMapper;
+    private ITbSysMenuDao sysMenuDao;
 
     /**
      * 获取所有的菜单
@@ -25,7 +25,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public List<SysMenu> findList() {
-        List<TbSysMenu> sysMenuList = sysMenuMapper.findList();
+        List<TbSysMenu> sysMenuList = sysMenuDao.findAll();
         return JSON.parseArray(JSON.toJSONString(sysMenuList), SysMenu.class);
     }
 
@@ -50,7 +50,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public List<SysMenu> findListByParentId(int parentMenuId) {
-        List<SysMenu> sysMenuList = JSON.parseArray(JSON.toJSONString(sysMenuMapper.findListByParentId(parentMenuId)), SysMenu.class);
+        List<SysMenu> sysMenuList = JSON.parseArray(JSON.toJSONString(sysMenuDao.findByParentId(parentMenuId)), SysMenu.class);
         for (SysMenu sysMenu : sysMenuList) {
 //          sysMenu.setMenuUrl("menu/toEdit.do?MENU_ID="+sysMenu.getMenuId());
             sysMenu.setSubMenu(this.findListByParentId(sysMenu.getMenuId()));

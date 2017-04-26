@@ -5,6 +5,7 @@ import com.toquery.cleverweb.common.util.Const;
 import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.common.util.RightsHelper;
 import com.toquery.cleverweb.entity.po.TbSysButton;
+import com.toquery.cleverweb.entity.po.TbSysMenu;
 import com.toquery.cleverweb.entity.po.TbSysRole;
 import com.toquery.cleverweb.entity.vo.SysMenu;
 import com.toquery.cleverweb.entity.vo.SysUserRole;
@@ -50,7 +51,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "/main/{changeMenu}")
     public ModelAndView login_index(HttpSession session, @PathVariable("changeMenu") String changeMenu) {
         ModelAndView mv = new ModelAndView();
-        PageData pd = this.getPageData();
+        PageData pd = new PageData();
         SysUserRole sessionUserRole = (SysUserRole) session.getAttribute(Const.SESSION_USER);                //读取session中的用户信息(单独用户信息)
         if (sessionUserRole == null) {
             RedirectView rdv = new RedirectView("/login");
@@ -61,12 +62,12 @@ public class IndexController extends BaseController {
         String roleRights = sysRole != null ? sysRole.getRights() : "";                //角色权限(菜单权限)
         session.setAttribute(USERNAME + Const.SESSION_ROLE_RIGHTS, roleRights); //将角色权限存入session
         session.setAttribute(Const.SESSION_USERNAME, USERNAME);                //放入用户名到session
-        List<SysMenu> sysMenuList = (List<SysMenu>) session.getAttribute(USERNAME + Const.SESSION_allmenuList);
-        if (sysMenuList == null ) {
-            sysMenuList = sysMenuService.findListByParentId(0);
+        List<TbSysMenu> sysMenuList = (List<TbSysMenu>) session.getAttribute(USERNAME + Const.SESSION_allmenuList);
+        if (sysMenuList == null) {
+            sysMenuList = sysMenuService.findListByParentId("0");
             if (!Strings.isNullOrEmpty(roleRights)) {
                 sysMenuList = this.readMenu(sysMenuList, roleRights);        //根据角色权限获取本权限的菜单列表
-            }else{
+            } else {
                 sysMenuList = new ArrayList<>();
             }
             session.setAttribute(USERNAME + Const.SESSION_allmenuList, sysMenuList);//菜单权限放入session中
@@ -74,13 +75,13 @@ public class IndexController extends BaseController {
 
 
         //切换菜单处理=====start
-        List<SysMenu> menuList = new ArrayList<SysMenu>();
+        List<TbSysMenu> menuList = new ArrayList<>();
         if (null == session.getAttribute(USERNAME + Const.SESSION_menuList) || ("yes".equals(changeMenu))) {
-            List<SysMenu> menuList1 = new ArrayList<SysMenu>();
-            List<SysMenu> menuList2 = new ArrayList<SysMenu>();
+            List<TbSysMenu> menuList1 = new ArrayList<>();
+            List<TbSysMenu> menuList2 = new ArrayList<>();
             //拆分菜单
             for (int i = 0; i < sysMenuList.size(); i++) {
-                SysMenu sysMenu = sysMenuList.get(i);
+                TbSysMenu sysMenu = sysMenuList.get(i);
                 if ("1".equals(sysMenu.getMenuType())) {
                     menuList1.add(sysMenu);
                 } else {
@@ -100,7 +101,7 @@ public class IndexController extends BaseController {
                 menuList = menuList2;
             }
         } else {
-            menuList = (List<SysMenu>) session.getAttribute(USERNAME + Const.SESSION_menuList);
+            menuList = (List<TbSysMenu>) session.getAttribute(USERNAME + Const.SESSION_menuList);
         }
         //切换菜单处理=====end
         if (null == session.getAttribute(USERNAME + Const.SESSION_QX)) {
@@ -145,13 +146,7 @@ public class IndexController extends BaseController {
      * @param roleRights：加密的权限字符串
      * @return
      */
-    public List<SysMenu> readMenu(List<SysMenu> sysMenuList, String roleRights) {
-        for (int i = 0; i < sysMenuList.size(); i++) {
-            sysMenuList.get(i).setHasMenu(RightsHelper.testRights(roleRights, sysMenuList.get(i).getMenuId()));
-            if (sysMenuList.get(i).isHasMenu()) {        //判断是否有此菜单权限
-                this.readMenu(sysMenuList.get(i).getSubMenu(), roleRights);//是：继续排查其子菜单
-            }
-        }
+    public List<TbSysMenu> readMenu(List<TbSysMenu> sysMenuList, String roleRights) {
         return sysMenuList;
     }
 

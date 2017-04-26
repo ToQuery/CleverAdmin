@@ -1,21 +1,13 @@
 package com.toquery.cleverweb.web.controller;
 
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.toquery.cleverweb.common.util.AppUtil;
 import com.toquery.cleverweb.common.util.DateUtil;
+import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.common.util.UuidUtil;
+import com.toquery.cleverweb.core.entity.Page;
+import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.entity.po.TbSysMessage;
 import com.toquery.cleverweb.service.ISysMessageService;
-import com.toquery.cleverweb.service.system.fhsms.FhsmsManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -24,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.toquery.cleverweb.web.controller.BaseController;
-import com.toquery.cleverweb.core.entity.Page;
-import com.toquery.cleverweb.common.util.AppUtil;
-import com.toquery.cleverweb.core.utils.Jurisdiction;
-import com.toquery.cleverweb.common.util.PageData;
+import javax.annotation.Resource;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：站内信
@@ -137,7 +133,7 @@ public class SysMessagesController extends BaseController {
         }
         pd.put("FROM_USERNAME", Jurisdiction.getUsername());    //当前用户名
         page.setPd(pd);
-        List<PageData> varList = fhsmsService.list(page);        //列出Fhsms列表
+        List<TbSysMessage> varList = sysMessageService.findAll();        //列出Fhsms列表
         mv.setViewName("system/fhsms/fhsms_list");
         mv.addObject("varList", varList);
         mv.addObject("pd", pd);
@@ -153,9 +149,8 @@ public class SysMessagesController extends BaseController {
      */
     @RequestMapping(value = "/goAdd")
     public ModelAndView goAdd() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         mv.setViewName("system/fhsms/fhsms_edit");
         mv.addObject("msg", "save");
         mv.addObject("pd", pd);
@@ -170,13 +165,12 @@ public class SysMessagesController extends BaseController {
      */
     @RequestMapping(value = "/goView")
     public ModelAndView goView() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         if ("1".equals(pd.getString("TYPE")) && "2".equals(pd.getString("STATUS"))) { //在收信箱里面查看未读的站内信时去数据库改变未读状态为已读
-            fhsmsService.edit(pd);
+            sysMessageService.edit(null);
         }
-        pd = fhsmsService.findById(pd);    //根据ID读取
+        TbSysMessage sysMessage = sysMessageService.findById("");    //根据ID读取
         mv.setViewName("system/fhsms/fhsms_view");
         mv.addObject("pd", pd);
         return mv;
@@ -191,18 +185,13 @@ public class SysMessagesController extends BaseController {
     @RequestMapping(value = "/deleteAll")
     @ResponseBody
     public Object deleteAll() throws Exception {
-        logBefore(logger, Jurisdiction.getUsername() + "批量删除Fhsms");
-        if (!Jurisdiction.buttonJurisdiction(menuUrl, "del")) {
-            return null;
-        } //校验权限
         PageData pd = new PageData();
         Map<String, Object> map = new HashMap<String, Object>();
-        pd = this.getPageData();
         List<PageData> pdList = new ArrayList<PageData>();
         String DATA_IDS = pd.getString("DATA_IDS");
         if (null != DATA_IDS && !"".equals(DATA_IDS)) {
             String ArrayDATA_IDS[] = DATA_IDS.split(",");
-            fhsmsService.deleteAll(ArrayDATA_IDS);
+            sysMessageService.deleteAll(ArrayDATA_IDS);
             pd.put("msg", "ok");
         } else {
             pd.put("msg", "no");

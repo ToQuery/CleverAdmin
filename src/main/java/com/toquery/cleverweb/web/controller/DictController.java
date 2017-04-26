@@ -1,28 +1,22 @@
-package com.toquery.cleverweb.web.controller.system.dictionaries;
+package com.toquery.cleverweb.web.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.toquery.cleverweb.common.util.AppUtil;
-import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.common.util.PageData;
+import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.entity.Page;
-import com.toquery.cleverweb.service.system.dictionaries.DictionariesManager;
+import com.toquery.cleverweb.core.utils.Jurisdiction;
+import com.toquery.cleverweb.entity.po.TbSysDict;
+import com.toquery.cleverweb.service.ISysDictService;
 import com.toquery.cleverweb.web.controller.BaseController;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -33,11 +27,10 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/dictionaries")
-public class DictionariesController extends BaseController {
+public class DictController extends BaseController {
 
-    String menuUrl = "dictionaries/list.do"; //菜单地址(权限用)
-    @Resource(name = "dictionariesService")
-    private DictionariesManager dictionariesService;
+    @Resource
+    private ISysDictService sysDictService;
 
     /**
      * 保存
@@ -47,15 +40,10 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/save")
     public ModelAndView save() throws Exception {
-        logBefore(logger, Jurisdiction.getUsername() + "新增Dictionaries");
-        if (!Jurisdiction.buttonJurisdiction(menuUrl, "add")) {
-            return null;
-        } //校验权限
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
-        pd.put("DICTIONARIES_ID", this.get32UUID());    //主键
-        dictionariesService.save(pd);
+        pd.put("DICTIONARIES_ID", UuidUtil.get32UUID());    //主键
+        sysDictService.save(new TbSysDict());
         mv.addObject("msg", "success");
         mv.setViewName("save_result");
         return mv;
@@ -71,36 +59,32 @@ public class DictionariesController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam String DICTIONARIES_ID) throws Exception {
-        if (!Jurisdiction.buttonJurisdiction(menuUrl, "del")) {
-            return null;
-        } //校验权限
-        logBefore(logger, Jurisdiction.getUsername() + "删除Dictionaries");
         Map<String, String> map = new HashMap<String, String>();
         PageData pd = new PageData();
         pd.put("DICTIONARIES_ID", DICTIONARIES_ID);
         String errInfo = "success";
-        if (dictionariesService.listSubDictByParentId(DICTIONARIES_ID).size() > 0) {//判断是否有子级，是：不允许删除
-            errInfo = "false";
-        } else {
-            pd = dictionariesService.findById(pd);//根据ID读取
+       // if (dictionariesService.listSubDictByParentId(DICTIONARIES_ID).size() > 0) {//判断是否有子级，是：不允许删除
+       //     errInfo = "false";
+      //  } else {
+           // dictionariesService.findById(pd);//根据ID读取
             if (null != pd.get("TBSNAME") && !"".equals(pd.getString("TBSNAME"))) {
                 String[] table = pd.getString("TBSNAME").split(",");
                 for (int i = 0; i < table.length; i++) {
                     pd.put("thisTable", table[i]);
                     try {
-                        if (Integer.parseInt(dictionariesService.findFromTbs(pd).get("zs").toString()) > 0) {//判断是否被占用，是：不允许删除(去排查表检查字典表中的编码字段)
+                       // if (Integer.parseInt(dictionariesService.findFromTbs(pd).get("zs").toString()) > 0) {//判断是否被占用，是：不允许删除(去排查表检查字典表中的编码字段)
                             errInfo = "false";
                             break;
-                        }
+                       // }
                     } catch (Exception e) {
                         errInfo = "false2";
                         break;
                     }
                 }
             }
-        }
+      //  }
         if ("success".equals(errInfo)) {
-            dictionariesService.delete(pd);    //执行删除
+        //    dictionariesService.delete(pd);    //执行删除
         }
         map.put("result", errInfo);
         return AppUtil.returnObject(new PageData(), map);
@@ -114,14 +98,9 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/edit")
     public ModelAndView edit() throws Exception {
-        logBefore(logger, Jurisdiction.getUsername() + "修改Dictionaries");
-        if (!Jurisdiction.buttonJurisdiction(menuUrl, "edit")) {
-            return null;
-        } //校验权限
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv =  new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
-        dictionariesService.edit(pd);
+   //     dictionariesService.edit(pd);
         mv.addObject("msg", "success");
         mv.setViewName("save_result");
         return mv;
@@ -135,10 +114,8 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/list")
     public ModelAndView list(Page page) throws Exception {
-        logBefore(logger, Jurisdiction.getUsername() + "列表Dictionaries");
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         String keywords = pd.getString("keywords");                    //检索条件
         if (null != keywords && !"".equals(keywords)) {
             pd.put("keywords", keywords.trim());
@@ -149,11 +126,11 @@ public class DictionariesController extends BaseController {
         }
         pd.put("DICTIONARIES_ID", DICTIONARIES_ID);                    //上级ID
         page.setPd(pd);
-        List<PageData> varList = dictionariesService.list(page);    //列出Dictionaries列表
-        mv.addObject("pd", dictionariesService.findById(pd));        //传入上级所有信息
+      //  List<PageData> varList = dictionariesService.list(page);    //列出Dictionaries列表
+       // mv.addObject("pd", dictionariesService.findById(pd));        //传入上级所有信息
         mv.addObject("DICTIONARIES_ID", DICTIONARIES_ID);            //上级ID
         mv.setViewName("system/dictionaries/dictionaries_list");
-        mv.addObject("varList", varList);
+     //   mv.addObject("varList", varList);
         mv.addObject("QX", Jurisdiction.getHC());                    //按钮权限
         return mv;
     }
@@ -166,11 +143,10 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/listalldict")
     public ModelAndView listAllDict(Model model, String DICTIONARIES_ID) throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         try {
-            String json = JSON.toJSONString(dictionariesService.listAllDict("0"));
+            String json = "";//JSON.toJSONString(dictionariesService.listAllDict("0"));
             json = json.replaceAll("DICTIONARIES_ID", "id").replaceAll("PARENT_ID", "pId").replaceAll("NAME", "name").replaceAll("subDict", "nodes").replaceAll("hasDict", "checked").replaceAll("treeurl", "url");
             model.addAttribute("zTreeNodes", json);
             mv.addObject("DICTIONARIES_ID", DICTIONARIES_ID);
@@ -190,12 +166,11 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/goAdd")
     public ModelAndView goAdd() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         String DICTIONARIES_ID = null == pd.get("DICTIONARIES_ID") ? "" : pd.get("DICTIONARIES_ID").toString();
         pd.put("DICTIONARIES_ID", DICTIONARIES_ID);                    //上级ID
-        mv.addObject("pds", dictionariesService.findById(pd));        //传入上级所有信息
+      //  mv.addObject("pds", dictionariesService.findById(pd));        //传入上级所有信息
         mv.addObject("DICTIONARIES_ID", DICTIONARIES_ID);            //传入ID，作为子级ID用
         mv.setViewName("system/dictionaries/dictionaries_edit");
         mv.addObject("msg", "save");
@@ -213,10 +188,10 @@ public class DictionariesController extends BaseController {
         ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
         String DICTIONARIES_ID = pd.getString("DICTIONARIES_ID");
-        pd = dictionariesService.findById(pd);    //根据ID读取
+       //  dictionariesService.findById(pd);    //根据ID读取
         mv.addObject("pd", pd);                    //放入视图容器
         pd.put("DICTIONARIES_ID", pd.get("PARENT_ID").toString());            //用作上级信息
-        mv.addObject("pds", dictionariesService.findById(pd));                //传入上级所有信息
+       // mv.addObject("pds", dictionariesService.findById(pd));                //传入上级所有信息
         mv.addObject("DICTIONARIES_ID", pd.get("PARENT_ID").toString());    //传入上级ID，作为子ID用
         pd.put("DICTIONARIES_ID", DICTIONARIES_ID);                            //复原本ID
         mv.setViewName("system/dictionaries/dictionaries_edit");
@@ -236,10 +211,9 @@ public class DictionariesController extends BaseController {
         String errInfo = "success";
         PageData pd = new PageData();
         try {
-            pd = this.getPageData();
-            if (dictionariesService.findByBianma(pd) != null) {
+           // if (dictionariesService.findByBianma(pd) != null) {
                 errInfo = "error";
-            }
+           // }
         } catch (Exception e) {
             logger.error(e.toString(), e);
         }

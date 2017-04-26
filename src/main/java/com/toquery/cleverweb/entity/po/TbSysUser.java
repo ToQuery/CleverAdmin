@@ -1,40 +1,64 @@
 package com.toquery.cleverweb.entity.po;
 
-import org.springframework.data.annotation.Id;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
+
+
 @Entity
+@Table(name = "tb_sys_user")
 public class TbSysUser {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id", unique = true, nullable = false)
     private String userId;
 
+    @Column(name = "user_name", unique = true, nullable = false)
     private String userName;
 
+    @Column(name = "password", unique = true, nullable = false)
     private String password;
 
+    @Column(name = "nick_name", unique = true, nullable = false)
     private String nickName;
 
+    @Column(name = "rights", unique = true, nullable = false)
     private String rights;
 
+    @Column(name = "role_id", unique = true, nullable = false)
     private String roleId;
 
+    @Column(name = "status", unique = true, nullable = false)
     private String status;
 
+    @Column(name = "bz", unique = true, nullable = false)
     private String bz;
 
+    @Column(name = "skin", unique = true, nullable = false)
     private String skin;
 
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @Column(name = "index_num", unique = true, nullable = false)
     private String indexNum;
 
+    @Column(name = "phone", unique = true, nullable = false)
     private String phone;
 
+    @Column(name = "last_time", unique = true, nullable = false)
     private Date lastTime;
 
+    @Column(name = "last_ip", unique = true, nullable = false)
     private String lastIp;
 
+    @Column(name = "create_time", unique = true, nullable = false)
     private Date createTime;
 
     public String getUserId() {

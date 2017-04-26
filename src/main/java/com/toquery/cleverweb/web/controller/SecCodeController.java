@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.web.controller.system.secCode;
+package com.toquery.cleverweb.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

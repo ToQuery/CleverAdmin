@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.web.controller.system.buttonrights;
+package com.toquery.cleverweb.web.controller;
 
 import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.entity.vo.CWResponse;

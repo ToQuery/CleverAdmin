@@ -8,6 +8,7 @@ import com.toquery.cleverweb.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,7 +16,8 @@ import java.util.List;
  */
 @Service
 public class SysMenuServiceImpl implements ISysMenuService {
-    @Autowired
+
+    @Resource
     private ITbSysMenuDao sysMenuDao;
 
     /**
@@ -56,5 +58,20 @@ public class SysMenuServiceImpl implements ISysMenuService {
 //            sysMenu.setTarget("treeFrame");
         //  }
         return sysMenuList;
+    }
+
+    @Override
+    public void saveAndFlush(TbSysMenu tbSysMenu) {
+        sysMenuDao.saveAndFlush(tbSysMenu);
+    }
+
+    @Override
+    public TbSysMenu getById(String menuId) {
+        return sysMenuDao.findOne(menuId);
+    }
+
+    @Override
+    public void delete(String menuId) {
+        sysMenuDao.delete(menuId);
     }
 }

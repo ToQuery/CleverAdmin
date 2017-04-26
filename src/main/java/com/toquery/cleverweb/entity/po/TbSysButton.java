@@ -1,12 +1,28 @@
 package com.toquery.cleverweb.entity.po;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Table(name = "tb_sys_button")
 public class TbSysButton {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "button_id", unique = true, nullable = false)
     private String buttonId;
 
+    @Column(name = "button_name", unique = true, nullable = false)
     private String buttonName;
 
+    @Column(name = "qx_name", unique = true, nullable = false)
     private String qxName;
 
+    @Column(name = "remark", unique = true, nullable = false)
     private String remark;
 
     public String getButtonId() {

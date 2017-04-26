@@ -1,5 +1,6 @@
 package com.toquery.cleverweb.service;
 
+import com.toquery.cleverweb.core.entity.system.Menu;
 import com.toquery.cleverweb.entity.po.TbSysMenu;
 import com.toquery.cleverweb.entity.vo.SysMenu;
 
@@ -29,4 +30,11 @@ public interface ISysMenuService {
      * @return  菜单列表
      */
     List<TbSysMenu> findListByParentId(String parentMenuId);
+
+    public void saveAndFlush(TbSysMenu tbSysMenu);
+
+
+    TbSysMenu getById(String menuId);
+
+    void delete(String menuId);
 }

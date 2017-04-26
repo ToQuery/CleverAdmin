@@ -7,6 +7,7 @@ import com.toquery.cleverweb.common.util.RightsHelper;
 import com.toquery.cleverweb.common.util.Tools;
 import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.utils.Jurisdiction;
+import com.toquery.cleverweb.entity.po.TbSysMenu;
 import com.toquery.cleverweb.entity.po.TbSysRole;
 import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.entity.vo.SysMenu;
@@ -205,7 +206,7 @@ public class RoleController extends BaseController {
         ModelAndView mv = new ModelAndView();
         TbSysRole sysRole = sysRoleService.findByRoleId(roleId);            //根据角色ID获取角色对象
         String roleRights = sysRole.getRights();                    //取出本角色菜单权限
-        List<SysMenu> menuList = sysMenuService.findListByParentId(0);    //获取所有菜单
+        List<TbSysMenu> menuList = sysMenuService.findListByParentId("0");    //获取所有菜单
         menuList = this.readMenu(menuList, roleRights);            //根据角色权限处理菜单权限状态(递归处理)
         String json = JSON.toJSONString(menuList).replaceAll("menuId", "id").replaceAll("parentId", "pId").replaceAll("menuName", "name").replaceAll("subMenu", "nodes").replaceAll("hasMenu", "checked");
         mv.addObject("zTreeNodes", json);
@@ -262,7 +263,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/b4Button")
     public ModelAndView b4Button(@RequestParam(value = "roleId", defaultValue = "0") String roleId, @RequestParam String msg, Model model) {
         ModelAndView mv = new ModelAndView();
-        List<SysMenu> sysMenuList = sysMenuService.findListByMenuId(0); //获取所有菜单
+        List<TbSysMenu> sysMenuList = sysMenuService.findListByMenuId("0"); //获取所有菜单
         TbSysRole sysRole = sysRoleService.findByRoleId(roleId);          //根据角色ID获取角色对象
         String roleRights = "";
         if ("add_qx".equals(msg)) {
@@ -290,11 +291,7 @@ public class RoleController extends BaseController {
      * @param roleRights：加密的权限字符串
      * @return
      */
-    public List<SysMenu> readMenu(List<SysMenu> sysMenuList, String roleRights) {
-        for (SysMenu sysMenu : sysMenuList) {
-            sysMenu.setHasMenu(RightsHelper.testRights(roleRights, sysMenu.getMenuId()));
-            this.readMenu(sysMenu.getSubMenu(), roleRights);
-        }
+    public List<TbSysMenu> readMenu(List<TbSysMenu> sysMenuList, String roleRights) {
         return sysMenuList;
     }
 

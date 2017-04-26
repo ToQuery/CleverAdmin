@@ -1,17 +1,10 @@
-package com.toquery.cleverweb.web.controller.system.onlinemanager;
+package com.toquery.cleverweb.web.controller;
 
 import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.web.controller.BaseController;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 /** 
@@ -31,15 +24,9 @@ public class OnlineManagerController extends BaseController {
 	@RequestMapping(value="/list")
 	public ModelAndView list(){
 //		if(!Jurisdiction.buttonJurisdiction("", "cha")){return null;} //校验权限
-		ModelAndView mv = this.getModelAndView();
+		ModelAndView mv = new ModelAndView();
 		mv.setViewName("system/onlinemanager/onlinemanager_list");
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
-	}
-	
-	@InitBinder
-	public void initBinder(WebDataBinder binder){
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(format,true));
 	}
 }

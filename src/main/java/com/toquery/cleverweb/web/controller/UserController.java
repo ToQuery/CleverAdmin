@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.web.controller.system;
+package com.toquery.cleverweb.web.controller;
 
 import com.toquery.cleverweb.common.util.Const;
 import com.toquery.cleverweb.common.util.FileDownload;

@@ -56,14 +56,14 @@ spring:
 # Email (MailProperties)
   mail:
     default-encoding: UTF-8 # Default MimeMessage encoding.
-    host:  # SMTP server host. For instance `smtp.example.com`
+    host:  smtp.163.com # SMTP server host. For instance `smtp.example.com`
     jndi-name:  # Session JNDI name. When set, takes precedence to others mail settings.
     password:  # Login password of the SMTP server.
     port:  # SMTP server port.
     properties.*:  # Additional JavaMail session properties.
     protocol: smtp # Protocol used by the SMTP server.
     test-connection: false # Test that the mail server is available on startup.
-    username:  # Login user of the SMTP server.
+    username:  toquery@163.com # Login user of the SMTP server.
 # mvc
   mvc:
     view:

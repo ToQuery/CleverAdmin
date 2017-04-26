@@ -1,21 +1,49 @@
 package com.toquery.cleverweb.entity.po;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.Set;
+
+@Entity
+@Table(name = "tb_sys_role")
 public class TbSysRole {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "role_id", unique = true, nullable = false)
     private String roleId;
 
+    @Column(name = "role_name", unique = true, nullable = false)
     private String roleName;
 
+    @Column(name = "rights", unique = true, nullable = false)
     private String rights;
 
+    @Column(name = "parent_id", unique = true, nullable = false)
     private String parentId;
 
+    @Column(name = "add_qx", unique = true, nullable = false)
     private String addQx;
 
+    @Column(name = "del_qx", unique = true, nullable = false)
     private String delQx;
 
+    @Column(name = "edit_qx", unique = true, nullable = false)
     private String editQx;
 
+    @Column(name = "cha_qx", unique = true, nullable = false)
     private String chaQx;
+
+    @ManyToMany
+    @JoinTable(name = "tb_sys_role_button", joinColumns = @JoinColumn(name = "tb_sys_button_button_id"), inverseJoinColumns = @JoinColumn(name = "tb_sys_role_button_role_id"))
+    private Set<TbSysRoleButton> sysRoleButtonSet;
 
     public String getRoleId() {
         return roleId;

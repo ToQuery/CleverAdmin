@@ -4,9 +4,6 @@ import com.toquery.cleverweb.entity.po.TbSysMenu;
 
 import java.util.List;
 
-/**
- * Created by ToQuery on 2016-08-23.
- */
 public class SysMenu extends TbSysMenu {
     private String target;
     private SysMenu parentMenu;

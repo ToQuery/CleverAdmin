@@ -1,22 +1,41 @@
 package com.toquery.cleverweb.entity.po;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+@Entity
+@Table(name = "tb_sys_message")
 public class TbSysMessage {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "message_id", unique = true, nullable = false)
     private String messageId;
 
+    @Column(name = "content", unique = true, nullable = false)
     private String content;
 
+    @Column(name = "type", unique = true, nullable = false)
     private String type;
 
+    @Column(name = "receive_id", unique = true, nullable = false)
     private String receiveId;
 
+    @Column(name = "send_id", unique = true, nullable = false)
     private String sendId;
 
+    @Column(name = "send_time", unique = true, nullable = false)
     private Date sendTime;
 
+    @Column(name = "status", unique = true, nullable = false)
     private String status;
 
+    @Column(name = "sanme_id", unique = true, nullable = false)
     private String sanmeId;
 
     public String getMessageId() {

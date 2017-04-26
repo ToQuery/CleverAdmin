@@ -238,19 +238,19 @@ insert into `tb_sys_button` values ('cc51b694d5344d28a9aa13c84b7166cd', '发短�
 insert into `tb_sys_button` values ('da7fd386de0b49ce809984f5919022b8', '站内信', 'fhsms', '发送站内信');
 
 -- ----------------------------
--- table structure for sys_fhsms
+-- table structure for tb_sys_message
 -- ----------------------------
-drop table if exists `sys_fhsms`;
-create table `sys_fhsms` (
-  `fhsms_id` varchar(100) not null,
+drop table if exists `tb_sys_message`;
+create table `tb_sys_message` (
+  `message_id` varchar(32) not null,
   `content` varchar(1000) default null comment '内容',
   `type` varchar(5) default null comment '类型',
-  `to_username` varchar(255) default null comment '收信人',
-  `from_username` varchar(255) default null comment '发信人',
+  `receive_id` varchar(255) default null comment '收信人',
+  `send_id` varchar(255) default null comment '发信人',
   `send_time` varchar(100) default null comment '发信时间',
   `status` varchar(5) default null comment '状态',
   `sanme_id` varchar(100) default null,
-  primary key (`fhsms_id`)
+  primary key (`message_id`)
 ) engine=innodb default charset=utf8;
 
 -- ----------------------------

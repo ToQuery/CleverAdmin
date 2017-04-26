@@ -1,20 +1,41 @@
 package com.toquery.cleverweb.entity.po;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tb_sys_menu")
 public class TbSysMenu {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "menu_id", unique = true, nullable = false)
     private String menuId;
 
+    @Column(name = "menu_name", unique = true, nullable = false)
     private String menuName;
 
+    @Column(name = "menu_url", unique = true, nullable = false)
     private String menuUrl;
 
+    @Column(name = "parent_id", unique = true, nullable = false)
     private String parentId;
 
+    @Column(name = "menu_order", unique = true, nullable = false)
     private Integer menuOrder;
 
+    @Column(name = "menu_icon", unique = true, nullable = false)
     private String menuIcon;
 
+    @Column(name = "menu_type", unique = true, nullable = false)
     private Integer menuType;
 
+    @Column(name = "menu_state", unique = true, nullable = false)
     private Integer menuState;
 
     public String getMenuId() {

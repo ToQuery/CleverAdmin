@@ -20,6 +20,9 @@ public class TbSysLog {
     @Column(name = "log_id", unique = true, nullable = false)
     private String logId;
 
+    @Column(name = "log_type", unique = true, nullable = false)
+    private String logType;
+
     @Column(name = "user_id", unique = true, nullable = false)
     private String userId;
 
@@ -28,6 +31,14 @@ public class TbSysLog {
 
     @Column(name = "request_date", unique = true, nullable = false)
     private Date requestDate;
+
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
+    }
 
     public String getLogId() {
         return logId;

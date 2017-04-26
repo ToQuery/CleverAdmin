@@ -67,5 +67,14 @@ spring:
 # mvc
   mvc:
     view:
-      prefix: /resources/view/
+      prefix: classpath:/view/
       suffix: .jsp
+
+# thymeleaf
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html;charset=UTF-8
+    cache: false

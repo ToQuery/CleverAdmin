@@ -42,7 +42,7 @@ public class TbSysRole {
     private String chaQx;
 
     @ManyToMany
-    @JoinTable(name = "tb_sys_role_button", joinColumns = @JoinColumn(name = "tb_sys_button_button_id"), inverseJoinColumns = @JoinColumn(name = "tb_sys_role_button_role_id"))
+    @JoinTable(name = "tb_sys_role_button", joinColumns = @JoinColumn(name = "role_id"))
     private Set<TbSysRoleButton> sysRoleButtonSet;
 
     public String getRoleId() {

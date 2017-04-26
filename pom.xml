@@ -8,13 +8,14 @@
     <packaging>jar</packaging>
 
     <name>CleverWeb</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/ToQuery/CleverWeb</url>
     <description>CleverWeb project for Spring Boot</description>
 
     <developers>
         <developer>
             <name>ToQuery</name>
             <email>toquery@qq.com</email>
+            <url>https://github.com/ToQuery</url>
         </developer>
     </developers>
 
@@ -73,6 +74,11 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
@@ -105,17 +111,23 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+       <!--
+       <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        -->
 
         <dependency>
             <groupId>mysql</groupId>

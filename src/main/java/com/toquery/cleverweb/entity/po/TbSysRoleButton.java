@@ -26,10 +26,10 @@ public class TbSysRoleButton {
     @Column(name = "button_id", unique = true, nullable = false)
     private String buttonId;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "buttonId", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<TbSysButton> sysButtonSet;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "roleId", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<TbSysRole> sysRoleSet;
 
     public Set<TbSysButton> getSysButtonSet() {

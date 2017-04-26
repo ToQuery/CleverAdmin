@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class BaseController {
 
-	@Value(value = "#{COMMON['system.name']}")
-	public String systemName = "";
+	public String systemName = "123";
 	
 	protected Logger logger = LogManager.getLogger(BaseController.class);
 

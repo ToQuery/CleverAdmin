@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //允许访问静态资源
         http.authorizeRequests()
-                .antMatchers("/upload", "/css/**", "/js/**", "/images/**",
+                .antMatchers("/test/**","/upload", "/css/**", "/js/**", "/images/**",
                         "/resources/**", "/lib/**", "/skin/**", "/template/**")
                 .permitAll();
         //所有的访问都需要权限验证

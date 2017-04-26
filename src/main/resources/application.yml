@@ -42,17 +42,17 @@ spring:
     host: 127.0.0.1 # Redis server host.
     password: 123456 # Login password of the redis server.
     ssl: false # Enable SSL support.
-    pool.max-active: 8 # Max number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
-    pool.max-idle: 8 # Max number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
-    pool.max-wait: -1 # Maximum amount of time (in milliseconds) a connection allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
-    pool.min-idle: 0 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
+    pool.max-active: 200 # Max number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
+    pool.max-idle: 100 # Max number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.
+    pool.max-wait: 20 # Maximum amount of time (in milliseconds) a connection allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
+    pool.min-idle: 10 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
     port: 6379 # Redis server port.
 # session配置
   session:
     store-type: redis # Session store type.
     redis:
       flush-mode: on-save # Sessions flush mode.
-      namespace:  # Namespace for keys used to store sessions.
+      namespace:  session # Namespace for keys used to store sessions.
 # Email (MailProperties)
   mail:
     default-encoding: UTF-8 # Default MimeMessage encoding.

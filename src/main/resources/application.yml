@@ -27,7 +27,7 @@ spring:
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 
-#
+# jpa 配置
   jpa:
     show-sql: true
     properties:
@@ -65,5 +65,5 @@ spring:
 # mvc
   mvc:
     view:
-      prefix: /WEB-INF/view/
+      prefix: /resources/view/
       suffix: .jsp

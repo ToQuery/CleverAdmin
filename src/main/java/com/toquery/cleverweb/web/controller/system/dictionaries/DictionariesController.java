@@ -210,9 +210,8 @@ public class DictionariesController extends BaseController {
      */
     @RequestMapping(value = "/goEdit")
     public ModelAndView goEdit() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         String DICTIONARIES_ID = pd.getString("DICTIONARIES_ID");
         pd = dictionariesService.findById(pd);    //根据ID读取
         mv.addObject("pd", pd);                    //放入视图容器
@@ -248,9 +247,4 @@ public class DictionariesController extends BaseController {
         return AppUtil.returnObject(new PageData(), map);
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(format, true));
-    }
 }

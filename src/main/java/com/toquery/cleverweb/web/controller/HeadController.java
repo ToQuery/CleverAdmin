@@ -8,8 +8,8 @@ import com.toquery.cleverweb.common.util.mail.SimpleMailSender;
 import com.toquery.cleverweb.core.entity.vo.CWResponse;
 import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.entity.vo.SysUserRole;
+import com.toquery.cleverweb.service.ISysMessageService;
 import com.toquery.cleverweb.service.ISysUserService;
-import com.toquery.cleverweb.service.system.fhsms.FhsmsManager;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +37,8 @@ public class HeadController extends BaseController {
 
     //	@Resource(name="userService")
 //	private UserManager userService;
-    @Resource(name = "fhsmsService")
-    private FhsmsManager fhsmsService;
+    @Resource
+    private ISysMessageService sysMessageService;
 
     /**
      * 获取头部信息
@@ -48,10 +48,10 @@ public class HeadController extends BaseController {
     @RequestMapping(value = "/getList")
     @ResponseBody
     public CWResponse getList(HttpSession session) {
-        Map<String, Object> data = new HashedMap();
+        Map<String, Object> data = new HashMap<>();
         SysUserRole sysUserRole = (SysUserRole) session.getAttribute(Const.SESSION_USER);
         data.put("sysUser", sysUserRole);
-        data.put("fhsmsCount", fhsmsService.findFhsmsCount(sysUserRole.getUserName()).get("fhsmsCount").toString());//站内信未读总数
+        data.put("fhsmsCount", sysMessageService.findFhsmsCount(sysUserRole.getUserName()));//站内信未读总数
         String strWEBSOCKET = Tools.readTxtFile(Const.WEBSOCKET);//读取WEBSOCKET配置
         if (null != strWEBSOCKET && !"".equals(strWEBSOCKET)) {
             String strIW[] = strWEBSOCKET.split(",fh,");
@@ -61,7 +61,7 @@ public class HeadController extends BaseController {
                 data.put("FHsmsSound", strIW[4]);                //站内信提示音效配置
             }
         }
-        return new CWResponse<Map>("0000","成功",data);
+        return new CWResponse<Map>("0000", "成功", data);
     }
 
     /**
@@ -75,11 +75,10 @@ public class HeadController extends BaseController {
         PageData pd = new PageData();
         Map<String, Object> map = new HashMap<String, Object>();
         try {
-            map.put("fhsmsCount", fhsmsService.findFhsmsCount(Jurisdiction.getUsername()).get("fhsmsCount").toString());//站内信未读总数
+            map.put("fhsmsCount", sysMessageService.findFhsmsCount(Jurisdiction.getUsername()));//站内信未读总数
         } catch (Exception e) {
             logger.error(e.toString(), e);
         } finally {
-            logAfter(logger);
         }
         return AppUtil.returnObject(pd, map);
     }
@@ -92,10 +91,8 @@ public class HeadController extends BaseController {
      */
     @RequestMapping(value = "/editEmail")
     public ModelAndView editEmail() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
-        mv.setViewName("system/head/edit_email");
         mv.addObject("pd", pd);
         return mv;
     }
@@ -108,9 +105,8 @@ public class HeadController extends BaseController {
      */
     @RequestMapping(value = "/goSendSms")
     public ModelAndView goSendSms() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         mv.setViewName("system/head/send_sms");
         mv.addObject("pd", pd);
         return mv;
@@ -125,9 +121,8 @@ public class HeadController extends BaseController {
      */
     @RequestMapping(value = "/goSendEmail")
     public ModelAndView goSendEmail() throws Exception {
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         mv.setViewName("system/head/send_email");
         mv.addObject("pd", pd);
         return mv;
@@ -141,8 +136,8 @@ public class HeadController extends BaseController {
     @RequestMapping(value = "/sendEmail")
     @ResponseBody
     public Object sendEmail() {
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         Map<String, Object> map = new HashMap<String, Object>();
         String msg = "ok";        //发送状态
         int count = 0;            //统计发送成功条数
@@ -222,9 +217,8 @@ public class HeadController extends BaseController {
         if (!"admin".equals(Jurisdiction.getUsername())) {
             return null;
         }    //非admin用户不能修改
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         pd.put("YSYNAME", Tools.readTxtFile(Const.SYSNAME));     //读取系统名称
         pd.put("COUNTPAGE", Tools.readTxtFile(Const.PAGE));         //读取每页条数
         String strEMAIL = Tools.readTxtFile(Const.EMAIL);         //读取邮件配置
@@ -302,9 +296,8 @@ public class HeadController extends BaseController {
         if (!"admin".equals(Jurisdiction.getUsername())) {
             return null;
         }    //非admin用户不能修改
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         Tools.writeFile(Const.SYSNAME, pd.getString("YSYNAME"));    //写入系统名称
         Tools.writeFile(Const.PAGE, pd.getString("COUNTPAGE"));    //写入每页条数
         Tools.writeFile(Const.EMAIL, pd.getString("SMTP") + ",fh," + pd.getString("PORT") + ",fh," + pd.getString("EMAIL") + ",fh," + pd.getString("PAW"));    //写入邮件服务器配置
@@ -326,9 +319,8 @@ public class HeadController extends BaseController {
         if (!"admin".equals(Jurisdiction.getUsername())) {
             return null;
         }    //非admin用户不能修改
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         Tools.writeFile(Const.FWATERM, pd.getString("isCheck1") + ",fh," + pd.getString("fcontent") + ",fh," + pd.getString("fontSize") + ",fh," + pd.getString("fontX") + ",fh," + pd.getString("fontY"));    //文字水印配置
         Tools.writeFile(Const.IWATERM, pd.getString("isCheck2") + ",fh," + pd.getString("imgUrl") + ",fh," + pd.getString("imgX") + ",fh," + pd.getString("imgY"));    //图片水印配置
         mv.addObject("msg", "OK");
@@ -347,9 +339,8 @@ public class HeadController extends BaseController {
         if (!"admin".equals(Jurisdiction.getUsername())) {
             return null;
         }    //非admin用户不能修改
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
-        pd = this.getPageData();
         Tools.writeFile(Const.WEIXIN, pd.getString("Token"));    //写入微信配置
         Tools.writeFile(Const.WEBSOCKET, pd.getString("WIMIP") + ",fh," + pd.getString("WIMPORT") + ",fh," + pd.getString("OLIP") + ",fh," + pd.getString("OLPORT") + ",fh," + pd.getString("FHsmsSound"));    //websocket配置
         mv.addObject("msg", "OK");

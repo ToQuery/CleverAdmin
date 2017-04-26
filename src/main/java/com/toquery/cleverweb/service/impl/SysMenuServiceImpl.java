@@ -24,9 +24,8 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 所有的菜单
      */
     @Override
-    public List<SysMenu> findList() {
-        List<TbSysMenu> sysMenuList = sysMenuDao.findAll();
-        return JSON.parseArray(JSON.toJSONString(sysMenuList), SysMenu.class);
+    public List<TbSysMenu> findList() {
+        return sysMenuDao.findAll();
     }
 
     /**
@@ -36,7 +35,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单数据
      */
     @Override
-    public List<SysMenu> findListByMenuId(int menuId) {
+    public List<TbSysMenu> findListByMenuId(String menuId) {
         return null;
 //        List<TbSysMenu> sysMenuList = sysMenuMapper.findListByMenuId(menuId);
 //        return JSON.parseArray(JSON.toJSONString(sysMenuList), SysMenu.class);
@@ -49,13 +48,13 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return 菜单列表
      */
     @Override
-    public List<SysMenu> findListByParentId(int parentMenuId) {
-        List<SysMenu> sysMenuList = JSON.parseArray(JSON.toJSONString(sysMenuDao.findByParentId(parentMenuId)), SysMenu.class);
-        for (SysMenu sysMenu : sysMenuList) {
+    public List<TbSysMenu> findListByParentId(String parentMenuId) {
+        List<TbSysMenu> sysMenuList = sysMenuDao.findByParentId(parentMenuId);
+        //  for (TbSysMenu sysMenu : sysMenuList) {
 //          sysMenu.setMenuUrl("menu/toEdit.do?MENU_ID="+sysMenu.getMenuId());
-            sysMenu.setSubMenu(this.findListByParentId(sysMenu.getMenuId()));
-            sysMenu.setTarget("treeFrame");
-        }
+//            sysMenu.setSubMenu(this.findListByParentId(sysMenu.getMenuId()));
+//            sysMenu.setTarget("treeFrame");
+        //  }
         return sysMenuList;
     }
 }

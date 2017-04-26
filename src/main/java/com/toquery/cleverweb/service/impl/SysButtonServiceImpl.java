@@ -1,5 +1,6 @@
 package com.toquery.cleverweb.service.impl;
 
+import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.dao.ITbSysButtonDao;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.service.ISysButtonService;
@@ -10,9 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by ToQuery on 2016-08-23.
- */
 @Service
 public class SysButtonServiceImpl implements ISysButtonService {
     @Autowired
@@ -25,6 +23,11 @@ public class SysButtonServiceImpl implements ISysButtonService {
     @Override
     public Page<TbSysButton> findList(Pageable pageable) {
         return sysButtonDao.findAll(pageable);
+    }
+
+    @Override
+    public List<TbSysButton> findList() {
+        return sysButtonDao.findAll();
     }
 
     /**
@@ -46,5 +49,10 @@ public class SysButtonServiceImpl implements ISysButtonService {
     @Override
     public void save(TbSysButton sysButton) {
         sysButtonDao.save(sysButton);
+    }
+
+    @Override
+    public void saveAndFlush(TbSysButton sysButton) {
+        sysButtonDao.saveAndFlush(sysButton);
     }
 }

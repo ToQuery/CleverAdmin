@@ -5,9 +5,6 @@ import com.toquery.cleverweb.entity.po.TbSysUser;
 
 import java.util.List;
 
-/**
- * Created by ToQuery on 2016-08-21.
- */
 public interface ISysRoleService {
 
     /**
@@ -28,4 +25,9 @@ public interface ISysRoleService {
      * @return
      */
     List<TbSysRole> findByParentId(String parentId);
+
+    void save(TbSysRole sysRole);
+    public TbSysRole saveAndFlush(TbSysRole sysRole);
+
+    void delete(String role_id);
 }

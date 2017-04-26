@@ -51,7 +51,6 @@ public class BRdbController extends BaseController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/listAllTable")
 	public ModelAndView listAllTable() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"列出所有表");
 		if(!Jurisdiction.buttonJurisdiction(menuUrlb, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		Object[] arrOb = DbFH.getTables();
@@ -72,7 +71,6 @@ public class BRdbController extends BaseController {
 	@ResponseBody
 	public Object backupAll(){
 		String username = Jurisdiction.getUsername();
-		logBefore(logger, username+"备份全库");
 		if(!Jurisdiction.buttonJurisdiction(menuUrlb, "add")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -119,7 +117,6 @@ public class BRdbController extends BaseController {
 	@ResponseBody
 	public Object backupTable(){
 		String username = Jurisdiction.getUsername();
-		logBefore(logger, username+"备份单表");
 		if(!Jurisdiction.buttonJurisdiction(menuUrlb, "add")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -167,7 +164,6 @@ public class BRdbController extends BaseController {
 	@ResponseBody
 	public Object dbRecover(){
 		String username = Jurisdiction.getUsername();
-		logBefore(logger, username+"数据还原操作");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -215,7 +211,6 @@ public class BRdbController extends BaseController {
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"修改Fhdb");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -232,7 +227,6 @@ public class BRdbController extends BaseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page) throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"列表Fhdb");
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限(无权查看时页面会有提示,如果不注释掉这句代码就无法进入列表页面,所以根据情况是否加入本句代码)
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -284,7 +278,6 @@ public class BRdbController extends BaseController {
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public Object deleteAll() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"批量删除备份记录");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return null;} //校验权限
 		PageData pd = new PageData();		
 		Map<String,Object> map = new HashMap<String,Object>();

@@ -47,4 +47,18 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public List<TbSysRole> findByParentId(String parentId) {
         return sysRoleDao.findByParentId(parentId);
     }
+
+    @Override
+    public void save(TbSysRole sysRole) {
+        sysRoleDao.save(sysRole);
+    }
+
+    public TbSysRole saveAndFlush(TbSysRole sysRole){
+        return sysRoleDao.saveAndFlush(sysRole);
+    }
+
+    @Override
+    public void delete(String role_id) {
+        sysRoleDao.delete(role_id);
+    }
 }

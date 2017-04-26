@@ -31,6 +31,47 @@ create table `db_fhdb` (
   primary key (`fhdb_id`)
 ) engine=innodb default charset=utf8;
 
+CREATE TABLE `tb_sys_area` (
+  `id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '编号',
+  `parent_id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '父级编号',
+  `parent_ids` varchar(2000) COLLATE utf8_bin NOT NULL COMMENT '所有父级编号',
+  `name` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '名称',
+  `short_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '简称',
+  `sort` decimal(10,0) NOT NULL COMMENT '排序',
+  `code` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '区域编码',
+  `type` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '区域类型',
+  `create_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) COLLATE utf8_bin NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`),
+  KEY `sys_area_parent_id` (`parent_id`),
+  KEY `sys_area_del_flag` (`del_flag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='区域表';
+
+
+CREATE TABLE `tb_sys_dict` (
+  `id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '编号',
+  `value` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '数据值',
+  `label` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '标签名',
+  `type` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '类型',
+  `description` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '描述',
+  `sort` decimal(10,0) NOT NULL COMMENT '排序（升序）',
+  `parent_id` varchar(64) COLLATE utf8_bin DEFAULT '0' COMMENT '父级编号',
+  `create_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '创建者',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  `update_by` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '更新者',
+  `update_date` datetime NOT NULL COMMENT '更新时间',
+  `remarks` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注信息',
+  `del_flag` char(1) COLLATE utf8_bin NOT NULL DEFAULT '0' COMMENT '删除标记',
+  PRIMARY KEY (`id`),
+  KEY `tb_sys_dict_value` (`value`),
+  KEY `tb_sys_dict_label` (`label`),
+  KEY `tb_sys_dict_del_flag` (`del_flag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
+
 -- ----------------------------
 -- records of db_fhdb
 -- ----------------------------
@@ -215,16 +256,16 @@ create table `sys_fhsms` (
 -- ----------------------------
 -- records of sys_fhsms
 -- ----------------------------
-insert into `sys_fhsms` values ('05879f5868824f35932ee9f2062adc03', '你好', '2', 'admin', 'san', '2016-01-25 14:05:31', '1', 'b311e893228f42d5a05dbe16917fd16f');
-insert into `sys_fhsms` values ('2635dd035c6f4bb5a091abdd784bd899', '你好', '2', 'san', 'admin', '2016-01-25 14:05:02', '2', '1b7637306683460f89174c2b025862b5');
-insert into `sys_fhsms` values ('52378ccd4e2d4fe08994d1652af87c68', '你好', '1', 'admin', 'san', '2016-01-25 16:26:44', '1', '920b20dafdfb4c09b560884eb277c51d');
-insert into `sys_fhsms` values ('77ed13f9c49a4c4bb460c41b8580dd36', 'gggg', '2', 'admin', 'san', '2016-01-24 21:22:43', '2', 'dd9ee339576e48c5b046b94fa1901d00');
-insert into `sys_fhsms` values ('98a6869f942042a1a037d9d9f01cb50f', '你好', '1', 'admin', 'san', '2016-01-25 14:05:02', '2', '1b7637306683460f89174c2b025862b5');
-insert into `sys_fhsms` values ('9e00295529014b6e8a27019cbccb3da1', '柔柔弱弱', '1', 'admin', 'san', '2016-01-24 21:22:57', '1', 'a29603d613ea4e54b5678033c1bf70a6');
-insert into `sys_fhsms` values ('d3aedeb430f640359bff86cd657a8f59', '你好', '1', 'admin', 'san', '2016-01-24 21:22:12', '1', 'f022fbdce3d845aba927edb698beb90b');
-insert into `sys_fhsms` values ('e5376b1bd54b489cb7f2203632bd74ec', '管理员好', '2', 'admin', 'san', '2016-01-25 14:06:13', '2', 'b347b2034faf43c79b54be4627f3bd2b');
-insert into `sys_fhsms` values ('e613ac0fcc454f32895a70b747bf4fb5', '你也好', '2', 'admin', 'san', '2016-01-25 16:27:54', '2', 'ce8dc3b15afb40f28090f8b8e13f078d');
-insert into `sys_fhsms` values ('f25e00cfafe741a3a05e3839b66dc7aa', '你好', '2', 'san', 'admin', '2016-01-25 16:26:44', '1', '920b20dafdfb4c09b560884eb277c51d');
+insert into tb_sys_message values ('05879f5868824f35932ee9f2062adc03', '你好', '2', 'admin', 'san', '2016-01-25 14:05:31', '1', 'b311e893228f42d5a05dbe16917fd16f');
+insert into tb_sys_message values ('2635dd035c6f4bb5a091abdd784bd899', '你好', '2', 'san', 'admin', '2016-01-25 14:05:02', '2', '1b7637306683460f89174c2b025862b5');
+insert into tb_sys_message values ('52378ccd4e2d4fe08994d1652af87c68', '你好', '1', 'admin', 'san', '2016-01-25 16:26:44', '1', '920b20dafdfb4c09b560884eb277c51d');
+insert into tb_sys_message values ('77ed13f9c49a4c4bb460c41b8580dd36', 'gggg', '2', 'admin', 'san', '2016-01-24 21:22:43', '2', 'dd9ee339576e48c5b046b94fa1901d00');
+insert into tb_sys_message values ('98a6869f942042a1a037d9d9f01cb50f', '你好', '1', 'admin', 'san', '2016-01-25 14:05:02', '2', '1b7637306683460f89174c2b025862b5');
+insert into tb_sys_message values ('9e00295529014b6e8a27019cbccb3da1', '柔柔弱弱', '1', 'admin', 'san', '2016-01-24 21:22:57', '1', 'a29603d613ea4e54b5678033c1bf70a6');
+insert into tb_sys_message values ('d3aedeb430f640359bff86cd657a8f59', '你好', '1', 'admin', 'san', '2016-01-24 21:22:12', '1', 'f022fbdce3d845aba927edb698beb90b');
+insert into tb_sys_message values ('e5376b1bd54b489cb7f2203632bd74ec', '管理员好', '2', 'admin', 'san', '2016-01-25 14:06:13', '2', 'b347b2034faf43c79b54be4627f3bd2b');
+insert into tb_sys_message values ('e613ac0fcc454f32895a70b747bf4fb5', '你也好', '2', 'admin', 'san', '2016-01-25 16:27:54', '2', 'ce8dc3b15afb40f28090f8b8e13f078d');
+insert into tb_sys_message values ('f25e00cfafe741a3a05e3839b66dc7aa', '你好', '2', 'san', 'admin', '2016-01-25 16:26:44', '1', '920b20dafdfb4c09b560884eb277c51d');
 
 -- ----------------------------
 -- table structure for tb_sys_menu

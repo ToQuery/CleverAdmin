@@ -1,13 +1,13 @@
 package com.toquery.cleverweb.entity.po;
 
 public class TbSysMenu {
-    private Integer menuId;
+    private String menuId;
 
     private String menuName;
 
     private String menuUrl;
 
-    private Integer parentId;
+    private String parentId;
 
     private Integer menuOrder;
 
@@ -17,12 +17,20 @@ public class TbSysMenu {
 
     private Integer menuState;
 
-    public Integer getMenuId() {
+    public String getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Integer menuId) {
+    public void setMenuId(String menuId) {
         this.menuId = menuId;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
     public String getMenuName() {
@@ -41,13 +49,6 @@ public class TbSysMenu {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
 
     public Integer getMenuOrder() {
         return menuOrder;

@@ -24,8 +24,7 @@ public class LogoutController extends BaseController{
     @RequestMapping(value = "/logout")
     public ModelAndView logout() {
         String USERNAME = Jurisdiction.getUsername();    //当前登录的用户名
-        logBefore(logger, USERNAME + "退出系统");
-        ModelAndView mv = this.getModelAndView();
+        ModelAndView mv = new ModelAndView();
         PageData pd = new PageData();
 //        Session session = Jurisdiction.getSession();    //以下清除session缓存
 //        session.removeAttribute(Const.SESSION_USER);
@@ -40,7 +39,6 @@ public class LogoutController extends BaseController{
 //        //shiro销毁登录
 //        Subject subject = SecurityUtils.getSubject();
 //        subject.logout();
-        pd = this.getPageData();
         pd.put("msg", pd.getString("msg"));
         pd.put("SYSNAME", systemName); //读取系统名称
         mv.setViewName("system/index/login");

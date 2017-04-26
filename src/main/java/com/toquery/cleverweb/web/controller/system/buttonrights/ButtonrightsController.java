@@ -1,29 +1,23 @@
 package com.toquery.cleverweb.web.controller.system.buttonrights;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.entity.vo.CWResponse;
+import com.toquery.cleverweb.core.utils.Jurisdiction;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.entity.po.TbSysRole;
 import com.toquery.cleverweb.entity.po.TbSysRoleButton;
 import com.toquery.cleverweb.service.ISysButtonService;
 import com.toquery.cleverweb.service.ISysRoleButtonService;
 import com.toquery.cleverweb.service.ISysRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import com.toquery.cleverweb.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.toquery.cleverweb.web.controller.BaseController;
-import com.toquery.cleverweb.core.utils.Jurisdiction;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 按钮权限
@@ -33,17 +27,16 @@ import com.toquery.cleverweb.core.utils.Jurisdiction;
 public class ButtonrightsController extends BaseController {
 
 
-    @Autowired
+    @Resource
     private ISysRoleService sysRoleService;
-    @Autowired
+    @Resource
     private ISysRoleButtonService sysRoleButtonService;
-    @Autowired
+    @Resource
     private ISysButtonService sysButtonService;
 
 
     /**
      * 列表
-     *
      */
     @RequestMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "roleId", defaultValue = "1") String roleId) {
@@ -70,27 +63,21 @@ public class ButtonrightsController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/upRb")
-    public CWResponse updateRolebuttonrightd(@RequestParam(value = "roleId",defaultValue = "")String roleId,
-                                             @RequestParam(value = "buttonId",defaultValue = "")String buttonId) {
+    public CWResponse updateRolebuttonrightd(@RequestParam(value = "roleId", defaultValue = "") String roleId,
+                                             @RequestParam(value = "buttonId", defaultValue = "") String buttonId) {
         if (!Jurisdiction.buttonJurisdiction("", "edit")) {
             return null;
         } //校验权限
-        TbSysRoleButton syeRoleButton = sysRoleButtonService.findByRoleIdAndButtonId(roleId,buttonId);
+        TbSysRoleButton syeRoleButton = sysRoleButtonService.findByRoleIdAndButtonId(roleId, buttonId);
         if (null != syeRoleButton) {    //判断关联表是否有数据 是:删除/否:新增
             sysRoleButtonService.deleteById(syeRoleButton.getRbId());        //删除
         } else {
             TbSysRoleButton saveTbSysRoleButton = new TbSysRoleButton();
-            saveTbSysRoleButton.setRbId(this.get32UUID());
+            saveTbSysRoleButton.setRbId(UuidUtil.get32UUID());
             saveTbSysRoleButton.setButtonId(buttonId);
             saveTbSysRoleButton.setRoleId(roleId);
             sysRoleButtonService.save(saveTbSysRoleButton);        //新增
         }
         return null;
-    }
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(format, true));
     }
 }

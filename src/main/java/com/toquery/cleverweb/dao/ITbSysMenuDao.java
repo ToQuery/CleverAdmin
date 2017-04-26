@@ -19,5 +19,5 @@ public interface ITbSysMenuDao  extends JpaRepository<TbSysMenu, String> {
      * @param parentMenuId 父级ID
      * @return 菜单列表
      */
-    List<TbSysMenu> findByParentId(int parentMenuId);
+    List<TbSysMenu> findByParentId(String parentMenuId);
 }

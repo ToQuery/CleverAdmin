@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by ToQuery on 2016-08-20.
- */
 @Service
 public class SysUserServiceImpl implements ISysUserService {
     @Autowired

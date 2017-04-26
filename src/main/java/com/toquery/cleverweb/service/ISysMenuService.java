@@ -13,14 +13,14 @@ public interface ISysMenuService {
      * 获取所有的菜单
      * @return  所有的菜单
      */
-    List<SysMenu> findList();
+    List<TbSysMenu> findList();
 
     /**
      * 通过菜单ID获取菜单数据
      * @param menuId    菜单ID
      * @return  菜单数据
      */
-    List<SysMenu> findListByMenuId(int menuId);
+    List<TbSysMenu> findListByMenuId(String menuId);
 
 
     /**
@@ -28,5 +28,5 @@ public interface ISysMenuService {
      * @param parentMenuId  父级ID
      * @return  菜单列表
      */
-    List<SysMenu> findListByParentId(int parentMenuId);
+    List<TbSysMenu> findListByParentId(String parentMenuId);
 }

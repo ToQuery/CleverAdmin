@@ -9,8 +9,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>CleverWeb</artifactId>
-    <packaging>war</packaging>
-    <name>CleverWeb-Web Maven Webapp</name>
+    <packaging>jar</packaging>
+
+    <name>CleverWeb Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -21,16 +22,10 @@
         <mysql.version>5.1.38</mysql.version>
     </properties>
 
-    <modules>
-        <module>CleverWeb-Document</module>
-        <module>CleverWeb-Generate</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>

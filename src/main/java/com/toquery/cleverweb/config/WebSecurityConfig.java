@@ -13,7 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -47,6 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         //所有的访问都需要权限验证
         http.authorizeRequests().anyRequest().authenticated();
+        http.rememberMe()
+                .rememberMeServices(rememberMeServices());
         //访问失败页url
         http.formLogin().failureUrl("/login?error").
                 //登录信息保存
@@ -58,7 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 //注销失败跳转到登录页面
-                .logoutSuccessUrl("/login").permitAll();
+                .logoutSuccessUrl("/login").permitAll()
+        ;
 
         // 允许iframe 嵌套
         http.headers().frameOptions().disable();
@@ -79,6 +84,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(provider);
         //需要采用加密
 //        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    /**
+     * spring session
+     * @return
+     */
+    @Bean
+    RememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices =
+                new SpringSessionRememberMeServices();
+        // optionally customize
+        rememberMeServices.setAlwaysRemember(true);
+        return rememberMeServices;
     }
 
     @Bean

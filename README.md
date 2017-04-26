@@ -1,6 +1,6 @@
 # CleverWeb
 
-[![Build Status](https://travis-ci.org/hluk/CopyQ.svg?branch=master)](https://github.com/ToQuery/CleverWeb)
+[![Build Status](https://travis-ci.org/ToQuery/CleverWeb.svg?branch=master)](https://travis-ci.org/ToQuery/CleverWeb)
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
 

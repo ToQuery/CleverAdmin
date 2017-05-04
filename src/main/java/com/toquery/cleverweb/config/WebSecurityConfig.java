@@ -44,8 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //允许访问静态资源
         http.authorizeRequests()
-                .antMatchers("/test/**","/upload", "/css/**", "/js/**", "/images/**",
-                        "/resources/**", "/lib/**", "/skin/**", "/template/**")
+//                .antMatchers("/test/**","/upload", "/css/**", "/js/**", "/images/**",
+//                        "/resources/**", "/lib/**", "/skin/**", "/template/**")
+                .antMatchers("/**")
                 .permitAll();
         //所有的访问都需要权限验证
         http.authorizeRequests().anyRequest().authenticated();
@@ -92,8 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     RememberMeServices rememberMeServices() {
-        SpringSessionRememberMeServices rememberMeServices =
-                new SpringSessionRememberMeServices();
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
         // optionally customize
         rememberMeServices.setAlwaysRemember(true);
         return rememberMeServices;
@@ -123,22 +123,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 用户或者管理员登录日志
      */
     @Bean
-    public LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler();
-    }
+    public AuthenticationSuccessHandler loginSuccessHandler() {
+        return new AuthenticationSuccessHandler(){
+            /**
+             * Called when a user has been successfully authenticated.
+             *
+             * @param request        the request which caused the successful authentication
+             * @param response       the response
+             * @param authentication the <tt>Authentication</tt> object which was created during
+             */
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-    class LoginSuccessHandler implements AuthenticationSuccessHandler {
-
-        /**
-         * Called when a user has been successfully authenticated.
-         *
-         * @param request        the request which caused the successful authentication
-         * @param response       the response
-         * @param authentication the <tt>Authentication</tt> object which was created during
-         */
-        @Override
-        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
-        }
+            }
+        };
     }
 }

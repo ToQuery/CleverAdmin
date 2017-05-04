@@ -1,8 +1,5 @@
 package com.toquery.cleverweb.config;
 
-import com.google.common.base.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +21,7 @@ public class RedisConfig {
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
-        // Defaults
+        // todo redis配置修改
         redisConnectionFactory.setHostName(redisProperties.getHost());
         redisConnectionFactory.setPort(redisProperties.getPort());
         redisConnectionFactory.setDatabase(redisProperties.getDatabase());

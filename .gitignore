@@ -24,3 +24,4 @@ hs_err_pid*
 /CleverWeb-Generate/target
 /CleverWeb-Document/*.iml
 /CleverWeb-Entity/*.iml
+/target/

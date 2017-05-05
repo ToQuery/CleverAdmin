@@ -1,8 +1,6 @@
 package com.toquery.cleverweb.service;
 
-import com.toquery.cleverweb.core.entity.system.Menu;
 import com.toquery.cleverweb.entity.po.TbSysMenu;
-import com.toquery.cleverweb.entity.vo.SysMenu;
 
 import java.util.List;
 

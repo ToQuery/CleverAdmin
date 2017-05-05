@@ -1,9 +1,8 @@
 package com.toquery.cleverweb.dao.mybatis;
 
 import com.toquery.cleverweb.entity.po.TbSysButton;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * @author ToQuery
  * @version 1.0
  */
-@Component
+@Mapper
 public interface ITbSysButtonMapper  {
 
     /**

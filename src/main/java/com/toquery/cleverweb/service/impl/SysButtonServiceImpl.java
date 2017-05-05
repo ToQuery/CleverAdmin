@@ -1,7 +1,7 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.common.util.PageData;
-import com.toquery.cleverweb.dao.ITbSysButtonDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysButtonDao;
+import com.toquery.cleverweb.dao.mybatis.ITbSysButtonMapper;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import com.toquery.cleverweb.service.ISysButtonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +9,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class SysButtonServiceImpl implements ISysButtonService {
-    @Autowired
+    @Resource
     private ITbSysButtonDao sysButtonDao;
+
+    @Resource
+    private ITbSysButtonMapper sysButtonMapper;
+
     /**
      * 获取所有的按钮
      *
-     * @return  所有的按钮
+     * @return 所有的按钮
      */
     @Override
     public Page<TbSysButton> findList(Pageable pageable) {
@@ -38,7 +43,7 @@ public class SysButtonServiceImpl implements ISysButtonService {
      */
     @Override
     public List<TbSysButton> findListByRoleId(String roleId) {
-        return sysButtonDao.findByRoleId(roleId);
+        return sysButtonMapper.findByRoleId(roleId);
     }
 
     /**

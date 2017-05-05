@@ -27,6 +27,11 @@ spring:
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 
+#Spring Data REST
+  data:
+    rest:
+      basePath: /api
+
 # jpa 配置
   jpa:
     database: MYSQL
@@ -38,7 +43,7 @@ spring:
 
 # redis配置
   redis:
-    url: 127.0.0.1 # Connection URL, will override host, port and password (user will be ignored), e.g. redis://user:password@example.com:6379
+    # url: 127.0.0.1 # Connection URL, will override host, port and password (user will be ignored), e.g. redis://user:password@example.com:6379
     host: 127.0.0.1 # Redis server host.
     password: 123456 # Login password of the redis server.
     ssl: false # Enable SSL support.
@@ -47,12 +52,14 @@ spring:
     pool.max-wait: 20 # Maximum amount of time (in milliseconds) a connection allocation should block before throwing an exception when the pool is exhausted. Use a negative value to block indefinitely.
     pool.min-idle: 10 # Target for the minimum number of idle connections to maintain in the pool. This setting only has an effect if it is positive.
     port: 6379 # Redis server port.
+
 # session配置
   session:
     store-type: redis # Session store type.
     redis:
       flush-mode: on-save # Sessions flush mode.
       namespace:  session # Namespace for keys used to store sessions.
+
 # Email (MailProperties)
   mail:
     default-encoding: UTF-8 # Default MimeMessage encoding.
@@ -64,6 +71,7 @@ spring:
     protocol: smtp # Protocol used by the SMTP server.
     test-connection: false # Test that the mail server is available on startup.
     username:  toquery@163.com # Login user of the SMTP server.
+
 # mvc
   mvc:
     view:
@@ -78,3 +86,25 @@ spring:
     encoding: UTF-8
     content-type: text/html;charset=UTF-8
     cache: false
+
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  type-aliases-package: com.toquery.cleverweb.entity.po
+  type-handlers-package: com.toquery.cleverweb.dao.mybatis
+  configuration:
+      map-underscore-to-camel-case: true
+      default-fetch-size: 100
+      default-statement-timeout: 30
+
+
+mapper:
+  not-empty: false
+  identity: MYSQL
+#  mappers:
+#     - com.toquery.cleverweb.core.repository.CleverWebMapper
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

@@ -1,6 +1,6 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.ITbSysUserDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysUserDao;
 import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;

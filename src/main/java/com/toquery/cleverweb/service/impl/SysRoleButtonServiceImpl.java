@@ -1,6 +1,6 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.ITbSysRoleButtonDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysRoleButtonDao;
 import com.toquery.cleverweb.entity.po.TbSysRoleButton;
 import com.toquery.cleverweb.service.ISysRoleButtonService;
 import org.springframework.beans.factory.annotation.Autowired;

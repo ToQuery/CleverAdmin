@@ -18,6 +18,12 @@ public class TestController {
      @Autowired
     private RedisTemplate redisTemplate;
 
+    @ResponseBody
+    @RequestMapping("/dev/tool")
+    public String devTool(){
+        return "12345555";
+    }
+
 
      @ResponseBody
      @RequestMapping("/redis/{content}")

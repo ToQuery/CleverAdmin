@@ -1,11 +1,8 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.toquery.cleverweb.dao.ITbSysMenuDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysMenuDao;
 import com.toquery.cleverweb.entity.po.TbSysMenu;
-import com.toquery.cleverweb.entity.vo.SysMenu;
 import com.toquery.cleverweb.service.ISysMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

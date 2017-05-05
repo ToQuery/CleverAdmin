@@ -11,7 +11,6 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * @author ToQuery
  * @version 1.0
- * @date 17-4-25.
  */
 @SpringBootApplication
 public class CleverWeb {

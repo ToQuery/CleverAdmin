@@ -1,10 +1,9 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.ITbSysMessageDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysMessageDao;
 import com.toquery.cleverweb.entity.po.TbSysMessage;
 import com.toquery.cleverweb.service.ISysMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

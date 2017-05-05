@@ -1,13 +1,10 @@
-package com.toquery.cleverweb.dao;
+package com.toquery.cleverweb.dao.jpa;
 
 import com.toquery.cleverweb.entity.po.TbSysUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-/**
- * Created by toquery on 2017/4/25.
- */
 public interface ITbSysUserDao extends JpaRepository<TbSysUser, String> {
 
     /**

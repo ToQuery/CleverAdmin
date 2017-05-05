@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.dao;
+package com.toquery.cleverweb.dao.jpa;
 
 import com.toquery.cleverweb.entity.po.TbSysMenu;
 import com.toquery.cleverweb.entity.po.TbSysRoleButton;

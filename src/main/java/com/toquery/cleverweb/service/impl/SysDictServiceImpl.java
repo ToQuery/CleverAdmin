@@ -1,6 +1,6 @@
 package com.toquery.cleverweb.service.impl;
 
-import com.toquery.cleverweb.dao.ITbSysDictDao;
+import com.toquery.cleverweb.dao.jpa.ITbSysDictDao;
 import com.toquery.cleverweb.entity.po.TbSysDict;
 import com.toquery.cleverweb.service.ISysDictService;
 import org.springframework.stereotype.Service;

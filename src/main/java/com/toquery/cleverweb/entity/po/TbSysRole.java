@@ -1,7 +1,11 @@
 package com.toquery.cleverweb.entity.po;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_sys_role")
@@ -32,18 +36,6 @@ public class TbSysRole {
 
     @Column(name = "cha_qx", unique = true, nullable = false)
     private String chaQx;
-
-    @ManyToMany(targetEntity = TbSysRoleButton.class)
-    @JoinColumn(name = "role_id",referencedColumnName = "role_id")
-    private Set<TbSysRoleButton> sysRoleButtonSet;
-
-    public Set<TbSysRoleButton> getSysRoleButtonSet() {
-        return sysRoleButtonSet;
-    }
-
-    public void setSysRoleButtonSet(Set<TbSysRoleButton> sysRoleButtonSet) {
-        this.sysRoleButtonSet = sysRoleButtonSet;
-    }
 
     public String getRoleId() {
         return roleId;

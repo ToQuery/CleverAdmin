@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.dao;
+package com.toquery.cleverweb.dao.jpa;
 
 import com.toquery.cleverweb.entity.po.TbSysArea;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -8,7 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * @author toquery
  * @version 1
  */
-@RepositoryRestResource(collectionResourceRel = "dict", path = "dict")
+@RepositoryRestResource(collectionResourceRel = "list       ", path = "dict")
 public interface ITbSysDictDao extends JpaRepository<TbSysDict, String> {
 
 }

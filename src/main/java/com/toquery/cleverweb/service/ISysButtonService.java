@@ -1,6 +1,5 @@
 package com.toquery.cleverweb.service;
 
-import com.toquery.cleverweb.common.util.PageData;
 import com.toquery.cleverweb.entity.po.TbSysButton;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

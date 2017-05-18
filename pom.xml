@@ -34,6 +34,8 @@
         <mybatis.version>1.3.0</mybatis.version>
         <pagehelp.version>5.0.1</pagehelp.version>
 
+        <mybatisplus-spring-boot-starter.version>1.0.1</mybatisplus-spring-boot-starter.version>
+
         <poi.version>3.16</poi.version>
         <guava.version>21.0</guava.version>
         <mysql.version>5.1.38</mysql.version>

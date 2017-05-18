@@ -15,13 +15,12 @@
  */
 package com.toquery.mybatis.plugins;
 
-import com.baomidou.mybatisplus.entity.CountOptimize;
-import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
-import com.baomidou.mybatisplus.plugins.pagination.DialectFactory;
-import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.baomidou.mybatisplus.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.toolkit.SqlUtils;
-import com.baomidou.mybatisplus.toolkit.StringUtils;
+import com.toquery.mybatis.entity.CountOptimize;
+import com.toquery.mybatis.plugins.pagination.DialectFactory;
+import com.toquery.mybatis.plugins.pagination.Pagination;
+import com.toquery.mybatis.toolkit.PluginUtils;
+import com.toquery.mybatis.toolkit.SqlUtils;
+import com.toquery.mybatis.toolkit.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;

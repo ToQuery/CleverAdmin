@@ -15,12 +15,11 @@
  */
 package com.toquery.mybatis.plugins;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.Version;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.VersionHandler;
-import com.baomidou.mybatisplus.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.toolkit.StringUtils;
+import com.toquery.mybatis.annotations.TableField;
+import com.toquery.mybatis.annotations.Version;
+import com.toquery.mybatis.mapper.EntityWrapper;
+import com.toquery.mybatis.toolkit.PluginUtils;
+import com.toquery.mybatis.toolkit.StringUtils;
 import net.sf.jsqlparser.expression.BinaryExpression;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
@@ -79,7 +78,7 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 	/**
 	 * 根据version字段类型缓存的处理器
 	 */
-	private static final Map<Type, com.baomidou.mybatisplus.plugins.VersionHandler<?>> typeHandlers = new HashMap<>();
+	private static final Map<Type,   VersionHandler<?>> typeHandlers = new HashMap<>();
 
 	private static final Expression RIGHT_EXPRESSION = new Column("?");
 
@@ -199,7 +198,7 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 
 	private ParameterMapping getVersionMappingInstance(Configuration configuration) {
 		if (parameterMapping == null) {
-			synchronized (com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor.class) {
+			synchronized (  OptimisticLockerInterceptor.class) {
 				if (parameterMapping == null) {
 					parameterMapping = new ParameterMapping.Builder(configuration, "originVersionValue",
 							new UnknownTypeHandler(configuration.getTypeHandlerRegistry())).build();
@@ -237,7 +236,7 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 	private static void registerHandler(Class<?> versionHandlerClazz) throws Exception {
 		ParameterizedType parameterizedType = (ParameterizedType) versionHandlerClazz.getGenericInterfaces()[0];
 		Object versionInstance = versionHandlerClazz.newInstance();
-		if (!(versionInstance instanceof com.baomidou.mybatisplus.plugins.VersionHandler)) {
+		if (!(versionInstance instanceof   VersionHandler)) {
 			throw new TypeException("参数未实现VersionHandler,不能注入");
 		} else {
 			Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
@@ -246,20 +245,20 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 			} else if (Object.class.equals(actualTypeArguments[0])) {
 				throw new IllegalArgumentException("处理器泛型不能为Object");
 			} else {
-				typeHandlers.put(actualTypeArguments[0], (com.baomidou.mybatisplus.plugins.VersionHandler<?>) versionInstance);
+				typeHandlers.put(actualTypeArguments[0], (  VersionHandler<?>) versionInstance);
 			}
 		}
 	}
 
 	// *****************************基本类型处理器*****************************
-	private static class IntegerTypeHandler implements com.baomidou.mybatisplus.plugins.VersionHandler<Integer> {
+	private static class IntegerTypeHandler implements   VersionHandler<Integer> {
 
 		public void plusVersion(Object paramObj, Field field, Integer versionValue) throws Exception {
 			field.set(paramObj, versionValue + 1);
 		}
 	}
 
-	private static class LongTypeHandler implements com.baomidou.mybatisplus.plugins.VersionHandler<Long> {
+	private static class LongTypeHandler implements   VersionHandler<Long> {
 
 		public void plusVersion(Object paramObj, Field field, Long versionValue) throws Exception {
 			field.set(paramObj, versionValue + 1);
@@ -267,14 +266,14 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 	}
 
 	// ***************************** 时间类型处理器*****************************
-	private static class DateTypeHandler implements com.baomidou.mybatisplus.plugins.VersionHandler<Date> {
+	private static class DateTypeHandler implements   VersionHandler<Date> {
 
 		public void plusVersion(Object paramObj, Field field, Date versionValue) throws Exception {
 			field.set(paramObj, new Date());
 		}
 	}
 
-	private static class TimestampTypeHandler implements com.baomidou.mybatisplus.plugins.VersionHandler<Timestamp> {
+	private static class TimestampTypeHandler implements   VersionHandler<Timestamp> {
 
 		public void plusVersion(Object paramObj, Field field, Timestamp versionValue) throws Exception {
 			field.set(paramObj, new Timestamp(new Date().getTime()));
@@ -292,7 +291,7 @@ public final class OptimisticLockerInterceptor implements Interceptor {
 		private boolean lock;
 		private String column;
 		private Field field;
-		private com.baomidou.mybatisplus.plugins.VersionHandler versionHandler;
+		private   VersionHandler versionHandler;
 
 		public LockerCache() {
 		}

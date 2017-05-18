@@ -39,7 +39,7 @@ import java.sql.Statement;
  */
 public class IOUtils {
 
-    private static final Log logger = LogFactory.getLog(com.baomidou.mybatisplus.toolkit.IOUtils.class);
+    private static final Log logger = LogFactory.getLog(  IOUtils.class);
 
     private IOUtils() {
     }

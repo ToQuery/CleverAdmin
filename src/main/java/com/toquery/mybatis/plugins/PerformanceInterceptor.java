@@ -15,11 +15,11 @@
  */
 package com.toquery.mybatis.plugins;
 
-import com.baomidou.mybatisplus.exceptions.MybatisPlusException;
-import com.baomidou.mybatisplus.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.toolkit.SqlUtils;
-import com.baomidou.mybatisplus.toolkit.StringUtils;
-import com.baomidou.mybatisplus.toolkit.SystemClock;
+import com.toquery.mybatis.exceptions.MybatisPlusException;
+import com.toquery.mybatis.toolkit.PluginUtils;
+import com.toquery.mybatis.toolkit.SqlUtils;
+import com.toquery.mybatis.toolkit.StringUtils;
+import com.toquery.mybatis.toolkit.SystemClock;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;

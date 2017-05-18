@@ -18,6 +18,7 @@ package com.toquery.mybatis.plugins;
 import com.toquery.mybatis.entity.GlobalConfiguration;
 import com.toquery.mybatis.enums.DBType;
 import com.toquery.mybatis.exceptions.MybatisPlusException;
+import com.toquery.mybatis.toolkit.StringUtils;
 import com.toquery.mybatis.toolkit.VersionUtils;
 import org.apache.ibatis.builder.StaticSqlSource;
 import org.apache.ibatis.executor.Executor;

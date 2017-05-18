@@ -25,7 +25,7 @@ public class RedisConfig {
         redisConnectionFactory.setHostName(redisProperties.getHost());
         redisConnectionFactory.setPort(redisProperties.getPort());
         redisConnectionFactory.setDatabase(redisProperties.getDatabase());
-        //redisConnectionFactory.setPassword(redisProperties.getPassword());
+        redisConnectionFactory.setPassword(redisProperties.getPassword());
         return redisConnectionFactory;
     }
 }

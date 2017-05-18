@@ -45,7 +45,7 @@ spring:
   redis:
     # url: 127.0.0.1 # Connection URL, will override host, port and password (user will be ignored), e.g. redis://user:password@example.com:6379
     host: 127.0.0.1 # Redis server host.
-    password: 123456 # Login password of the redis server.
+    password: spark123 # Login password of the redis server.
     ssl: false # Enable SSL support.
     pool.max-active: 200 # Max number of connections that can be allocated by the pool at a given time. Use a negative value for no limit.
     pool.max-idle: 100 # Max number of "idle" connections in the pool. Use a negative value to indicate an unlimited number of idle connections.

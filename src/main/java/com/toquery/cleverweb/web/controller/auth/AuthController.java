@@ -1,7 +1,5 @@
 package com.toquery.cleverweb.web.controller.auth;
 
-import com.toquery.cleverweb.core.secruity.JwtAuthenticationRequest;
-import com.toquery.cleverweb.core.secruity.JwtAuthenticationResponse;
 import com.toquery.cleverweb.entity.po.TbSysUser;
 import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +22,6 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
-        LoginSuccess token = authService.login(authenticationRequest.getUserName(), authenticationRequest.getPassword());
-        // Return the token
-        return ResponseEntity.ok(token);
-    }
-
     @RequestMapping(value = "/refresh", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) throws AuthenticationException {
         String token = request.getHeader(tokenHeader);
@@ -39,7 +29,7 @@ public class AuthController {
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body(null);
         } else {
-            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+            return ResponseEntity.ok(new LoginSuccess("", "", refreshedToken));
         }
     }
 

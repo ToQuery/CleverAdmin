@@ -28,9 +28,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 #Spring Data REST
-#  data:
-#    rest:
-#      basePath: /api
+  data:
+    rest:
+      basePath: /api
 
 # jpa 配置
   jpa:

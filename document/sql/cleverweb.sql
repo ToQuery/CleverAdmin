@@ -53,7 +53,7 @@ CREATE TABLE `tb_sys_area` (
 
 
 CREATE TABLE `tb_sys_dict` (
-  `id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '编号',
+  `dict_id` varchar(64) COLLATE utf8_bin NOT NULL COMMENT '编号',
   `value` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '数据值',
   `label` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '标签名',
   `type` varchar(100) COLLATE utf8_bin NOT NULL COMMENT '类型',
@@ -66,7 +66,7 @@ CREATE TABLE `tb_sys_dict` (
   `update_date` datetime NOT NULL COMMENT '更新时间',
   `remarks` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注信息',
   `del_flag` char(1) COLLATE utf8_bin NOT NULL DEFAULT '0' COMMENT '删除标记',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`dict_id`),
   KEY `tb_sys_dict_value` (`value`),
   KEY `tb_sys_dict_label` (`label`),
   KEY `tb_sys_dict_del_flag` (`del_flag`)

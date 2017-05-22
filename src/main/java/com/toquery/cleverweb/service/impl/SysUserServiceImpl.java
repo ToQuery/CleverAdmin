@@ -1,18 +1,30 @@
 package com.toquery.cleverweb.service.impl;
 
+import com.toquery.cleverweb.core.secruity.JwtTokenUtil;
 import com.toquery.cleverweb.dao.jpa.ITbSysUserDao;
 import com.toquery.cleverweb.entity.po.TbSysUser;
+import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import com.toquery.cleverweb.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class SysUserServiceImpl implements ISysUserService {
-    @Autowired
+
+    @Resource
     private ITbSysUserDao sysUserDao;
 
     /**
@@ -78,4 +90,19 @@ public class SysUserServiceImpl implements ISysUserService {
     public Page<TbSysUser> findList(Pageable pageable) {
         return sysUserDao.findAll(pageable);
     }
+
+    @Override
+    public TbSysUser registerUser(TbSysUser registerUser) {
+        if (sysUserDao.findByUserName(registerUser.getUserName()) != null) {
+            return null;
+        }
+        registerUser.setCreateTime(new Date());
+        registerUser.setLastTime(new Date());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        registerUser.setPassword(encoder.encode(registerUser.getPassword()));
+        registerUser.setStatus("1");
+        return sysUserDao.save(registerUser);
+    }
+
+
 }

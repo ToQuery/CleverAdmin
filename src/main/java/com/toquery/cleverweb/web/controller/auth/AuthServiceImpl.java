@@ -1,9 +1,11 @@
-package com.toquery.cleverweb.web.controller.test.auth;
+package com.toquery.cleverweb.web.controller.auth;
 
+import com.toquery.cleverweb.common.util.UuidUtil;
 import com.toquery.cleverweb.core.entity.dto.JWTUserDetails;
 import com.toquery.cleverweb.core.secruity.JwtTokenUtil;
 import com.toquery.cleverweb.dao.jpa.ITbSysUserDao;
 import com.toquery.cleverweb.entity.po.TbSysUser;
+import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,9 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-
-import static java.util.Arrays.asList;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -44,7 +43,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TbSysUser register(TbSysUser userToAdd) {
-        final String username = userToAdd.getNickName();
+        final String username = userToAdd.getUserName();
         if (userDao.findByUserName(username) != null) {
             return null;
         }
@@ -53,20 +52,21 @@ public class AuthServiceImpl implements AuthService {
         userToAdd.setPassword(encoder.encode(rawPassword));
 //        userToAdd.setLastPasswordResetDate(new Date());
 //        userToAdd.setRoles(asList("ROLE_USER"));
+        userToAdd.setUserId(UuidUtil.get32UUID());
         return userDao.save(userToAdd);
     }
 
     @Override
-    public String login(String username, String password) {
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+    public LoginSuccess login(String userName, String password) {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(userName, password);
         // Perform the security
-        final Authentication authentication = authenticationManager.authenticate(upToken);
+        Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        return token;
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+        String token = jwtTokenUtil.generateToken(userDetails);
+        return new LoginSuccess(userName, "CleverWeb", token);
     }
 
     @Override

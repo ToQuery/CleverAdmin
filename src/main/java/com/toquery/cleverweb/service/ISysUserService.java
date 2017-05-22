@@ -1,14 +1,13 @@
 package com.toquery.cleverweb.service;
 
 import com.toquery.cleverweb.entity.po.TbSysUser;
+import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-/**
- * Created by ToQuery on 2016-08-20.
- */
+
 public interface ISysUserService {
     /**
      * 通过用户名查找用户信息
@@ -53,4 +52,10 @@ public interface ISysUserService {
      * @return  所有的用户
      */
     Page<TbSysUser> findList(Pageable pageable);
+
+    /**
+     * 注册一名用户
+     */
+    TbSysUser registerUser(TbSysUser registerUser);
+
 }

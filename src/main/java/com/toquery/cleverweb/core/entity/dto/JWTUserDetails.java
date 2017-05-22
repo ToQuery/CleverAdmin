@@ -4,13 +4,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 
 public class JWTUserDetails implements UserDetails {
 
     private String userId;
     private String password;
     private final String username;
+    //返回分配给用户的角色列表
     private final Collection<? extends GrantedAuthority> authorities;
+
+    private final Date lastPasswordResetDate = new Date();
+
     private final boolean accountNonExpired;
     private final boolean accountNonLocked;
     private final boolean credentialsNonExpired;
@@ -73,5 +78,9 @@ public class JWTUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 }

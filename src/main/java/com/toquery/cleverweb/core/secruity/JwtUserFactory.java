@@ -14,15 +14,12 @@ public final class JwtUserFactory {
     }
 
     public static JWTUserDetails create(TbSysUser user) {
-       /* return new JWTUserDetails(
+        return new JWTUserDetails(
                 user.getUserId(),
-                user.getNickName(),
+                user.getUserName(),
                 user.getPassword(),
-                user.getEmail(),
-                mapToGrantedAuthorities(user.getRoles()),
-                user.getLastPasswordResetDate()
-        );*/
-        return null;
+                null
+        );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {

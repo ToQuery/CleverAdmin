@@ -1,8 +1,6 @@
 package com.toquery.cleverweb.core.exception;
 
-/**
- * Created by ToQuery on 2016-08-20.
- */
+
 public class CleverWebException extends Exception {
     public CleverWebException() {
         super();

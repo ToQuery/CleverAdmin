@@ -102,11 +102,6 @@ jwt:
   secret: mySecret
   expiration: 604800
   tokenHead: "ToQuery "
-  route:
-    authentication:
-      path: auth
-      refresh: refresh
-      register: "auth/register"
 
 mapper:
   not-empty: false

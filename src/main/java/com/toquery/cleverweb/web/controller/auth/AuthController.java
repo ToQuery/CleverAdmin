@@ -1,8 +1,9 @@
-package com.toquery.cleverweb.web.controller.test.auth;
+package com.toquery.cleverweb.web.controller.auth;
 
 import com.toquery.cleverweb.core.secruity.JwtAuthenticationRequest;
 import com.toquery.cleverweb.core.secruity.JwtAuthenticationResponse;
 import com.toquery.cleverweb.entity.po.TbSysUser;
+import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -23,28 +24,26 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
-        final String token = authService.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
+        LoginSuccess token = authService.login(authenticationRequest.getUserName(), authenticationRequest.getPassword());
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(token);
     }
 
-    @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
-    public ResponseEntity<?> refreshAndGetAuthenticationToken(
-            HttpServletRequest request) throws AuthenticationException {
+    @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) throws AuthenticationException {
         String token = request.getHeader(tokenHeader);
         String refreshedToken = authService.refresh(token);
-        if(refreshedToken == null) {
+        if (refreshedToken == null) {
             return ResponseEntity.badRequest().body(null);
         } else {
             return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
         }
     }
 
-    @RequestMapping(value = "${jwt.route.authentication.register}", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public TbSysUser register(@RequestBody TbSysUser addedUser) throws AuthenticationException {
         return authService.register(addedUser);
     }

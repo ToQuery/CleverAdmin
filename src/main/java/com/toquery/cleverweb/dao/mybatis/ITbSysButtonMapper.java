@@ -1,7 +1,6 @@
 package com.toquery.cleverweb.dao.mybatis;
 
 import com.toquery.cleverweb.entity.po.TbSysButton;
-import com.toquery.mybatis.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @version 1.0
  */
 @Mapper
-public interface ITbSysButtonMapper extends BaseMapper<TbSysButton> {
+public interface ITbSysButtonMapper  {
 
     /**
      * 通过角色的ID获取该角色下的所有按钮

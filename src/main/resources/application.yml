@@ -28,9 +28,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 #Spring Data REST
-  data:
-    rest:
-      basePath: /api
+#  data:
+#    rest:
+#      basePath: /api
 
 # jpa 配置
   jpa:
@@ -96,6 +96,17 @@ mybatis:
       default-fetch-size: 100
       default-statement-timeout: 30
 
+# JWT
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "ToQuery "
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+      register: "auth/register"
 
 mapper:
   not-empty: false

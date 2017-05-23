@@ -30,8 +30,6 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     private ITbSysUserDao userDao;
 
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil, ITbSysUserDao userDao) {
@@ -71,14 +69,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String refresh(String oldToken) {
-        final String token = oldToken.substring(tokenHead.length());
-        String username = jwtTokenUtil.getUsernameFromToken(token);
+        String username = jwtTokenUtil.getUsernameFromToken(oldToken);
         JWTUserDetails user = (JWTUserDetails) userDetailsService.loadUserByUsername(username);
        /* if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
             return jwtTokenUtil.refreshToken(token);
         }*/
-        if (jwtTokenUtil.canTokenBeRefreshed(token, null)) {
-            return jwtTokenUtil.refreshToken(token);
+        if (jwtTokenUtil.canTokenBeRefreshed(oldToken, null)) {
+            return jwtTokenUtil.refreshToken(oldToken);
         }
         return null;
     }

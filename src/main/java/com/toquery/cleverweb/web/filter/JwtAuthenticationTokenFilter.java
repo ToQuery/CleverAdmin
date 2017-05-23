@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+public class  JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private final Log logger = LogFactory.getLog(this.getClass());
 
@@ -32,16 +32,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String authHeader = request.getHeader(this.tokenHeader);
-        if (authHeader != null && authHeader.startsWith(tokenHead)) {
-            final String authToken = authHeader.substring(tokenHead.length()); // The part after "Bearer "
-            String username = jwtTokenUtil.getUsernameFromToken(authToken);
-
+        if (authHeader != null ) {
+            String username = jwtTokenUtil.getUsernameFromToken(authHeader);
             logger.info("checking authentication " + username);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -52,11 +47,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 // 但简单验证的话，你可以采用直接验证token是否合法来避免昂贵的数据查询
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(
-                            request));
+                if (jwtTokenUtil.validateToken(authHeader, userDetails)) {
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     logger.info("authenticated user " + username + ", setting security context");
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }

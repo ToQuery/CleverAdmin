@@ -101,7 +101,6 @@ jwt:
   header: Authorization
   secret: mySecret
   expiration: 604800
-  tokenHead: "ToQuery "
 
 mapper:
   not-empty: false

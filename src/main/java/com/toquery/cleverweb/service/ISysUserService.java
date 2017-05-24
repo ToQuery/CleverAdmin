@@ -1,7 +1,6 @@
 package com.toquery.cleverweb.service;
 
 import com.toquery.cleverweb.entity.po.TbSysUser;
-import com.toquery.cleverweb.entity.vo.LoginSuccess;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

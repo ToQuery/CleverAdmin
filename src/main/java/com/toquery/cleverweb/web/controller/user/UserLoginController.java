@@ -1,11 +1,10 @@
 package com.toquery.cleverweb.web.controller.user;
 
 
+import com.toquery.cleverweb.core.entity.vo.AuthorizationToken;
 import com.toquery.cleverweb.entity.dto.UserLogin;
-import com.toquery.cleverweb.entity.vo.LoginSuccess;
-import com.toquery.cleverweb.service.ISysUserService;
-import com.toquery.cleverweb.web.controller.auth.AuthService;
-import org.springframework.beans.factory.annotation.Value;
+import com.toquery.cleverweb.service.IAuthorizationTokenService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,15 +17,13 @@ import javax.annotation.Resource;
 @RequestMapping("/user")
 public class UserLoginController {
 
-    @Value("${jwt.header}")
-    private String tokenHeader;
-
     @Resource
-    private AuthService authService;
+    @Qualifier("authorizationTokenServiceImpl")
+    private IAuthorizationTokenService authorizationTokenService;
 
     @PostMapping("/login")
     public ResponseEntity UserLogin(@RequestBody UserLogin userLogin) {
-        LoginSuccess loginSuccess = authService.login(userLogin.getUserName(), userLogin.getPassword());
+        AuthorizationToken loginSuccess = authorizationTokenService.getToken(userLogin.getUserName(), userLogin.getPassword());
         return ResponseEntity.ok(loginSuccess);
     }
 }

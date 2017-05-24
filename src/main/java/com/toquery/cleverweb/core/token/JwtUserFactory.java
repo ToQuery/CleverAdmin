@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.core.secruity;
+package com.toquery.cleverweb.core.token;
 
 import com.toquery.cleverweb.core.entity.dto.JWTUserDetails;
 import com.toquery.cleverweb.entity.po.TbSysUser;
@@ -8,6 +8,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 用户工厂模式
+ */
 public final class JwtUserFactory {
 
     private JwtUserFactory() {

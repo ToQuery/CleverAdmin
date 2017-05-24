@@ -1,9 +1,8 @@
 package com.toquery.cleverweb.web.filter;
 
-import com.toquery.cleverweb.core.secruity.JwtTokenUtil;
+import com.toquery.cleverweb.core.token.JwtTokenUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,9 +33,9 @@ public class  JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String authHeader = request.getHeader(this.tokenHeader);
-        if (authHeader != null ) {
-            String username = jwtTokenUtil.getUsernameFromToken(authHeader);
+        String token = request.getHeader(tokenHeader);
+        if (token != null ) {
+            String username = jwtTokenUtil.getUsernameFromToken(token);
             logger.info("checking authentication " + username);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -47,7 +46,7 @@ public class  JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 // 但简单验证的话，你可以采用直接验证token是否合法来避免昂贵的数据查询
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-                if (jwtTokenUtil.validateToken(authHeader, userDetails)) {
+                if (jwtTokenUtil.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     logger.info("authenticated user " + username + ", setting security context");

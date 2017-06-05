@@ -67,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 允许对于网站静态资源的无授权访问
                 .antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js").permitAll()
+                //适配前端，解除对options请求的拦截
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 // 对于获取token的rest api要允许匿名访问
                 .antMatchers("/user/login", "/token", "/token/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证

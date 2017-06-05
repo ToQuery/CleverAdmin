@@ -9,7 +9,7 @@ server:
   session:
     timeout: 1800 # session timeout in seconds
   context-parameters.*: # Servlet context init parameters, e.g. server.context-parameters.a: alpha
-  context-path: / # the context path, defaults to '/'
+  context-path: /cleverweb # the context path, defaults to '/'
   servlet-path: / # the servlet path, defaults to '/'
 
 

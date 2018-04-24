@@ -12,16 +12,4 @@
 hs_err_pid*
 /.idea
 /*.iml
-/CleverWeb-Common/*.iml
-/CleverWeb-Core/*.iml
-/CleverWeb-Dao/*.iml
-/CleverWeb-Dao/target
-/CleverWeb-Web/target
-/CleverWeb-Web/CleverWeb-Web.iml
-/CleverWeb-Service/CleverWeb-Service.iml
-/CleverWeb-Service/target
-/CleverWeb-Generate/CleverWeb-Generate.iml
-/CleverWeb-Generate/target
-/CleverWeb-Document/*.iml
-/CleverWeb-Entity/*.iml
 /target/

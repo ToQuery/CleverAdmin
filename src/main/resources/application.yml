@@ -1,4 +1,10 @@
 
+endpoints:
+  default:
+    web:
+      enabled: true
+
+
 spring:
   application:
     name: CleverWeb

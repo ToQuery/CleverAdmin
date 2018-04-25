@@ -27,6 +27,7 @@ repositories {
 dependencies {
 	//compile('org.springframework.boot:spring-boot-starter-security')
 	//compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-integration');
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')

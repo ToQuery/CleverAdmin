@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.modules.test;
+package com.toquery.cleverweb.modules.test.handlers;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

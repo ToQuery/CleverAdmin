@@ -1,7 +1,7 @@
-package com.toquery.cleverweb.modules.system.router;
+package com.toquery.cleverweb.modules.test.router;
 
-import com.toquery.cleverweb.modules.test.handlers.HelloWorldHandler;
 import com.toquery.cleverweb.modules.system.handlers.SystemMenuHandler;
+import com.toquery.cleverweb.modules.test.handlers.HelloWorldHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RequestPredicates;
@@ -14,14 +14,15 @@ import javax.annotation.Resource;
  * @author toquery
  * @version 1
  */
-@Configuration
-public class SystemRouter {
-    @Resource
-    private SystemMenuHandler systemMenuHandler;
+//@Configuration
+public class TestRouter {
+  //  @Resource
+    private HelloWorldHandler helloWorldHandler;
 
-    @Bean
+
+    //@Bean
     public RouterFunction<?> routerFunction() {
         return RouterFunctions
-                .route(RequestPredicates.GET("/menus/{id}"), systemMenuHandler::getMenu);
+                .route(RequestPredicates.GET("/hello"), helloWorldHandler::helloWorld);
     }
 }

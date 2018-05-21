@@ -1,4 +1,4 @@
-package com.toquery.cleverweb.modules.test.router;
+package com.toquery.cleverweb.core.web.router;
 
 import com.toquery.cleverweb.modules.system.handlers.SystemMenuHandler;
 import com.toquery.cleverweb.modules.test.handlers.HelloWorldHandler;
@@ -14,13 +14,11 @@ import javax.annotation.Resource;
  * @author toquery
  * @version 1
  */
-//@Configuration
-public class TestRouter {
-  //  @Resource
+@Configuration
+public class CleverWebReactorRouter {
+    @Resource
     private HelloWorldHandler helloWorldHandler;
-
-
-    //@Bean
+    @Bean
     public RouterFunction<?> routerFunction() {
         return RouterFunctions
                 .route(RequestPredicates.GET("/hello"), helloWorldHandler::helloWorld);

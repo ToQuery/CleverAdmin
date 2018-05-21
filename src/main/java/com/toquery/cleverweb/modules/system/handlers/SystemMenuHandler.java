@@ -1,6 +1,5 @@
 package com.toquery.cleverweb.modules.system.handlers;
 
-import com.toquery.cleverweb.modules.system.dao.SysMenuDao;
 import com.toquery.cleverweb.modules.system.entity.SysMenu;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -19,14 +18,12 @@ import static org.springframework.web.reactive.function.BodyInserters.fromObject
 @Service
 public class SystemMenuHandler {
 
-    @Resource
-    private SysMenuDao sysMenuDao;
 
 
     public Mono<ServerResponse> getMenu(ServerRequest request) {
         int id = Integer.valueOf(request.pathVariable("id"));
         Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-        Mono<SysMenu> personMono = sysMenuDao.getPerson(id);
+        Mono<SysMenu> personMono = null;//sysMenuDao.getPerson(id);
         return personMono
                 .flatMap(person -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(fromObject(person)))
                 .switchIfEmpty(notFound);

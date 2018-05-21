@@ -20,20 +20,3 @@ spring:
 #    multipart:
 #      max-request-size: 100MB #\u6700\u5927\u8BF7\u6C42\u5927\u5C0F
 #      max-file-size: 100MB #\u6700\u5927\u6587\u4EF6\u5927\u5C0F
-
-
----
-
-spring:
-  profiles: dev
-  datasource:
-    url: jdbc:mysql://mysql.jszx.sparke.cn:3306/cleverweb?autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
-    username: root
-    password: spark2016
-
-server:
-  port: 8899
-
-logging:
-  level:
-    root: info

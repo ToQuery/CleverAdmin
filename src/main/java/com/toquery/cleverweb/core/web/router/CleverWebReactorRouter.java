@@ -1,6 +1,5 @@
 package com.toquery.cleverweb.core.web.router;
 
-import com.toquery.cleverweb.modules.system.handlers.SystemMenuHandler;
 import com.toquery.cleverweb.modules.test.handlers.HelloWorldHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -12,5 +12,4 @@ public class CleverWebApplication {
 		SpringApplication.run(CleverWebApplication.class, args);
 	}
 
-
 }

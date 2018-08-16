@@ -1,4 +1,3 @@
-
 server:
   port: 8899
 
@@ -12,7 +11,7 @@ spring:
     username: root
     password: spark2016
   jpa:
-#    hibernate:
-#      ddl-auto: update
-#    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
     show-sql: true

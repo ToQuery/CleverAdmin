@@ -10,13 +10,3 @@ spring:
     name: CleverWeb
   profiles:
     active: dev
-  mvc:
-    static-path-pattern: /static/**
-    view:
-      prefix: /templates
-  http:
-    converters:
-      preferred-json-mapper: fastjson
-#    multipart:
-#      max-request-size: 100MB #\u6700\u5927\u8BF7\u6C42\u5927\u5C0F
-#      max-file-size: 100MB #\u6700\u5927\u6587\u4EF6\u5927\u5C0F

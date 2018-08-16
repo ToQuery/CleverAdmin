@@ -1,51 +1,45 @@
 buildscript {
-	ext {
-		springBootVersion   = '2.0.2.RELEASE'
-        lombokVersion       = '1.16.20'
-	}
-	repositories {
-		mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/"}
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+        lombokVersion = '1.16.20'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://repository.excilys.com/content/groups/public'
+        }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 plugins {
-    id "org.sonarqube" version "2.6.2"
 //    id "org.springframework.boot" version "${springBootVersion}"
     id "io.spring.dependency-management" version "1.0.5.RELEASE"
 }
-sonarqube {
-    properties {
-        property "sonar.host.url", "10.211.55.4:9000"
-        property "sonar.jdbc.url", "jdbc:mysql://localhost:3306/sonar"
-        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
-        property "sonar.jdbc.username", "root"
-        property "sonar.jdbc.password", "123456"
 
-        property "sonar.projectName", "CleverWeb"
-        property "sonar.login", "admin"
-        property "sonar.password", "admin"
-
-        property "sonar.projectKey", "123456:99a5518429a686e7125083f67a17b11eca04f0fd"
-        property "sonar.projectVersion", "v1.0"
-        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
-    }
-
-}
 
 apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.toquery'
 version = '0.0.1'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
+
+bootJar {
+    baseName = 'CleverWeb'
+    version =  '0.0.1'
+}
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
@@ -54,18 +48,23 @@ dependencies {
     compile "org.projectlombok:lombok:${lombokVersion}"
 
     //compile('org.springframework.boot:spring-boot-starter-security')
-	//compile('org.springframework.boot:spring-boot-starter-web')
-	//compile 'org.springframework.boot:spring-boot-starter-integration'
-	compile 'org.springframework.boot:spring-boot-starter-webflux'
+    //compile('org.springframework.boot:spring-boot-starter-web')
+    //compile 'org.springframework.boot:spring-boot-starter-integration'
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
 
-	//compile 'com.nimbusds:nimbus-jose-jwt:5.9'
+    //compile 'com.nimbusds:nimbus-jose-jwt:5.9'
 
-	runtime 'org.springframework.boot:spring-boot-devtools'
-	runtime 'mysql:mysql-connector-java'
+    runtime 'org.springframework.boot:spring-boot-devtools'
+    runtime 'mysql:mysql-connector-java'
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('io.projectreactor:reactor-test')
-	testCompile('org.springframework.security:spring-security-test')
+    // https://mvnrepository.com/artifact/io.gatling.highcharts/gatling-charts-highcharts
+    compile group: 'io.gatling.highcharts', name: 'gatling-charts-highcharts', version: '2.3.1'
+// https://mvnrepository.com/artifact/org.scala-lang/scala-library
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.6'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'io.projectreactor:reactor-test'
+    testCompile 'org.springframework.security:spring-security-test'
 }

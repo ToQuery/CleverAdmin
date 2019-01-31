@@ -4,7 +4,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -15,3 +14,8 @@ hs_err_pid*
 /target/
 /out/
 /build/
+
+# node
+/node
+/node_modules
+package-lock.json

@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.2.RELEASE</version>
+        <groupId>io.github.toquery</groupId>
+        <artifactId>clever-framework</artifactId>
+        <version>1.0.2-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>io.github.toquery</groupId>
+
     <artifactId>clever-web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>clever-web</name>
@@ -18,6 +18,7 @@
     <properties>
         <java.version>1.8</java.version>
 
+        <clever-framework.version>1.0.2-SNAPSHOT</clever-framework.version>
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
         <java.version>1.8</java.version>
@@ -41,6 +42,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
@@ -48,7 +57,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-curd</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

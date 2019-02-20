@@ -6,7 +6,7 @@ export function loginByUsername(username, password) {
         password
     };
     return request({
-        url: '/login/login',
+        url: '/user/token',
         method: 'post',
         data
     });

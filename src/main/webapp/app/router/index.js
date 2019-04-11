@@ -8,7 +8,7 @@ import Layout from '@/views/layout/Layout';
 
 /* Router Modules */
 import componentsRouter from './modules/components';
-import chartsRouter from './modules/charts';
+import systemRouter from './modules/system';
 import tableRouter from './modules/table';
 import nestedRouter from './modules/nested';
 
@@ -60,7 +60,7 @@ export const constantRouterMap = [
                 path: 'dashboard',
                 component: () => import('@/views/dashboard/index'),
                 name: 'Dashboard',
-                meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+                meta: { title: 'dashboard', icon: 'tachometer-alt', noCache: true }
             }
         ]
     }
@@ -86,7 +86,7 @@ export const asyncRouterMap = [
         name: 'ErrorPages',
         meta: {
             title: 'errorPages',
-            icon: '404'
+            icon: 'times'
         },
         children: [
             {
@@ -126,5 +126,6 @@ export const asyncRouterMap = [
             }
         ]
     },
+    systemRouter,
     { path: '*', redirect: '/404', hidden: true }
 ];

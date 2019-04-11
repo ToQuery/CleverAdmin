@@ -1,6 +1,19 @@
 export default {
+    filter: {
+        system: {
+            user: {
+                userName: 'user name'
+            }
+        }
+    },
     route: {
         dashboard: 'Dashboard',
+
+        system: 'system',
+        user: 'user',
+        role: 'role',
+        menu: 'menu',
+
         introduction: 'Introduction',
         documentation: 'Documentation',
         guide: 'Guide',

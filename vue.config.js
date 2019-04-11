@@ -21,6 +21,7 @@ function assetsPath(_path) {
 
 module.exports = {
     outputDir: 'target/www',
+    // parallel: require('os').cpus().length > 1,
     pages: {
         index: {
             // page 的入口
@@ -55,45 +56,47 @@ module.exports = {
             new webpack.WatchIgnorePlugin([
                 utils.root('src/test'),
             ]),
-            new WebpackNotifierPlugin({
-                title: 'Clever Web',
-                contentImage: path.join(__dirname, 'src/main/webapp/favicon.ico')
-            })
+            // new WebpackNotifierPlugin({
+            //     title: 'Clever Web',
+            //     contentImage: path.join(__dirname, 'src/main/webapp/favicon.ico')
+            // })
         ]
     },
     devServer: {
+        //open: true,
+        // hotOnly: true, //热更新（webpack已实现了，这里false即可）
         proxy: 'http://127.0.0.1:8080'
     },
     chainWebpack: config => {
         // svg-sprite-loader
-        config.module.rule('svg-sprite-loader')
-            .include.add(resolve('src/icons')).end()
-            .test(/\.svg$/)
-            .use('svg-sprite-loader')
-            .loader('svg-sprite-loader')
-            .options({symbolId: 'icon-[name]'})
-            .end();
+        // config.module.rule('svg-sprite-loader')
+        //     .include.add(resolve('src/icons')).end()
+        //     .test(/\.svg$/)
+        //     .use('svg-sprite-loader')
+        //     .loader('svg-sprite-loader')
+        //     .options({symbolId: 'icon-[name]'})
+        //     .end();
 
-        config.module.rule('icon-url-loader')
-            .exclude.add(resolve('src/icons')).end()
-            .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-            .use('url-loader')
-            .loader('url-loader')
-            .options({limit: 10000,name: assetsPath('img/[name].[hash:7].[ext]')})
-            .end();
-
-        config.module.rule('media-url-loader')
-            .test(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/)
-            .use('url-loader')
-            .loader('url-loader')
-            .options({limit: 10000,name: assetsPath('media/[name].[hash:7].[ext]')})
-            .end();
-
-        config.module.rule('fonts-url-loader')
-            .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
-            .use('url-loader')
-            .loader('url-loader')
-            .options({limit: 10000,name: assetsPath('fonts/[name].[hash:7].[ext]')})
-            .end();
+        // config.module.rule('icon-url-loader')
+        //     .exclude.add(resolve('src/icons')).end()
+        //     .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+        //     .use('url-loader')
+        //     .loader('url-loader')
+        //     .options({limit: 10000,name: assetsPath('img/[name].[hash:7].[ext]')})
+        //     .end();
+        //
+        // config.module.rule('media-url-loader')
+        //     .test(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/)
+        //     .use('url-loader')
+        //     .loader('url-loader')
+        //     .options({limit: 10000,name: assetsPath('media/[name].[hash:7].[ext]')})
+        //     .end();
+        //
+        // config.module.rule('fonts-url-loader')
+        //     .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
+        //     .use('url-loader')
+        //     .loader('url-loader')
+        //     .options({limit: 10000,name: assetsPath('fonts/[name].[hash:7].[ext]')})
+        //     .end();
     }
 };

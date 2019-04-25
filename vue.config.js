@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 const defaultSettings = require('./src/main/webapp/src/settings.js')
 
 function resolve(dir) {
@@ -79,6 +80,11 @@ module.exports = {
       }
     },
     plugins: [
+
+      new HtmlWebpackPlugin({
+        hash: true,
+        filename: './src/main/webapp/public/index.html' // relative to root of the application
+      })
 
       // new CopyWebpackPlugin([
       //   { from: './src/main/webapp/public/favicon.ico', to: 'favicon.ico' },

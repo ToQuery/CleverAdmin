@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EnableAppJpaRepositories(basePackages = {"io.github.toquery.framework.security"})
 public class CleverWebApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CleverWebApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CleverWebApplication.class, args);
+    }
 
 }
 

@@ -1,102 +1,190 @@
-'use strict';
-const path = require('path');
-const webpack = require('webpack');
-const utils = require('./webpack/utils');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const writeFilePlugin = require('write-file-webpack-plugin');
-const WebpackNotifierPlugin = require('webpack-notifier');
+'use strict'
 
+const path = require('path')
+const defaultSettings = require('./src/main/webapp/src/settings.js')
 
 function resolve(dir) {
-    return path.join(__dirname, '..', dir);
+  return path.join(__dirname, dir)
 }
-function assetsPath(_path) {
-    /*const assetsSubDirectory =
-        process.env.NODE_ENV === 'production'
-            ? config.build.assetsSubDirectory
-            : config.dev.assetsSubDirectory;*/
 
-    return path.posix.join(_path);
-}
+const name = defaultSettings.title || 'Clever Web Index' // page title
+const port = 9527 // dev port
 
 module.exports = {
-    outputDir: 'target/www',
-    // parallel: require('os').cpus().length > 1,
-    pages: {
-        index: {
-            // page 的入口
-            entry: 'src/main/webapp/app/main.js',
-            // 模板来源
-            template: 'src/main/webapp/index.html',
-            // 在 dist/index.html 的输出
-            filename: 'index.html',
-            // 当使用 title 选项时，
-            // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-            title: 'Clever Web Index',
-            // 在这个页面中包含的块，默认情况下会包含
-            // 提取出来的通用 chunk 和 vendor chunk。
-            chunks: ['chunk-vendors', 'chunk-common', 'index']
-        }
-    },
-    configureWebpack: {
-        resolve: {
-            alias: {
-                "~": path.resolve(__dirname, 'src/main/webapp/app/'),
-                "@": path.resolve(__dirname, 'src/main/webapp/app/'),
-            }
-        },
-        plugins: [
-            new CopyWebpackPlugin([
-                { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
-                { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
-                { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
-            ]),
-            // new webpack.HotModuleReplacementPlugin(),
-            // new writeFilePlugin(),
-            new webpack.WatchIgnorePlugin([
-                utils.root('src/test'),
-            ]),
-            // new WebpackNotifierPlugin({
-            //     title: 'Clever Web',
-            //     contentImage: path.join(__dirname, 'src/main/webapp/favicon.ico')
-            // })
-        ]
-    },
-    devServer: {
-        //open: true,
-        // hotOnly: true, //热更新（webpack已实现了，这里false即可）
-        proxy: 'http://127.0.0.1:8080'
-    },
-    chainWebpack: config => {
-        // svg-sprite-loader
-        // config.module.rule('svg-sprite-loader')
-        //     .include.add(resolve('src/icons')).end()
-        //     .test(/\.svg$/)
-        //     .use('svg-sprite-loader')
-        //     .loader('svg-sprite-loader')
-        //     .options({symbolId: 'icon-[name]'})
-        //     .end();
-
-        // config.module.rule('icon-url-loader')
-        //     .exclude.add(resolve('src/icons')).end()
-        //     .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-        //     .use('url-loader')
-        //     .loader('url-loader')
-        //     .options({limit: 10000,name: assetsPath('img/[name].[hash:7].[ext]')})
-        //     .end();
-        //
-        // config.module.rule('media-url-loader')
-        //     .test(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/)
-        //     .use('url-loader')
-        //     .loader('url-loader')
-        //     .options({limit: 10000,name: assetsPath('media/[name].[hash:7].[ext]')})
-        //     .end();
-        //
-        // config.module.rule('fonts-url-loader')
-        //     .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
-        //     .use('url-loader')
-        //     .loader('url-loader')
-        //     .options({limit: 10000,name: assetsPath('fonts/[name].[hash:7].[ext]')})
-        //     .end();
+  /**
+   * You will need to set publicPath if you plan to deploy your site under a sub path,
+   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
+   * then publicPath should be set to "/bar/".
+   * In most cases please use '/' !!!
+   * Detail: https://cli.vuejs.org/config/#publicpath
+   */
+  publicPath: '/',
+  assetsDir: 'static',
+  outputDir: 'target/www',
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
+  // parallel: require('os').cpus().length > 1,
+  /*
+  // 这里配置了 pages， 在 chainWebpack 必须删除 插件 preload prefetch ！！！
+  // TODO: Remove this workaround once https://github.com/vuejs/vue-cli/issues/2463 is fixed
+  pages: {
+    index: {
+      // page 的入口
+      entry: './src/main/webapp/src/main.js',
+      // 模板来源
+      template: 'src/main/webapp/public/index.html',
+      // 在 dist/index.html 的输出
+      filename: 'index.html',
+      // 当使用 title 选项时，
+      // template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
+      title: name,
+      // 在这个页面中包含的块，默认情况下会包含
+      // 提取出来的通用 chunk 和 vendor chunk。
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
     }
-};
+  },*/
+
+  devServer: {
+    port: port,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    // hotOnly: true, //热更新（webpack已实现了，这里false即可）
+    // proxy: 'http://127.0.0.1:8080',
+    proxy: {
+      // change xxx-api/login => mock/login
+      // detail: https://cli.vuejs.org/config/#devserver-proxy
+      [process.env.VUE_APP_BASE_API]: {
+        target: `http://localhost:${port}/mock`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      }
+    },
+    after: require('./src/main/webapp/mock/mock-server.js')
+  },
+
+  configureWebpack: {
+    name: name,
+    entry: {
+      app: './src/main/webapp/src/main.js'
+    },
+    resolve: {
+      alias: {
+        '~': resolve('src/main/webapp/src/'),
+        '@': resolve('src/main/webapp/src/')
+      }
+    },
+    plugins: [
+
+      // new CopyWebpackPlugin([
+      //   { from: './src/main/webapp/public/favicon.ico', to: 'favicon.ico' },
+      //   { from: './src/main/webapp/public/manifest.webapp', to: 'manifest.webapp' },
+      //   { from: './src/main/webapp/public/robots.txt', to: 'robots.txt' }
+      // ]),
+      // new webpack.HotModuleReplacementPlugin(),
+      // new writeFilePlugin(),
+
+      // new webpack.WatchIgnorePlugin([
+      //   utils.root('src/main/webapp/tests')
+      // ])
+      // new WebpackNotifierPlugin({
+      //     title: 'Clever Web',
+      //     contentImage: path.join(__dirname, 'src/main/webapp/favicon.ico')
+      // })
+    ]
+  },
+
+  chainWebpack: config => {
+    // FIX:
+    // 1.preload,prefetch 插件和 pages 配置冲突，如果配置pages,则需要删除这两个插件，否则在项目根目录下增加public目录 index.html文件 （vue-cli默认配置）。
+    // 2.如果想自定义main.js位置（默认在 根目录/src/main.js 下），则需要在 configureWebpack.entry.app 配置main.js文件路径
+    //
+    // TODO: need test
+    // config.plugins.delete('preload')
+    // config.plugins.delete('prefetch')
+
+    // TODO: Remove this workaround once https://github.com/vuejs/vue-cli/issues/2463 is fixed
+    // Remove preload plugins for multi-page build to prevent infinite recursion
+    // Object.keys(pagesObject).forEach(page => {
+    //   config.plugins.delete(`preload-${page}`)
+    //   config.plugins.delete(`prefetch-${page}`)
+    // })
+
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/main/webapp/src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/main/webapp/src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+
+    // set preserveWhitespace
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
+
+    config
+    // https://webpack.js.org/configuration/devtool/#development
+      .when(process.env.NODE_ENV === 'development',
+        config => config.devtool('cheap-source-map')
+      )
+
+    config
+      .when(process.env.NODE_ENV !== 'development',
+        config => {
+          config
+            .plugin('ScriptExtHtmlWebpackPlugin')
+            .after('html')
+            .use('script-ext-html-webpack-plugin', [{
+              // `runtime` must same as runtimeChunk name. default is `runtime`
+              inline: /runtime\..*\.js$/
+            }])
+            .end()
+          config
+            .optimization.splitChunks({
+              chunks: 'all',
+              cacheGroups: {
+                libs: {
+                  name: 'chunk-libs',
+                  test: /[\\/]node_modules[\\/]/,
+                  priority: 10,
+                  chunks: 'initial' // only package third parties that are initially dependent
+                },
+                elementUI: {
+                  name: 'chunk-elementUI', // split elementUI into a single package
+                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+                },
+                commons: {
+                  name: 'chunk-commons',
+                  test: resolve('src/main/webapp/src/components'), // can customize your rules
+                  minChunks: 3, //  minimum common number
+                  priority: 5,
+                  reuseExistingChunk: true
+                }
+              }
+            })
+          config.optimization.runtimeChunk('single')
+        }
+      )
+  }
+}

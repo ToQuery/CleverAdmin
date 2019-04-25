@@ -134,7 +134,7 @@
                     <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                    <npmRegistryURL>https://registry.npm.taobao.org</npmRegistryURL>
+<!--                    <npmRegistryURL>https://registry.npm.taobao.org</npmRegistryURL>-->
                 </configuration>
                 <executions>
                     <execution>

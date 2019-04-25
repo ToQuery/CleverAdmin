@@ -1,7 +1,7 @@
 'use strict'
 
 const path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 const defaultSettings = require('./src/main/webapp/src/settings.js')
 
 function resolve(dir) {
@@ -24,7 +24,9 @@ module.exports = {
   outputDir: 'target/www',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
-  // parallel: require('os').cpus().length > 1,
+
+  // parallel: require('os').cpus().length > 1, // 多核编译
+
   /*
   // 这里配置了 pages， 在 chainWebpack 必须删除 插件 preload prefetch ！！！
   // TODO: Remove this workaround once https://github.com/vuejs/vue-cli/issues/2463 is fixed
@@ -43,7 +45,8 @@ module.exports = {
       // 提取出来的通用 chunk 和 vendor chunk。
       chunks: ['chunk-vendors', 'chunk-common', 'index']
     }
-  },*/
+  },
+  */
 
   devServer: {
     port: port,
@@ -81,10 +84,14 @@ module.exports = {
     },
     plugins: [
 
+      /*
+      // todo 需要增加自定义目录
+      // 取消 pages 配置后，增加 HtmlWebpackPlugin 插件，自定义 index.html 路径
       new HtmlWebpackPlugin({
         hash: true,
         filename: './src/main/webapp/public/index.html' // relative to root of the application
       })
+      */
 
       // new CopyWebpackPlugin([
       //   { from: './src/main/webapp/public/favicon.ico', to: 'favicon.ico' },

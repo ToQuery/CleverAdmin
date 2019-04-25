@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: 'Clever Web Index',
 
   /**
    * @type {boolean} true | false

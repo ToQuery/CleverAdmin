@@ -78,7 +78,7 @@ module.exports = {
     },
     resolve: {
       alias: {
-        '~': resolve('src/main/webapp/src/'),
+        '~': resolve('src/main/webapp/'),
         '@': resolve('src/main/webapp/src/')
       }
     },

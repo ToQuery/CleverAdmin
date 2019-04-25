@@ -107,6 +107,26 @@ export const constantRoutes = [
         meta: { title: 'guide', icon: 'guide', noCache: true }
       }
     ]
+  },
+  {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/user',
+    meta: { title: 'system', icon: 'guide' },
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/system/user/index'),
+        name: 'User',
+        meta: { title: 'user', icon: 'user', noCache: true }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/system/user/index'),
+        name: 'Role',
+        meta: { title: 'role', icon: 'role', noCache: true }
+      }
+    ]
   }
 ]
 

@@ -1,5 +1,8 @@
 export default {
   route: {
+    system: '系统设置',
+    user: '用户管理',
+    role: '角色管理',
     dashboard: '首页',
     documentation: '文档',
     guide: '引导页',
@@ -169,5 +172,13 @@ export default {
     tagsView: '开启 Tags-View',
     fixedHeader: '固定 Header',
     sidebarLogo: '侧边栏 Logo'
+  },
+  system: {
+    user: {
+      loginName: '登录名',
+      userName: '用户昵称',
+      enabled: '是否启用',
+      lastPasswordResetDate: '最后重置密码时间'
+    }
   }
 }

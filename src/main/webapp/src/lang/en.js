@@ -1,5 +1,8 @@
 export default {
   route: {
+    system: 'System',
+    user: 'User',
+    role: 'Role',
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',
@@ -169,5 +172,13 @@ export default {
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
+  },
+  system: {
+    user: {
+      loginName: 'loginName',
+      userName: 'userName',
+      enabled: 'enabled',
+      lastPasswordResetDate: 'lastPasswordResetDate'
+    }
   }
 }

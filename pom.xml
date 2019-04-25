@@ -134,7 +134,10 @@
                     <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-<!--                    <npmRegistryURL>https://registry.npm.taobao.org</npmRegistryURL>-->
+                    <!--
+                    淘宝npm sha值不一致
+                    <npmRegistryURL>https://registry.npm.taobao.org</npmRegistryURL>
+                    -->
                 </configuration>
                 <executions>
                     <execution>

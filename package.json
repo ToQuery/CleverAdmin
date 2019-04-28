@@ -7,7 +7,8 @@
     "dev:mock": "vue-cli-service serve --mode dev-mock",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "new": "plop"
   },
   "keywords": [
     "vue",

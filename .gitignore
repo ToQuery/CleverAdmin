@@ -15,6 +15,12 @@ hs_err_pid*
 /out/
 /build/
 
+#
+.project
+.factorypath
+.classpath
+.settings
+
 # node
 /node
 /node_modules

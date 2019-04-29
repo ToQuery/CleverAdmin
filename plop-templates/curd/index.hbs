@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import systemUserApi from '@/api/{{ name }}/user'
+import {{ properCase name }}Api from '@/api/{{ name }}'
 import editVue from './edit'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
@@ -59,7 +59,7 @@ export default {
   methods: {
 		queryContent() {
 			this.listLoading = true
-			systemUserApi.query(this.data.query, this.data.page).then(response => {
+			{{ properCase name }}Api.query(this.data.query, this.data.page).then(response => {
 			this.data.content = response.content
 			this.data.page = response.page
 			this.listLoading = false
@@ -80,7 +80,7 @@ export default {
 			this.queryContent()
 		},
 		handleDelete(id) {
-			systemUserApi.deleteById(id).then(response => {
+			{{ properCase name }}Api.deleteById(id).then(response => {
 			this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
 			}).catch(e => {
 			this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })

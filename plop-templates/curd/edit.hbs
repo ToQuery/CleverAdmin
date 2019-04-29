@@ -13,11 +13,6 @@
 			<el-input v-model="content.{{ fieldName }}"/>
 		</el-form-item>
 		{{/each}}
-		<el-form-item :label="$t('system.user.enabled')" prop="enabled">
-		<el-select v-model="content.enabled" class="filter-item" placeholder="Please select" :value="content.enabled">
-			<el-option v-for="item in enabledOptions" :key="item" :label="item" :value="item"/>
-		</el-select>
-		</el-form-item>
 	</el-form>
 	<div slot="footer" class="dialog-footer">
 		<el-button @click="dialogFormVisible = false"></el-button>
@@ -27,10 +22,10 @@
 </template>
 
 <script>
-  import systemUserApi from '@/api/system/user'
+  import {{ properCase name }}Api from '@/api/{{ name }}'
 
   export default {
-		name: 'SystemUserEdit',
+		name: '{{ properCase name }}',
 		filters: {},
 		data() {
 			return {
@@ -46,11 +41,10 @@
 					{{/each}}
 					id: undefined
 				},
-				enabledOptions: [true, false],
 				rules: {
-					loginName: [{required: true, message: 'type is required', trigger: 'change'}],
-					userName: [{type: 'date', required: true, message: 'timestamp is required', trigger: 'change'}],
-					enabled: [{type: 'date', required: true, message: 'enabled is required', trigger: 'change'}]
+					{{#each fieldList}}
+					{{ fieldName }}: [{required: true, message: '{{ fieldName }} is required', trigger: 'change'}],
+					{{/each}}
 				}
 			}
 		},
@@ -74,7 +68,7 @@
 					this.$refs['contentForm'].clearValidate()
 				})
 				if (!isCreate) {
-					systemUserApi.get(id).then((reponses) => {
+					{{ properCase name }}Api.get(id).then((reponses) => {
 						this.content = reponses.content
 					})
 				}
@@ -86,7 +80,7 @@
 			saveOrUpdateData() {
 				this.$refs['contentForm'].validate((valid) => {
 					if (valid) {
-						systemUserApi.saveOrUpdate(this.content).then((reponses) => {
+						{{ properCase name }}Api.saveOrUpdate(this.content).then((reponses) => {
 							this.$notify({title: '成功', message: '创建成功', type: 'success', duration: 2000})
 							this.handleDataSuccess()
 						})

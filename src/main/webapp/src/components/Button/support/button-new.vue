@@ -16,10 +16,6 @@ export default {
     icon: {
       type: String,
       default: 'el-icon-plus'
-    },
-    xClass: {
-      type: String,
-      default: 'filter-item'
     }
   }
 }

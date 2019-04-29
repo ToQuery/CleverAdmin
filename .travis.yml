@@ -1,0 +1,15 @@
+language: java
+
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+install:
+  - mvn install -DskipTests
+
+script:
+  - mvn clean package -DskipTests

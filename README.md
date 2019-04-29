@@ -1,5 +1,7 @@
 # CleverWeb
 
+[![Build Status](https://travis-ci.org/ToQuery/CleverWeb.svg?branch=master)](https://travis-ci.org/ToQuery/CleverWeb)
+
 CleverWeb 即敏捷的Web，可能是最符合中国国情的首个前后端结合的项目。项目只包含基本的用户，菜单，和权限控制，可用于CMS 等后台管理端的快速成型。
 
 ## 项目概要

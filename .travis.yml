@@ -11,7 +11,7 @@ cache:
     - 'node_modules'
 
 install:
-  - mvn install -DskipTests -X
+  - mvn install -DskipTests
 
 script:
   - mvn clean package -DskipTests -X

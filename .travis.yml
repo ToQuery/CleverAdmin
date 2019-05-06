@@ -1,5 +1,16 @@
-language: node_js
-node_js: stable
-script: npm run test
-notifications:
-  email: false
+language: java
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - 'node'
+    - 'node_modules'
+
+install:
+  - mvn install -DskipTests
+
+script:
+  - mvn clean package -DskipTests -X

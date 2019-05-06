@@ -35,9 +35,8 @@ spring:
 logging:
   level:
     root: info
-    org:
-      springframework:
-        security: debug
+    org.springframework.security: debug
+    io.github.toquery.framework.security.jwt.rest: debug
 
 
 #mybatis:

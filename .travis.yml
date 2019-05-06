@@ -1,16 +1,5 @@
-language: java
-
-jdk:
-  - oraclejdk8
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - 'node'
-    - 'node_modules'
-
-install:
-  - mvn install -DskipTests
-
-script:
-  - mvn clean package -DskipTests -X
+language: node_js
+node_js: 10
+script: npm run test
+notifications:
+  email: false

@@ -1,33 +1,19 @@
 {
-  "name": "clever-web-ui",
-  "version": "0.0.1",
-  "private": true,
+  "name": "vue-element-admin",
+  "version": "4.0.1",
+  "description": "A magical vue admin. An out-of-box UI solution for enterprise applications. Newest development stack of vue. Lots of awesome features",
+  "author": "Pan <panfree23@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
-    "dev:mock": "vue-cli-service serve --mode dev-mock",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
+    "build:prod": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",
+    "preview": "node build/index.js --preview",
+    "lint": "eslint --ext .js,.vue src",
+    "test:unit": "jest --clearCache && vue-cli-service test:unit",
+    "test:ci": "npm run lint && npm run test:unit",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
     "new": "plop"
-  },
-  "keywords": [
-    "vue",
-    "element-ui",
-    "admin",
-    "management-system",
-    "admin-template"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
   },
   "husky": {
     "hooks": {
@@ -35,10 +21,26 @@
     }
   },
   "lint-staged": {
-    "src/main/webapp/**/*.{js,vue}": [
+    "src/**/*.{js,vue}": [
       "eslint --fix",
       "git add"
     ]
+  },
+  "keywords": [
+    "vue",
+    "admin",
+    "dashboard",
+    "element-ui",
+    "boilerplate",
+    "admin-template",
+    "management-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -101,7 +103,7 @@
     "vue-template-compiler": "2.6.10"
   },
   "engines": {
-    "node": ">= 6.0.0",
+    "node": ">=8.9",
     "npm": ">= 3.0.0"
   },
   "browserslist": [

@@ -1,4 +1,13 @@
-function allParam(code, message, success, content, page) {
+function allContentParam(content, success = true, code = 0, message = 'ok') {
+  return {
+    code: code,
+    message: message,
+    success: success,
+    content: content
+  }
+}
+
+function allPageParam(code, message, success, content, page) {
   return {
     code: code,
     message: message,
@@ -8,7 +17,7 @@ function allParam(code, message, success, content, page) {
   }
 }
 
-function param(param) {
+function pageParam(param) {
   return {
     code: param.code,
     message: param.message,
@@ -19,6 +28,7 @@ function param(param) {
 }
 
 export default {
-  allParam,
-  param
+  allContentParam,
+  allPageParam,
+  pageParam
 }

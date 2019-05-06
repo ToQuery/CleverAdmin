@@ -1,3 +1,4 @@
+import requestParam from './common/request-param'
 
 const tokens = {
   admin: {
@@ -34,16 +35,9 @@ export default [
 
       // mock error
       if (!token) {
-        return {
-          code: 60204,
-          message: 'Account and password are incorrect.'
-        }
+        return requestParam.handleResponseContent({}, false, 401, 'do not find user.')
       }
-
-      return {
-        code: 20000,
-        data: token
-      }
+      return requestParam.handleResponseContent(token)
     }
   },
 
@@ -51,22 +45,16 @@ export default [
   {
     url: '/user/info\.*',
     type: 'get',
-    response: config => {
-      const { token } = config.query
-      const info = users[token]
+    response: (config, b, c) => {
+      const { authorization } = config.headers
+      const info = users[authorization]
 
       // mock error
       if (!info) {
-        return {
-          code: 50008,
-          message: 'Login failed, unable to get user details.'
-        }
+        return requestParam.handleResponseContent({}, false, 404, 'Login failed, unable to get user details.')
       }
 
-      return {
-        code: 20000,
-        data: info
-      }
+      return requestParam.handleResponseContent(info)
     }
   },
 

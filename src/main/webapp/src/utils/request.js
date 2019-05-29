@@ -44,7 +44,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
 
-    if (res.success) {
+    if (response.status >= 200 && response.status < 300) {
       return res
     } else {
       Message({ message: res.message || 'error', type: 'error', duration: 5 * 1000 })

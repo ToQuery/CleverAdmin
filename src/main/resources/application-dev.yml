@@ -1,0 +1,56 @@
+app:
+  jwt:
+    secret: 123456
+  page:
+    param:
+      page-size: ps
+
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:clever_web
+    driverClassName: org.h2.Driver
+    platform: h2
+    username: sa
+    password: 123456
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    open-in-view: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        enable_lazy_load_no_trans: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
+  data:
+    rest:
+      defaultMediaType: application/json
+  hateoas:
+    use-hal-as-default-json-media-type: false
+
+
+
+logging:
+  level:
+    root: info
+    org.springframework.security: debug
+    io.github.toquery.framework.security: debug
+
+
+#mybatis:
+#  mapper-locations: classpath:mybatis/mapper/*.xml
+#  config-location: classpath:mybatis/config/mybatis-config.xml
+
+server:
+  port: 8080

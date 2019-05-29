@@ -19,7 +19,7 @@ export default [
     url: '/system/user/query',
     type: 'get',
     response: config => {
-      return requestParam.handleResponseData(config, List)
+      return requestParam.handleResponsePage(config, List)
     }
   }
 ]

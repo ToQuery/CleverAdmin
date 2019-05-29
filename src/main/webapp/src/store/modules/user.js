@@ -34,7 +34,8 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const token = 'Bearer ' + response.content.token
+        // const token = 'Bearer ' + response.content.token
+        const token = response.content.token
         commit('SET_TOKEN', token)
         setToken(token)
         resolve()
@@ -97,7 +98,7 @@ const actions = {
     })
   },
 
-  // Dynamically modify permissions
+  // dynamically modify permissions
   changeRoles({ commit, dispatch }, role) {
     return new Promise(async resolve => {
       const token = role + '-token'

@@ -113,6 +113,16 @@ module.exports = {
   },
 
   chainWebpack: config => {
+    const cdn = {
+      // inject tinymce into index.html
+      // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
+      js: ['https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.2/tinymce.min.js']
+    }
+    config.plugin('html')
+      .tap(args => {
+        args[0].cdn = cdn
+        return args
+      })
     // FIX:
     // 1.preload,prefetch 插件和 pages 配置冲突，如果配置pages,则需要删除这两个插件，否则在项目根目录下增加public目录 index.html文件 （vue-cli默认配置）。
     // 2.如果想自定义main.js位置（默认在 根目录/src/main.js 下），则需要在 configureWebpack.entry.app 配置main.js文件路径

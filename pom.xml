@@ -169,6 +169,7 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+                    <!--
                     <execution>
                         <id>webpack build test</id>
                         <goals>
@@ -180,6 +181,7 @@
                             <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                         </configuration>
                     </execution>
+                    -->
                     <execution>
                         <id>webpack build prod</id>
                         <goals>

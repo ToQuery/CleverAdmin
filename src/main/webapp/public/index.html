@@ -10,7 +10,10 @@
   </head>
   <body>
     <div id="webapp-public-index"></div>
-    <script src="<%= BASE_URL %>static/tinymce4.7.5/tinymce.min.js"></script>
+    <!-- import cdn js -->
+    <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%=js%>"></script>
+    <% } %>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

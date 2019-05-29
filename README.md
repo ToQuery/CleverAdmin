@@ -51,6 +51,11 @@ git subtree pull -P src/main/webapp git@github.com:PanJiaChen/vue-element-admin.
 5. 运行 `npm run build`，可只将前端项目打包，目录为 `target/www`
 6. 运行 `maven clean pageage -X -DskipTests` ,将前后端项目同时打包运行（推荐！！！不需要另行配置nginx代理）。
 
+
+```bash
+git subtree pull -P src/main/webapp git@github.com:PanJiaChen/vue-element-admin.git i18n --squash
+```
+
 ## package.json 配置
 
 - postcss 代替根目录下的 .postcssrc.js

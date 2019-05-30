@@ -16,8 +16,29 @@ for (let i = 0; i < count; i++) {
 export default [
   // system user
   {
-    url: '/system/user/query',
+    url: '/sys/user',
     type: 'get',
+    response: config => {
+      return requestParam.handleResponsePage(config, List)
+    }
+  },
+  {
+    url: '/sys/user',
+    type: 'post',
+    response: config => {
+      return requestParam.handleResponsePage(config, List)
+    }
+  },
+  {
+    url: '/sys/user',
+    type: 'put',
+    response: config => {
+      return requestParam.handleResponsePage(config, List)
+    }
+  },
+  {
+    url: '/sys/user',
+    type: 'delete',
     response: config => {
       return requestParam.handleResponsePage(config, List)
     }

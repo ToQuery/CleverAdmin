@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EnableAppRepositoryRest
-@EntityScan(basePackages = {"io.github.toquery.framework.security.domain"})
-@EnableAppJpaRepositories(basePackages = {"io.github.toquery.framework.security"})
+//@EntityScan(basePackages = {"io.github.toquery.framework.security.domain"})
+@EnableAppJpaRepositories // (basePackages = {"io.github.toquery.framework.security"})
 public class CleverWebApplication {
 
     public static void main(String[] args) {

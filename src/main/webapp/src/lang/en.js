@@ -180,7 +180,10 @@ export default {
       loginName: 'loginName',
       userName: 'userName',
       enabled: 'enabled',
-      lastPasswordResetDate: 'lastPasswordResetDate'
+      password: 'password',
+      email: 'email',
+      lastPasswordResetDate: 'lastPasswordResetDate',
+      role: 'role'
     }
   }
 }

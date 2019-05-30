@@ -180,7 +180,10 @@ export default {
       loginName: '登录名',
       userName: '用户昵称',
       enabled: '是否启用',
-      lastPasswordResetDate: '最后重置密码时间'
+      password: '密码',
+      email: '邮箱',
+      lastPasswordResetDate: '最后重置密码时间',
+      role: '角色'
     }
   }
 }

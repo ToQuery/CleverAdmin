@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const biz_path = '/sys/user/'
+const biz_path = '/sys/role/'
 
 function query(queryParam, page = undefined) {
   const query = Object.assign({}, queryParam) // copy obj
@@ -35,23 +35,23 @@ function save(data) {
   return request({
     url: biz_path,
     method: 'post',
-    data: data
+    params: data
   })
 }
 
 function update(data) {
   return request({
-    url: biz_path,
+    url: biz_path + data.id,
     method: 'put',
-    data: data
+    params: query
   })
 }
 
 function saveOrUpdate(data) {
   if (data.id !== undefined && data.id !== null && data.id !== '') {
-    return update(data)
+    update(data)
   } else {
-    return save(data)
+    save(data)
   }
 }
 

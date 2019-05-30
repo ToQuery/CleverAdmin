@@ -29,6 +29,9 @@ import * as filters from './filters' // global filters
  * mockXHR()
  */
 
+import CWButton from '@/components/Button'
+Vue.use(CWButton)
+
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)

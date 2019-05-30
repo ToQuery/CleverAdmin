@@ -6,10 +6,7 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
-        {{ $t('table.export') }}
-      </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleShowEdit">
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleShowEdit(undefined)">
         {{ $t('table.add') }}
       </el-button>
     </div>
@@ -32,7 +29,7 @@
           <span>{{ scope.row.userName }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('system.user.lastPasswordResetDate')" width="150px" align="center">
+      <el-table-column :label="$t('system.user.lastPasswordResetDate')" width="200px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.lastPasswordResetDate | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -40,6 +37,11 @@
       <el-table-column :label="$t('system.user.enabled')" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.enabled }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('system.user.role')" align="center">
+        <template slot-scope="scope">
+          <el-tag v-for="role in scope.row.roles" :key="role.id" style="margin-right: 10px">{{ role.name }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
@@ -64,7 +66,6 @@
 import systemUserApi from '@/api/system/user'
 import editVue from './edit'
 import waves from '@/directive/waves' // waves directive
-import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
@@ -97,6 +98,7 @@ export default {
   methods: {
     queryContent() {
       this.listLoading = true
+      debugger
       systemUserApi.query(this.data.query, this.data.page).then(response => {
         this.data.content = response.content
         this.data.page = response.page
@@ -120,32 +122,10 @@ export default {
     handleDelete(id) {
       systemUserApi.deleteById(id).then(response => {
         this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
+        this.queryContent()
       }).catch(e => {
         this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })
       })
-    },
-    handleDownload() {
-      this.downloadLoading = true
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-        const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-        const data = this.formatJson(filterVal, this.data.content)
-        excel.export_json_to_excel({
-          header: tHeader,
-          data,
-          filename: 'table-list'
-        })
-        this.downloadLoading = false
-      })
-    },
-    formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
     }
   }
 }

@@ -153,8 +153,8 @@
                     <!--<workingDirectory>src/main/node</workingDirectory>
                     <outputdir>src/main/resources/templates</outputdir>
                     <installDirectory>target</installDirectory>-->
-                    <nodeVersion>v11.5.0</nodeVersion>
-                    <npmVersion>6.5.0</npmVersion>
+                    <nodeVersion>v12.1.0</nodeVersion>
+                    <npmVersion>6.9.0</npmVersion>
                     <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
                     <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>

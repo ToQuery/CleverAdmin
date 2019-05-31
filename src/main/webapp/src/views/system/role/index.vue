@@ -19,29 +19,14 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column :label="$t('system.user.loginName')" prop="loginName" align="center">
+      <el-table-column :label="$t('system.role.name')" prop="name" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.loginName }}</span>
+          <span>{{ scope.row.name }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('system.user.userName')" align="center">
+      <el-table-column :label="$t('system.role.code')" prop="code" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.userName }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('system.user.lastPasswordResetDate')" width="200px" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.lastPasswordResetDate | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('system.user.enabled')" align="center">
-        <template slot-scope="scope">
-          <span>{{ scope.row.enabled }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('system.user.role')" align="center">
-        <template slot-scope="scope">
-          <el-tag v-for="role in scope.row.roles" :key="role.id" style="margin-right: 10px">{{ role.name }}</el-tag>
+          <span>{{ scope.row.code }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
@@ -63,7 +48,7 @@
 </template>
 
 <script>
-import systemUserApi from '@/api/system/user'
+import sysRoleApi from '@/api/system/role'
 import editVue from './edit'
 import waves from '@/directive/waves' // waves directive
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -98,7 +83,7 @@ export default {
   methods: {
     queryContent() {
       this.listLoading = true
-      systemUserApi.query(this.data.query, this.data.page).then(response => {
+      sysRoleApi.query(this.data.query, this.data.page).then(response => {
         this.data.content = response.content
         this.data.page = response.page
         this.listLoading = false
@@ -119,7 +104,7 @@ export default {
       this.queryContent()
     },
     handleDelete(id) {
-      systemUserApi.deleteById(id).then(response => {
+      sysRoleApi.deleteById(id).then(response => {
         this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
         this.queryContent()
       }).catch(e => {

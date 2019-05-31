@@ -122,6 +122,11 @@ export default {
       if (!isCreate) {
         sysUserApi.get(id).then((reponses) => {
           this.content = reponses.content
+          const ids = []
+          this.content.roles.forEach(item => {
+            ids.push(item.id)
+          })
+          this.content.roles = ids
         })
       }
     },

@@ -184,6 +184,11 @@ export default {
       email: '邮箱',
       lastPasswordResetDate: '最后重置密码时间',
       role: '角色'
+    },
+    role: {
+      name: '名称',
+      code: 'code',
+      user: '用户'
     }
   }
 }

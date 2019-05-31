@@ -122,7 +122,7 @@ export const constantRoutes = [
       },
       {
         path: 'role',
-        component: () => import('@/views/system/user/index'),
+        component: () => import('@/views/system/role/index'),
         name: 'Role',
         meta: { title: 'role', icon: 'role', noCache: true }
       }

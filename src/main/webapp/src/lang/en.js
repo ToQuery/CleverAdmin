@@ -184,6 +184,11 @@ export default {
       email: 'email',
       lastPasswordResetDate: 'lastPasswordResetDate',
       role: 'role'
+    },
+    role: {
+      name: 'name',
+      code: 'code',
+      user: 'user'
     }
   }
 }

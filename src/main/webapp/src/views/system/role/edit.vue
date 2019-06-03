@@ -14,10 +14,11 @@
       <el-form-item :label="$t('system.role.code')" prop="code">
         <el-input v-model="content.code" />
       </el-form-item>
-      <el-form-item :label="$t('system.role.user')" prop="user">
-        <template slot-scope="scope">
-          <el-tag v-for="user in scope.users" :key="user.id" :label="user.loginName" :value="user.id" />
-        </template>
+      <el-form-item :label="$t('system.role.user')">
+        <div v-if="content.users.length > 0">
+          <el-tag v-for="user in content.users" :key="user.id" :label="user.loginName" :value="user.id">{{ user.loginName }}</el-tag>
+        </div>
+        <div v-else>暂无用户</div>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -54,11 +55,8 @@ export default {
       },
       rules: {
         name: [{ required: true, message: 'loginName is required', trigger: 'change' }],
-        code: [{ required: true, message: 'userName is required', trigger: 'change' }],
-        user: [{ required: true, message: 'password is required', trigger: 'change' }]
-      },
-      roleLoading: false,
-      sysRoleOptions: []
+        code: [{ required: true, message: 'userName is required', trigger: 'change' }]
+      }
     }
   },
   created() {

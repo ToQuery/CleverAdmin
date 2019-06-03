@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="data.query.loginName" :placeholder="$t('system.user.loginName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="data.query.userName" :placeholder="$t('system.user.userName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_loginNameLike" :placeholder="$t('system.user.loginName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_userNameLike" :placeholder="$t('system.user.userName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
@@ -78,7 +78,9 @@ export default {
     return {
       tableKey: 0,
       data: {
-        query: {
+        filter: {
+          filter_loginNameLike: '',
+          filter_userNameLike: ''
         },
         page: {
           pageSize: 10,
@@ -98,7 +100,7 @@ export default {
   methods: {
     queryContent() {
       this.listLoading = true
-      systemUserApi.query(this.data.query, this.data.page).then(response => {
+      systemUserApi.query(this.data.filter, this.data.page).then(response => {
         this.data.content = response.content
         this.data.page = response.page
         this.listLoading = false

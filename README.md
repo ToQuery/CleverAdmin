@@ -38,27 +38,33 @@ git subtree pull -P src/main/webapp git@github.com:PanJiaChen/vue-element-admin.
 
 - jdk8+
 - maven
-- node（npm）可不安装，maven将会自动帮你处理
+- node（npm）可不安装，但注意保持和pom配置版本一致
 
-### 基于maven运行
+### 基于maven运行(推荐)
 
 1. 进入项目根目录 `mvn clean install`
 2. 项目打包 `mvn clean package -X -DskipTests`
-3. 运行 `target/xxxx.jar`
+3. 运行 `java -jar target/xxxx.jar`
 
 ### 使用 IntellJ IDEA 运行（建议安装 node）
 
-1. 导入项目到IDEA，以普通maven项目导入
-2. 添加 SpringBoot 项目运行方式，配置本地数据库、redis 并运行
+1. 以普通maven项目导入项目
+2. 添加 SpringBoot 项目运行方式运行后端项目（默认使用H2数据库）
 3. 命令行进入项目根目录，`npm install`
 4. 运行 `npm run dev`，可进入开发模式
-5. 运行 `npm run build`，可只将前端项目打包，目录为 `target/www`
-6. 运行 `maven clean pageage -X -DskipTests` ,将前后端项目同时打包运行（推荐！！！不需要另行配置nginx代理）。
 
+**注意后端项目使用`8080`端口，前端项目使用`9527`端口，使用`9527`端口可实现页面动态**
 
-```bash
-git subtree pull -P src/main/webapp git@github.com:PanJiaChen/vue-element-admin.git i18n --squash
-```
+### 打包
+
+- 以普通jar文件方式
+
+运行 `mvn clean pageage -X -DskipTests` ,将前后端项目同时打包运行（推荐！！！不需要另行配置nginx代理）。
+
+- 以docker方式
+
+docker run
+
 
 ## package.json 配置
 

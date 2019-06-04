@@ -1,4 +1,4 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { asyncRoutes, constantRoutes, redirect404Routes } from '@/router'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -58,6 +58,8 @@ const actions = {
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles, false)
       }
+      // 最后添加 404 通配符跳转
+      accessedRoutes = accessedRoutes.concat(redirect404Routes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

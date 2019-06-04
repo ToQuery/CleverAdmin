@@ -26,7 +26,7 @@
         </el-select>
       </el-form-item>
       <el-form-item :label="$t('system.user.role')" prop="roles">
-        <el-select v-model="content.roles" multiple filterable remote reserve-keyword value-key="id"	:remote-method="handleRemoteRoles" :loading="roleLoading" :placeholder="$t('system.user.role')">
+        <el-select v-model="content.roles" multiple filterable remote reserve-keyword value-key="id" :remote-method="handleRemoteRoles" :loading="roleLoading" :placeholder="$t('system.user.role')">
           <el-option v-for="role in sysRoleOptions" :key="role.id" :label="role.name" :value="role.id" />
         </el-select>
       </el-form-item>
@@ -88,6 +88,11 @@ export default {
     this.handleRemoteRoles()
   },
   methods: {
+
+    // 切换角色刷新菜单
+    handleChangeRoles(roles) {
+      this.$store.dispatch('user/changeRoles', roles).then(() => { this.$emit('change') })
+    },
     handleRemoteRoles(query) {
       this.roleLoading = true
       const sysRoleParam = {}
@@ -130,7 +135,8 @@ export default {
         })
       }
     },
-    handleDataSuccess() {
+    handleDataSuccess(reponses) {
+      this.handleChangeRoles(reponses.content.roles)
       this.dialogFormVisible = false
       this.$emit('success')
     },
@@ -150,8 +156,8 @@ export default {
         if (valid) {
           this.handleMany2Many()
           sysUserApi.saveOrUpdate(this.content).then((reponses) => {
-            this.$notify({ title: '成功', message: '创建成功', type: 'success', duration: 2000 })
-            this.handleDataSuccess()
+            this.$notify({ title: '成功', message: '操作成功', type: 'success', duration: 2000 })
+            this.handleDataSuccess(reponses)
           }).catch(error => {
             console.info(error)
             this.dialogFormVisible = false

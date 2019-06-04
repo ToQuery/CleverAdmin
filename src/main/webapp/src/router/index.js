@@ -122,10 +122,7 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
-  },
-  // 这里必须增加一个统配路径，否则找不到指定路径
-  // 前端项目区分不出因错误路径造成404，还是因未授权造成404
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
 
 /**
@@ -133,6 +130,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  systemRouter,
   {
     path: '/permission',
     component: Layout,
@@ -190,7 +188,6 @@ export const asyncRoutes = [
 
   /** when your routing map is too long, you can split it into small modules **/
   componentsRouter,
-  systemRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,
@@ -399,8 +396,17 @@ export const asyncRoutes = [
         meta: { title: 'externalLink', icon: 'link' }
       }
     ]
-  },
+  }
+  // ,
+  // { path: '*', redirect: '/404', hidden: true }
+]
 
+// ,
+// 这里必须增加一个统配路径，否则找不到指定路径
+// 前端项目区分不出因错误路径造成404，还是因未授权造成404
+// 这里路由必须设置为最后，否则将匹配到 /404
+// { path: '*', redirect: '/404', hidden: true }
+export const redirect404Routes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 

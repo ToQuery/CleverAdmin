@@ -7,6 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
+import systemRouter from './modules/system'
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
@@ -109,26 +110,6 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/system',
-    component: Layout,
-    redirect: '/system/user',
-    meta: { title: 'system', icon: 'guide' },
-    children: [
-      {
-        path: 'user',
-        component: () => import('@/views/system/user/index'),
-        name: 'User',
-        meta: { title: 'user', icon: 'user', noCache: true }
-      },
-      {
-        path: 'role',
-        component: () => import('@/views/system/role/index'),
-        name: 'Role',
-        meta: { title: 'role', icon: 'lock', noCache: true }
-      }
-    ]
-  },
-  {
     path: '/profile',
     component: Layout,
     redirect: '/profile/index',
@@ -141,7 +122,10 @@ export const constantRoutes = [
         meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
-  }
+  },
+  // 这里必须增加一个统配路径，否则找不到指定路径
+  // 前端项目区分不出因错误路径造成404，还是因未授权造成404
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 /**
@@ -206,6 +190,7 @@ export const asyncRoutes = [
 
   /** when your routing map is too long, you can split it into small modules **/
   componentsRouter,
+  systemRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,

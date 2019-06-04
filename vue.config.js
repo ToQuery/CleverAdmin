@@ -9,7 +9,7 @@ function resolve(dir) {
 }
 
 const name = defaultSettings.title || 'Clever Web Index' // page title
-const port = 9527 // dev port
+const port = 9528 // dev port
 
 module.exports = {
   /**

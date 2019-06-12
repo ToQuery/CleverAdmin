@@ -7,6 +7,9 @@ export function getToken() {
 }
 
 export function setToken(token) {
+  if (token.indexOf('Bearer') === -1) {
+    token = 'Bearer ' + token
+  }
   return Cookies.set(TokenKey, token)
 }
 

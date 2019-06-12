@@ -1,0 +1,88 @@
+<template>
+  <div class="app-container">
+    <div class="filter-container">
+      {{#each fieldList}}
+      <el-input v-model="data.query.filter_{{ fieldName }}" :placeholder="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
+      {{/each}}
+    </div>
+    <el-table :key="tableKey" v-loading="listLoading" :data="data.content" border fit highlight-current-row style="width: 100%;" >
+      {{#each fieldList}}
+      <el-table-column :label="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" prop="{{ fieldName }}" align="center"></el-table-column>
+      {{/each}}
+      <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="{row}">
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <pagination v-show="data.page.totalElements > 0" :total="data.page.totalElements" :page.sync="data.page.pageNumber" :limit.sync="data.page.pageSize" @pagination="queryContent"></pagination>
+
+    <edit-vue ref="editVue" @success="handleEditSuccess"></edit-vue>
+  </div>
+</template>
+
+<script>
+import {{ properCase name }}Api from '@/api/biz/{{ name }}'
+import editVue from './edit'
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+
+export default {
+  name: '{{ properCase name }}',
+  components: { editVue, Pagination },
+  data() {
+    return {
+      tableKey: 0,
+      data: {
+        query: {
+        },
+        page: {
+          pageSize: 10,
+          pageNumber: 1,
+          totalElements: 0,
+          totalPages: 0
+        },
+        content: null
+      },
+      listLoading: true,
+      downloadLoading: false
+    }
+  },
+  created() {
+    this.queryContent()
+  },
+  methods: {
+    queryContent() {
+      this.listLoading = true
+      {{ properCase name }}Api.query(this.data.query, this.data.page).then(response => {
+        this.data.content = response.content
+        this.data.page = response.page
+        this.listLoading = false
+      }).catch(e => {
+        this.listLoading = false
+        this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })
+        console.error(e)
+      })
+    },
+    handleShowEdit(id) {
+      this.$refs['editVue'].handleShowEdit(id)
+    },
+    handleEditSuccess() {
+      this.queryContent()
+    },
+    handleFilter() {
+      this.data.page.pageNumber = 0
+      this.queryContent()
+    },
+    handleDelete(id) {
+      {{ properCase name }}Api.deleteById(id).then(response => {
+        this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
+      }).catch(e => {
+        this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+</style>

@@ -1,0 +1,35 @@
+package {{ packageSources }}.service.impl;
+
+import org.springframework.stereotype.Service;
+import io.github.toquery.framework.curd.service.impl.AppBaseServiceImpl;
+
+import {{ packageSources }}.entity.{{ properCase name }};
+import {{ packageSources }}.dao.{{ properCase name }}Dao;
+import {{ packageSources }}.service.I{{ properCase name }}Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+* @author toquery
+* @version 1
+*/
+@Service
+public class {{ properCase name }}ServiceImpl extends AppBaseServiceImpl<Long, {{ properCase name }}, {{ properCase name }}Dao> implements I{{ properCase name }}Service {
+
+    /**
+     * 查询条件表达式
+     */
+    private Map<String, String> expressionMap = new LinkedHashMap<String, String>() {
+        {
+            {{#each fieldList}}
+            put("{{ camelCase fieldName }}", "{{ camelCase fieldName }}:EQ");
+            {{/each}}
+        }
+    };
+
+    @Override
+    public Map<String, String> getQueryExpressions() {
+        return expressionMap;
+    }
+}

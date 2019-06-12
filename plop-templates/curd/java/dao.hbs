@@ -1,0 +1,11 @@
+package {{ packageSources }}.dao;
+
+import {{ packageSources }}.entity.{{ properCase name }};
+import io.github.toquery.framework.dao.repository.AppJpaBaseRepository;
+
+/**
+* @author toquery
+* @version 1
+*/
+public interface {{ properCase name }}Dao extends AppJpaBaseRepository<{{ properCase name }}, Long> {
+}

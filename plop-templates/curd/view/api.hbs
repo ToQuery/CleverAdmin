@@ -1,41 +1,25 @@
 import request from '@/utils/request'
 
-const biz_path = '/system/user'
+const biz_path = '/{{ dashCase name }}'
 
 function query(queryParam, page = undefined) {
   const query = Object.assign({}, queryParam) // copy obj
   if (page) {
     Object.assign(query, page)
   }
-  console.info(query)
-  return request({
-    url: biz_path + '/query',
-    method: 'get',
-    params: query
-  })
+  return request({ url: biz_path + '/query', method: 'get', params: query })
 }
 
 function get(id) {
-  return request({
-    url: biz_path + id,
-    method: 'get'
-  })
+  return request({ url: biz_path + '/' + id, method: 'get' })
 }
 
 function save(data) {
-  return request({
-    url: biz_path,
-    method: 'post',
-    params: data
-  })
+  return request({ url: biz_path, method: 'post', data: data })
 }
 
 function update(data) {
-  return request({
-    url: biz_path + data.id,
-    method: 'put',
-    params: query
-  })
+  return request({ url: biz_path, method: 'put', data: data })
 }
 
 function saveOrUpdate(data) {
@@ -47,10 +31,7 @@ function saveOrUpdate(data) {
 }
 
 function deleteById(id) {
-  return request({
-    url: biz_path + id,
-    method: 'delete'
-  })
+  return request({ url: biz_path + '/' + id, method: 'delete' })
 }
 
 export default {

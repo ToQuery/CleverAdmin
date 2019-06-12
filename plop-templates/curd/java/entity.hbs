@@ -1,0 +1,25 @@
+package {{ packageSources }}.entity;
+
+import io.github.toquery.framework.dao.entity.AppBaseEntityPrimaryKeyLong;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Date;
+
+/**
+*
+*/
+@Entity
+@Getter
+@Setter
+@Table(name = "{{ name }}")
+public class {{ properCase name }} extends AppBaseEntityPrimaryKeyLong {
+
+    {{#each fieldList}}
+    @Column(name = "{{ dashCase fieldName }}", length = 50, unique = true, nullable = false)
+    private {{ fieldType }} {{ camelCase fieldName }};
+    {{/each}}
+}

@@ -1,9 +1,6 @@
 package io.github.toquery.cleverweb.controller;
 
-import io.github.toquery.framework.curd.controller.AppBaseCurdController;
-import io.github.toquery.framework.web.controller.AppBaseController;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import io.github.toquery.framework.webmvc.controller.AppBaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

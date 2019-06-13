@@ -1,9 +1,9 @@
 const { notEmpty } = require('../utils.js')
 
 // const WEBAPP_PATH = 'src/main/webapp'
-const WEBAPP_PATH = 'docs/temp/'
+const WEBAPP_PATH = 'src/main/webapp/'
 
-const JAVA_SOURCE_PATH = 'docs/temp/'
+const JAVA_SOURCE_PATH = 'src/main/java/'
 
 const PACKAGE_PATH = 'io/github/toquery/cleverweb/'
 
@@ -129,7 +129,7 @@ module.exports = {
 			},
 			{
 				type: 'add',
-				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/impl/${nameProperCase}Service.java`,
+				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/impl/${nameProperCase}ServiceImpl.java`,
 				templateFile: 'plop-templates/curd/java/service.hbs',
 				data: {
 					name: name,

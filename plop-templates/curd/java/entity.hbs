@@ -19,7 +19,7 @@ import java.util.Date;
 public class {{ properCase name }} extends AppBaseEntityPrimaryKeyLong {
 
     {{#each fieldList}}
-    @Column(name = "{{ dashCase fieldName }}", length = 50, unique = true, nullable = false)
+    @Column(name = "{{ dashCase fieldName }}")
     private {{ fieldType }} {{ camelCase fieldName }};
     {{/each}}
 }

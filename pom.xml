@@ -75,6 +75,10 @@
         </dependency>
         <dependency>
             <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-front</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-security-jwt</artifactId>
         </dependency>
         <dependency>

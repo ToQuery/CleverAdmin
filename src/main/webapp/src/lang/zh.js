@@ -3,6 +3,7 @@ export default {
     system: '系统设置',
     user: '用户管理',
     role: '角色管理',
+    menu: '菜单管理',
     dashboard: '首页',
     documentation: '文档',
     guide: '引导页',
@@ -112,6 +113,7 @@ export default {
     imageUploadTips: '由于我在使用时它只有vue@1版本，而且和mockjs不兼容，所以自己改造了一下，如果大家要使用的话，优先还是使用官方版本。'
   },
   table: {
+    addChild: '添加子集',
     dynamicTips1: '固定表头, 按照表头顺序排序',
     dynamicTips2: '不固定表头, 按照点击顺序排序',
     dragTips1: '默认顺序',
@@ -186,9 +188,18 @@ export default {
       role: '角色'
     },
     role: {
+      menus: '菜单',
       name: '名称',
       code: 'code',
       user: '用户'
+    },
+    menu: {
+      parentId: '父级ID',
+      parentName: '父级名称',
+      name: '名称',
+      code: 'code',
+      level: '层级',
+      leaf: '是否有子集'
     }
   }
 }

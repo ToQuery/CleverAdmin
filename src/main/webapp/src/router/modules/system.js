@@ -19,6 +19,12 @@ const systemRouter = {
       component: () => import('@/views/system/role/index'),
       name: 'Role',
       meta: { title: 'role', icon: 'lock', noCache: true, roles: ['root'] }
+    },
+    {
+      path: 'menu',
+      component: () => import('@/views/system/menu/index'),
+      name: 'Menu',
+      meta: { title: 'menu', icon: 'menu', noCache: true, roles: ['root'] }
     }
   ]
 }

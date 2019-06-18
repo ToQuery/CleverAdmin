@@ -13,6 +13,9 @@
       <el-form-item :label="$t('system.menu.code')" prop="code">
         <el-input v-model="content.code" />
       </el-form-item>
+      <el-form-item :label="$t('system.menu.sortNum')" prop="sortNum">
+        <el-input-number v-model="content.sortNum" :min="0" :max="999" />
+      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible = false">{{ $t('table.cancel') }}</el-button>
@@ -39,6 +42,7 @@ export default {
         parentId: '',
         level: '',
         leaf: '',
+        sortNum: 1,
         id: undefined
       },
       rules: {
@@ -58,6 +62,7 @@ export default {
         level: '',
         parentPath: '',
         leaf: '',
+        sortNum: 1,
         id: undefined
       }
     },

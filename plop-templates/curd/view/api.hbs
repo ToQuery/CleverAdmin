@@ -10,6 +10,11 @@ function query(queryParam, page = undefined) {
   return request({ url: biz_path + '/query', method: 'get', params: query })
 }
 
+function list(queryParam) {
+	const query = Object.assign({}, queryParam) // copy obj
+	return request({ url: biz_path + '/list', method: 'get', params: queryParam })
+}
+
 function get(id) {
   return request({ url: biz_path + '/' + id, method: 'get' })
 }
@@ -24,9 +29,9 @@ function update(data) {
 
 function saveOrUpdate(data) {
   if (data.id !== undefined && data.id !== null && data.id !== '') {
-    update(data)
+		return update(data)
   } else {
-    save(data)
+		return save(data)
   }
 }
 
@@ -36,6 +41,7 @@ function deleteById(id) {
 
 export default {
   query,
+	list,
   get,
   save,
   update,

@@ -115,7 +115,6 @@ export default {
       this.$refs['contentForm'].validate((valid) => {
         if (valid) {
           this.content.menus = this.$refs['tree'].getCheckedNodes()
-          debugger
           sysRoleApi.saveOrUpdate(this.content).then((reponses) => {
             this.$notify({ title: '成功', message: '创建成功', type: 'success', duration: 2000 })
             this.handleDataSuccess()

@@ -27,22 +27,22 @@ public class {{ properCase name }}Controller extends AppBaseCurdController<I{{ p
 
     @GetMapping
     public ResponseParam query() {
-        return ResponseParam.builder().build().page(super.handleQuery());
+        return super.query();
     }
 
     @GetMapping("/list")
     public ResponseParam list() {
-        return ResponseParam.builder().build().content(super.handleList());
+        return super.list();
     }
 
     @PostMapping
     public ResponseParam save(@Validated @RequestBody {{ properCase name }} {{ camelCase name }}) {
-        return ResponseParam.builder().build().content(service.save({{ camelCase name }}));
+        return super.save({{ camelCase name }});
     }
 
     @PutMapping
     public ResponseParam update(@RequestBody {{ properCase name }} {{ camelCase name }}) {
-        return ResponseParam.builder().build().content(service.update({{ camelCase name }}, Sets.newHashSet({{#each fieldList}}"{{ camelCase fieldName }}",{{/each}})));
+        return super.update({{ camelCase name }}, Sets.newHashSet({{#each fieldList}}"{{ camelCase fieldName }}",{{/each}}));
     }
 
     @DeleteMapping("{id}")
@@ -52,6 +52,6 @@ public class {{ properCase name }}Controller extends AppBaseCurdController<I{{ p
 
     @GetMapping("{id}")
     public ResponseParam detail(@PathVariable Long id) {
-        return ResponseParam.builder().build().content(service.getById(id));
+        return super.detail(id);
     }
 }

@@ -194,12 +194,12 @@ export default {
       user: '用户'
     },
     menu: {
+      sortNum: '排序',
       parentId: '父级ID',
       parentName: '父级名称',
       name: '名称',
       code: 'code',
-      level: '层级',
-      leaf: '是否有子集'
+      level: '层级'
     }
   }
 }

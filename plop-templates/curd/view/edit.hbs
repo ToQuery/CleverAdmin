@@ -73,6 +73,9 @@ export default {
           {{ camelCase name }}Api.saveOrUpdate(this.content).then((reponses) => {
             this.$notify({title: '成功', message: '创建成功', type: 'success', duration: 2000})
             this.handleDataSuccess()
+          }).catch(error => {
+	          this.dialogFormVisible = true
+	          console.info(error)
           })
         }
       })

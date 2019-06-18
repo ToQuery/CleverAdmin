@@ -88,13 +88,6 @@ export default {
   name: 'Login',
   components: { LangSelect, SocialSign },
   data() {
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: 'admin',
@@ -102,7 +95,7 @@ export default {
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '请输入用户名！' }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', message: '请输入密码！' }]
       },
       passwordType: 'password',
       capsTooltip: false,

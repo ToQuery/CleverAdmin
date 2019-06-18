@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="filter-container">
       {{#each fieldList}}
-      <el-input v-model="data.query.filter_{{ fieldName }}" :placeholder="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
+      <el-input v-model="data.query.filter_{{ fieldName }}" clearable :placeholder="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
       {{/each}}
     </div>
     <el-table :key="tableKey" v-loading="listLoading" :data="data.content" border fit highlight-current-row style="width: 100%;" >

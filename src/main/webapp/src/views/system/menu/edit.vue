@@ -13,9 +13,6 @@
       <el-form-item :label="$t('system.menu.code')" prop="code">
         <el-input v-model="content.code" />
       </el-form-item>
-      <el-form-item :label="$t('system.menu.level')" prop="level">
-        <el-input v-model="content.level" />
-      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible = false">{{ $t('table.cancel') }}</el-button>
@@ -93,6 +90,9 @@ export default {
           menuApi.saveOrUpdate(this.content).then((reponses) => {
             this.$notify({ title: '成功', message: '创建成功', type: 'success', duration: 2000 })
             this.handleDataSuccess()
+          }).catch(error => {
+            this.dialogFormVisible = true
+            console.info(error)
           })
         }
       })

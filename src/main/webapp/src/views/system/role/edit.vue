@@ -92,10 +92,10 @@ export default {
         menus: [],
         users: []
       }
+      this.$nextTick(() => { this.$refs['tree'].setCheckedNodes([]) })
     },
     handleShowEdit(id = undefined) {
       this.resetContent()
-      debugger
       const isCreate = id === undefined || id === null || id === ''
       this.dialogStatus = isCreate ? 'create' : 'update'
       this.dialogFormVisible = true
@@ -120,8 +120,8 @@ export default {
             this.$notify({ title: '成功', message: '创建成功', type: 'success', duration: 2000 })
             this.handleDataSuccess()
           }).catch(error => {
+            this.dialogFormVisible = true
             console.info(error)
-            this.dialogFormVisible = false
           })
         }
       })

@@ -159,8 +159,8 @@ export default {
             this.$notify({ title: '成功', message: '操作成功', type: 'success', duration: 2000 })
             this.handleDataSuccess(reponses)
           }).catch(error => {
+            this.dialogFormVisible = true
             console.info(error)
-            this.dialogFormVisible = false
           })
         }
       })

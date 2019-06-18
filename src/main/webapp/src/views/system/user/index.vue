@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="data.filter.filter_loginNameLike" :placeholder="$t('system.user.loginName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="data.filter.filter_userNameLike" :placeholder="$t('system.user.userName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_loginNameLike" clearable :placeholder="$t('system.user.loginName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_userNameLike" clearable :placeholder="$t('system.user.userName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>

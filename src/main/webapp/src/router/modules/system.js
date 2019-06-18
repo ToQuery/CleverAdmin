@@ -6,25 +6,25 @@ const systemRouter = {
   path: '/system',
   component: Layout,
   redirect: '/system/user',
-  meta: { title: 'system', icon: 'guide', roles: ['root'] },
+  meta: { title: 'system', icon: 'guide', roles: ['root', 'system', 'user', 'role', 'menu'] },
   children: [
     {
       path: 'user',
       component: () => import('@/views/system/user/index'),
       name: 'User',
-      meta: { title: 'user', icon: 'user', noCache: true, roles: ['root'] }
+      meta: { title: 'user', icon: 'user', noCache: true, roles: ['root', 'user'] }
     },
     {
       path: 'role',
       component: () => import('@/views/system/role/index'),
       name: 'Role',
-      meta: { title: 'role', icon: 'lock', noCache: true, roles: ['root'] }
+      meta: { title: 'role', icon: 'lock', noCache: true, roles: ['root', 'role'] }
     },
     {
       path: 'menu',
       component: () => import('@/views/system/menu/index'),
       name: 'Menu',
-      meta: { title: 'menu', icon: 'menu', noCache: true, roles: ['root'] }
+      meta: { title: 'menu', icon: 'nested', noCache: true, roles: ['root', 'menu'] }
     }
   ]
 }

@@ -11,6 +11,12 @@
       {{/each}}
       <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
+	        <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+		        \{{ $t('table.search') }}
+	        </el-button>
+	        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleShowEdit(undefined)">
+		        \{{ $t('table.add') }}
+	        </el-button>
         </template>
       </el-table-column>
     </el-table>

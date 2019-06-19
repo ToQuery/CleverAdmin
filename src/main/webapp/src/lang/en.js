@@ -1,5 +1,6 @@
 export default {
   route: {
+    config: 'config',
     system: 'System',
     user: 'User',
     role: 'Role',
@@ -178,6 +179,12 @@ export default {
     sidebarLogo: 'Sidebar Logo'
   },
   system: {
+    config: {
+      configGroup: 'configGroup',
+      configName: 'configName',
+      configValue: 'configValue',
+      sortNum: 'sortNum'
+    },
     user: {
       loginName: 'loginName',
       userName: 'userName',

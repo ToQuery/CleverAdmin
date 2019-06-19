@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const biz_path = '/sys/menu'
+const biz_path = '/sys/menu/'
 
 function query(queryParam, page = undefined) {
   const query = Object.assign({}, queryParam) // copy obj
@@ -12,18 +12,18 @@ function query(queryParam, page = undefined) {
 
 function list(queryParam) {
   const query = Object.assign({}, queryParam) // copy obj
-  return request({ url: biz_path + '/list', method: 'get', params: query })
+  return request({ url: biz_path + 'list', method: 'get', params: query })
 }
 
 function treeList() {
-  return request({ url: biz_path + '/tree', method: 'get' })
+  return request({ url: biz_path + 'tree', method: 'get' })
 }
 function permissionList() {
-  return request({ url: biz_path + '/permission', method: 'get' })
+  return request({ url: biz_path + 'permission', method: 'get' })
 }
 
 function get(id) {
-  return request({ url: biz_path + '/' + id, method: 'get' })
+  return request({ url: biz_path + id, method: 'get' })
 }
 
 function save(data) {
@@ -43,7 +43,7 @@ function saveOrUpdate(data) {
 }
 
 function deleteById(id) {
-  return request({ url: biz_path + '/' + id, method: 'delete' })
+  return request({ url: biz_path, method: 'delete', params: { ids: id }})
 }
 
 export default {

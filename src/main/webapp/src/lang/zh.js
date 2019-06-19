@@ -1,5 +1,6 @@
 export default {
   route: {
+    config: '系统配置',
     system: '系统设置',
     user: '用户管理',
     role: '角色管理',
@@ -178,6 +179,12 @@ export default {
     sidebarLogo: '侧边栏 Logo'
   },
   system: {
+    config: {
+      configGroup: '配置组名称',
+      configName: '配置名称',
+      configValue: '配置值',
+      sortNum: '配置排序'
+    },
     user: {
       loginName: '登录名',
       userName: '用户昵称',

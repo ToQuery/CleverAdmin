@@ -25,6 +25,12 @@ const systemRouter = {
       component: () => import('@/views/system/menu/index'),
       name: 'Menu',
       meta: { title: 'menu', icon: 'nested', noCache: true, roles: ['root', 'menu'] }
+    },
+    {
+      path: 'config',
+      component: () => import('@/views/system/config/index'),
+      name: 'Config',
+      meta: { title: 'config', icon: 'form', noCache: true, roles: ['root', 'config'] }
     }
   ]
 }

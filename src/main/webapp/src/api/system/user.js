@@ -57,8 +57,9 @@ function saveOrUpdate(data) {
 
 function deleteById(id) {
   return request({
-    url: biz_path + id,
-    method: 'delete'
+    url: biz_path,
+    method: 'delete',
+    params: { ids: id }
   })
 }
 

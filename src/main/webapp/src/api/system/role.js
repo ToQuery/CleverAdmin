@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const biz_path = '/sys/role'
+const biz_path = '/sys/role/'
 
 function query(queryParam, page = undefined) {
   const query = Object.assign({}, queryParam) // copy obj
@@ -18,7 +18,7 @@ function list(queryParam) {
   const query = Object.assign({}, queryParam) // copy obj
 
   return request({
-    url: biz_path + '/list',
+    url: biz_path + 'list',
     method: 'get',
     params: query
   })
@@ -26,7 +26,7 @@ function list(queryParam) {
 
 function get(id) {
   return request({
-    url: biz_path + '/' + id,
+    url: biz_path + id,
     method: 'get'
   })
 }
@@ -57,8 +57,9 @@ function saveOrUpdate(data) {
 
 function deleteById(id) {
   return request({
-    url: biz_path + id,
-    method: 'delete'
+    url: biz_path,
+    method: 'delete',
+    params: { ids: id }
   })
 }
 

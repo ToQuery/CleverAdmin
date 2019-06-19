@@ -1,6 +1,10 @@
 app:
   security:
-    whitelist: /h2-console/**
+    whitelist:
+      - /error
+      - /h2-console/**
+      - /app/files
+      - /app/files/**
   jwt:
     secret: 123456
   page:

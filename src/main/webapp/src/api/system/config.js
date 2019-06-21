@@ -35,6 +35,10 @@ function saveOrUpdate(data) {
   }
 }
 
+function saveOrUpdateGroup(configGroup, data) {
+  return request({ url: biz_path + 'group/' + configGroup, method: 'post', data: data })
+}
+
 function deleteById(id) {
   return request({ url: biz_path + id, method: 'delete', params: { ids: id }})
 }
@@ -46,5 +50,6 @@ export default {
   save,
   update,
   saveOrUpdate,
+  saveOrUpdateGroup,
   deleteById
 }

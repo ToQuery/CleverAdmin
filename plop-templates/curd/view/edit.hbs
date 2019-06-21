@@ -1,25 +1,24 @@
 <template>
   <el-dialog :title="dialogTitleMap[dialogStatus]" :visible.sync="dialogFormVisible">
-	<el-form ref="contentForm" :rules="rules" :model="content" label-position="left" label-width="90px" style="width: 400px; margin-left:50px;">
+    <el-form ref="contentForm" :rules="rules" :model="content" label-position="left" label-width="90px" style="width: 400px; margin-left:50px;">
       {{#each fieldList}}
       <el-form-item :label="$t('biz.{{ camelCase ../name }}.{{ camelCase fieldName }}')" prop="{{ camelCase fieldName }}">
         <el-input v-model="content.{{ camelCase fieldName }}"/>
       </el-form-item>
       {{/each}}
-	</el-form>
-	<div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false"></el-button>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogFormVisible = false">\{{ $t('table.cancel') }}</el-button>
       <el-button type="primary" @click="saveOrUpdateData()">\{{ $t('table.confirm') }}</el-button>
-	</div>
+    </div>
   </el-dialog>
 </template>
 
 <script>
-import {{ camelCase name }}Api from '@/api/biz/{{ camelCase name }}'
+import {{ camelCase name }}Api from '@/api/biz/{{ name }}'
 
 export default {
-  name: '{{ properCase name }}',
-  filters: {},
+  name: '{{ properCase name }}Edit',
   data() {
     return {
       dialogFormVisible: false,

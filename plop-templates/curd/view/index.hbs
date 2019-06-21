@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="filter-container">
       {{#each fieldList}}
-      <el-input v-model="data.query.filter_{{ fieldName }}" clearable :placeholder="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
+      <el-input v-model="data.query.filter_{{ camelCase fieldName }}" clearable :placeholder="$t('biz.{{ camelCase ../name }}.{{ camelCase fieldName }}')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
       {{/each}}
 	    <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
 		    \{{ $t('table.search') }}
@@ -13,16 +13,12 @@
     </div>
     <el-table :key="tableKey" v-loading="listLoading" :data="data.content" border fit highlight-current-row style="width: 100%;" >
       {{#each fieldList}}
-      <el-table-column :label="$t('biz.{{ camelCase ../name }}.{{ fieldName }}')" prop="{{ fieldName }}" align="center"></el-table-column>
+      <el-table-column :label="$t('biz.{{ camelCase ../name }}.{{ camelCase fieldName }}')" prop="{{ camelCase fieldName }}" align="center"></el-table-column>
       {{/each}}
       <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
-	        <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">
-		        \{{ $t('table.edit') }}
-	        </el-button>
-	        <el-button size="mini" type="danger" @click="handleDelete(row.id)">
-		        \{{ $t('table.delete') }}
-	        </el-button>
+          <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">\{{ $t('table.edit') }}</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(row.id)">\{{ $t('table.delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -34,13 +30,15 @@
 </template>
 
 <script>
-import {{ properCase name }}Api from '@/api/biz/{{ name }}'
+import {{ camelCase name }}Api from '@/api/biz/{{ name }}'
 import editVue from './edit'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import waves from '@/directive/waves' // waves directive
 
 export default {
   name: '{{ properCase name }}',
   components: { editVue, Pagination },
+  directives: { waves },
   data() {
     return {
       tableKey: 0,
@@ -65,7 +63,7 @@ export default {
   methods: {
     queryContent() {
       this.listLoading = true
-      {{ properCase name }}Api.query(this.data.query, this.data.page).then(response => {
+      {{ camelCase name }}Api.query(this.data.query, this.data.page).then(response => {
         this.data.content = response.content
         this.data.page = response.page
         this.listLoading = false
@@ -86,7 +84,7 @@ export default {
       this.queryContent()
     },
     handleDelete(id) {
-      {{ properCase name }}Api.deleteById(id).then(response => {
+      {{ camelCase name }}Api.deleteById(id).then(response => {
         this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
       }).catch(e => {
         this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })

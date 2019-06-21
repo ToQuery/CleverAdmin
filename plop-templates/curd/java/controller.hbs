@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Sets;
@@ -16,6 +17,8 @@ import io.github.toquery.framework.curd.controller.AppBaseCurdController;
 
 import {{ packageSources }}.entity.{{ properCase name }};
 import {{ packageSources }}.service.I{{ properCase name }}Service;
+
+import java.util.Set;
 
 /**
 * @author toquery
@@ -45,9 +48,9 @@ public class {{ properCase name }}Controller extends AppBaseCurdController<I{{ p
         return super.update({{ camelCase name }}, Sets.newHashSet({{#each fieldList}}"{{ camelCase fieldName }}",{{/each}}));
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        service.deleteById(id);
+    @DeleteMapping
+    public void delete(@RequestParam Set<Long> ids) {
+        super.delete(ids);
     }
 
     @GetMapping("{id}")

@@ -11,8 +11,8 @@ function query(queryParam, page = undefined) {
 }
 
 function list(queryParam) {
-	const query = Object.assign({}, queryParam) // copy obj
-	return request({ url: biz_path + 'list', method: 'get', params: query })
+  const query = Object.assign({}, queryParam) // copy obj
+  return request({ url: biz_path + 'list', method: 'get', params: query })
 }
 
 function get(id) {
@@ -29,22 +29,22 @@ function update(data) {
 
 function saveOrUpdate(data) {
   if (data.id !== undefined && data.id !== null && data.id !== '') {
-		return update(data)
+    return update(data)
   } else {
-		return save(data)
+    return save(data)
   }
 }
 
 function deleteById(id) {
-  return request({ url: biz_path, method: 'delete', params: {ids:id} })
+  return request({ url: biz_path, method: 'delete', params: { ids: id}})
 }
 
 export default {
   query,
-	list,
+  list,
   get,
   save,
   update,
   saveOrUpdate,
-  deleteById
+ deleteById
 }

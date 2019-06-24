@@ -62,14 +62,14 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       // 优先匹配后台服务
       [process.env.VUE_APP_BASE_API]: {
-        target: process.env.NODE_ENV === 'development' ? `http://localhost:8081` : `http://localhost:${port}/mock`,
+        target: process.env.NODE_ENV === 'development' ? `http://localhost:8080` : `http://localhost:${port}/mock`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       '/app': {
-        target: process.env.NODE_ENV === 'development' ? `http://localhost:8081` : `http://localhost:${port}/mock`,
+        target: process.env.NODE_ENV === 'development' ? `http://localhost:8080` : `http://localhost:${port}/mock`,
         changeOrigin: true
       }
     },

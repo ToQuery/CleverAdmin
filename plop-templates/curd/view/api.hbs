@@ -7,7 +7,7 @@ function query(queryParam, page = undefined) {
   if (page) {
     Object.assign(query, page)
   }
-  return request({ url: biz_path + 'query', method: 'get', params: query })
+  return request({ url: biz_path, method: 'get', params: query })
 }
 
 function list(queryParam) {

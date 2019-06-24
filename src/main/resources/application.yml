@@ -3,6 +3,7 @@ app:
     whitelist:
       - /error
       - /h2-console/**
+      - /app/ueditor
       - /app/files
       - /app/files/**
   jwt:

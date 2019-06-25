@@ -1,6 +1,9 @@
 app:
   security:
     whitelist:
+      - /
+      - /index.html
+      - /static/**
       - /error
       - /h2-console/**
       - /app/ueditor

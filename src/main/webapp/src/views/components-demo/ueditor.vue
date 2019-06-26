@@ -13,7 +13,6 @@
 
 <script>
 import VueUeditorWrap from 'vue-ueditor-wrap'
-process.env.VUE_APP_BASE_API
 export default {
   name: 'UeditorDemo',
   components: { VueUeditorWrap },

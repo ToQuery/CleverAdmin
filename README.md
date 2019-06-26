@@ -32,6 +32,10 @@ CleverWeb 即敏捷的Web，可能是最符合中国国情的首个前后端结�
 git subtree pull -P src/main/webapp git@github.com:PanJiaChen/vue-element-admin.git i18n --squash
 ```
 
+## New Features:
+
+- [ ] 自动生成模板时候，根据类型生成不同的元素
+
 ## 运行项目
 
 ### 基础环境

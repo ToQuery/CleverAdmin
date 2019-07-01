@@ -25,8 +25,8 @@
           <el-option v-for="item in enabledOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item :label="$t('system.user.role')" prop="roles">
-        <el-select v-model="content.roles" multiple filterable remote reserve-keyword value-key="id" :remote-method="handleRemoteRoles" :loading="roleLoading" :placeholder="$t('system.user.role')">
+      <el-form-item :label="$t('system.user.role')" prop="authorities">
+        <el-select v-model="content.authorities" multiple filterable remote reserve-keyword value-key="id" :remote-method="handleRemoteRoles" :loading="roleLoading" :placeholder="$t('system.user.role')">
           <el-option v-for="role in sysRoleOptions" :key="role.id" :label="role.name" :value="role.id" />
         </el-select>
       </el-form-item>
@@ -63,7 +63,7 @@ export default {
         loginName: '',
         userName: '',
         enabled: true,
-        roles: []
+        authorities: []
       },
       rules: {
         loginName: [{ required: true, message: 'loginName is required', trigger: 'change' }],
@@ -71,7 +71,7 @@ export default {
         password: [{ required: true, message: 'password is required', trigger: 'change' }],
         email: [{ required: true, message: 'email is required', trigger: 'change' }],
         enabled: [{ required: true, message: 'enabled is required', trigger: 'change' }],
-        roles: [{ required: true, message: 'role is required', trigger: 'change' }]
+        authorities: [{ required: true, message: 'role is required', trigger: 'change' }]
       },
       roleLoading: false,
       enabledOptions: [{
@@ -128,10 +128,10 @@ export default {
         sysUserApi.get(id).then((reponses) => {
           this.content = reponses.content
           const ids = []
-          this.content.roles.forEach(item => {
+          this.content.authorities.forEach(item => {
             ids.push(item.id)
           })
-          this.content.roles = ids
+          this.content.authorities = ids
         })
       }
     },
@@ -142,14 +142,14 @@ export default {
     },
     handleMany2Many() {
       const roles = []
-      this.content.roles.forEach(roleId => {
+      this.content.authorities.forEach(roleId => {
         this.sysRoleOptions.forEach(role => {
           if (role.id === roleId) {
             roles.push(role)
           }
         })
       })
-      this.content.roles = roles
+      this.content.authorities = roles
     },
     saveOrUpdateData() {
       this.$refs['contentForm'].validate((valid) => {

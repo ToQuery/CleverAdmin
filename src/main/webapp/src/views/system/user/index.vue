@@ -41,7 +41,7 @@
       </el-table-column>
       <el-table-column :label="$t('system.user.role')" align="center">
         <template slot-scope="scope">
-          <el-tag v-for="role in scope.row.roles" :key="role.id" style="margin-right: 10px">{{ role.name }}</el-tag>
+          <el-tag v-for="role in scope.row.authorities" :key="role.id" style="margin-right: 10px">{{ role.name }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">

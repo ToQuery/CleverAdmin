@@ -31,6 +31,12 @@ const systemRouter = {
       component: () => import('@/views/system/config/index'),
       name: 'Config',
       meta: { title: 'config', icon: 'form', noCache: true, roles: ['root', 'config'] }
+    },
+    {
+      path: 'log',
+      component: () => import('@/views/system/log/index'),
+      name: 'Log',
+      meta: { title: 'log', icon: 'form', noCache: true, roles: ['root', 'config'] }
     }
   ]
 }

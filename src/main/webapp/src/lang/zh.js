@@ -1,5 +1,6 @@
 export default {
   route: {
+    log: '系统日志',
     config: '系统配置',
     system: '系统设置',
     user: '用户管理',
@@ -180,6 +181,15 @@ export default {
     sidebarLogo: '侧边栏 Logo'
   },
   system: {
+    log: {
+      userId: '用户信息',
+      moduleName: '模块名称',
+      bizName: '业务名称',
+      logType: '日志类型',
+      rawData: '原始数据',
+      targetData: '目标数据',
+      createDate: '记录时间'
+    },
     config: {
       configGroup: '配置组名称',
       configName: '配置名称',

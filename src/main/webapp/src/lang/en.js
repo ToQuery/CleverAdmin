@@ -1,5 +1,6 @@
 export default {
   route: {
+    log: 'log',
     config: 'config',
     system: 'System',
     user: 'User',
@@ -180,6 +181,15 @@ export default {
     sidebarLogo: 'Sidebar Logo'
   },
   system: {
+    log: {
+      userId: 'userId',
+      moduleName: 'moduleName',
+      bizName: 'bizName',
+      logType: 'logType',
+      rawData: 'rawData',
+      targetData: 'targetData',
+      createDate: 'createDate'
+    },
     config: {
       configGroup: 'configGroup',
       configName: 'configName',

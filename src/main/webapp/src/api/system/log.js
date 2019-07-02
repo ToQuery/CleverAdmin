@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const biz_path = '/sys/config/'
+const biz_path = '/sys/log/'
 
 function query(queryParam, page = undefined) {
   const query = Object.assign({}, queryParam) // copy obj
@@ -35,10 +35,6 @@ function saveOrUpdate(data) {
   }
 }
 
-function saveOrUpdateGroup(configGroup, data) {
-  return request({ url: biz_path + 'group/' + configGroup, method: 'post', data: data })
-}
-
 function deleteById(id) {
   return request({ url: biz_path, method: 'delete', params: { ids: id }})
 }
@@ -50,6 +46,5 @@ export default {
   save,
   update,
   saveOrUpdate,
-  saveOrUpdateGroup,
   deleteById
 }

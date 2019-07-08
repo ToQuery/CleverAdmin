@@ -48,9 +48,9 @@ logging:
     io.github.toquery.framework.security: debug
 
 
-#mybatis:
-#  mapper-locations: classpath:mybatis/mapper/*.xml
-#  config-location: classpath:mybatis/config/mybatis-config.xml
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/config/mybatis-config.xml
 
 server:
   port: 8080

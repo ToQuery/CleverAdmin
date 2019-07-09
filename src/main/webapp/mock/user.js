@@ -4,6 +4,9 @@ const tokens = {
   admin: {
     token: 'admin-token'
   },
+  root: {
+    token: 'root-token'
+  },
   editor: {
     token: 'editor-token'
   }
@@ -11,16 +14,37 @@ const tokens = {
 
 const users = {
   'admin-token': {
-    roles: ['admin', 'editor'],
-    introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin'
+    roles: ['admin', 'editor', 'root'],
+    userName: 'admin',
+    enabled: true,
+    username: 'admin',
+    loginName: 'admin',
+    password: '123456',
+    email: 'admin@qq.com',
+    lastPasswordResetDate: new Date(),
+    authorities: []
+  },
+  'root-token': {
+    roles: ['admin', 'editor', 'root'],
+    userName: 'root',
+    enabled: true,
+    username: 'root',
+    loginName: 'root',
+    password: '123456',
+    email: 'root@qq.com',
+    lastPasswordResetDate: new Date(),
+    authorities: []
   },
   'editor-token': {
     roles: ['editor'],
-    introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal Editor'
+    userName: 'editor',
+    enabled: true,
+    username: 'editor',
+    loginName: 'editor',
+    password: '123456',
+    email: 'editor@qq.com',
+    lastPasswordResetDate: new Date(),
+    authorities: []
   }
 }
 
@@ -47,7 +71,7 @@ export default [
     type: 'get',
     response: (config, b, c) => {
       const { authorization } = config.headers
-      const info = users[authorization]
+      const info = users[authorization.indexOf('Bearer ') >= 0 ? authorization.substr(7) : authorization]
 
       // mock error
       if (!info) {
@@ -55,6 +79,16 @@ export default [
       }
 
       return requestParam.handleResponseContent(info)
+    }
+  },
+  // user logout
+  {
+    url: '/user/password',
+    type: 'post',
+    response: (config, b, c) => {
+      const { authorization } = config.headers
+      const info = users[authorization.indexOf('Bearer ') >= 0 ? authorization.substr(7) : authorization]
+      return requestParam.handleResponseContent(info, true)
     }
   },
 

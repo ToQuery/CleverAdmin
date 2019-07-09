@@ -6,7 +6,11 @@
         <groupId>io.github.toquery</groupId>
         <artifactId>clever-framework</artifactId>
         <version>1.0.5-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!--
+        如果启用，则每次去请求maven仓库，获取最新版本
+        <relativePath/>
+        lookup parent from repository
+        -->
     </parent>
 
     <artifactId>clever-web</artifactId>
@@ -29,16 +33,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
-        <!-- These remain empty unless the corresponding profile is active -->
-        <profile.no-liquibase/>
-        <profile.swagger/>
-        <profile.tls/>
     </properties>
 
     <repositories>
@@ -153,13 +153,6 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                    </execution>
-                    <execution>
                         <id>npm install</id>
                         <goals>
                             <goal>npm</goal>
@@ -183,7 +176,7 @@
                     </execution>
                     -->
                     <execution>
-                        <id>webpack build prod</id>
+                        <id>vue-cli-service build</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>

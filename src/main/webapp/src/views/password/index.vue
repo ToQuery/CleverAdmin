@@ -16,8 +16,8 @@
             <el-input v-model="changePasswordForm.rawPasswordConfirm" type="password" autocomplete="off" clearable show-password />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <el-button type="primary" @click="submitForm()">提交</el-button>
+            <el-button @click="resetForm()">重置</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -82,8 +82,8 @@ export default {
         sourcePassword: ''
       }
     },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+    submitForm() {
+      this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           password(this.changePasswordForm).then(response => {
             this.$notify({ title: '成功', message: response.message || '操作成功', type: 'success', duration: 2000 })
@@ -94,8 +94,8 @@ export default {
         }
       })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields()
+    resetForm() {
+      this.$refs['ruleForm'].resetFields()
     }
   }
 }

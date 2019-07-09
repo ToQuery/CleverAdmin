@@ -7,6 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
+import bizRouter from './modules/biz'
 import systemRouter from './modules/system'
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
@@ -120,6 +121,12 @@ export const constantRoutes = [
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'profile', icon: 'user', noCache: true }
+      },
+      {
+        path: 'password',
+        component: () => import('@/views/password/index'),
+        name: 'password',
+        meta: { title: 'password', icon: 'password', noCache: true }
       }
     ]
   }
@@ -129,7 +136,7 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [
+export const asyncRoutesTemp = [
   systemRouter,
   {
     path: '/permission',
@@ -400,6 +407,8 @@ export const asyncRoutes = [
   // ,
   // { path: '*', redirect: '/404', hidden: true }
 ]
+
+export const asyncRoutes = bizRouter.concat(asyncRoutesTemp)
 
 // ,
 // 这里必须增加一个统配路径，否则找不到指定路径

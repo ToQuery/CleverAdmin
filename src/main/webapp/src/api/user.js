@@ -8,6 +8,14 @@ export function login(data) {
   })
 }
 
+export function password(data) {
+  return request({
+    url: '/user/password',
+    method: 'post',
+    data: data
+  })
+}
+
 export function getInfo() {
   return request({
     url: '/user/info',

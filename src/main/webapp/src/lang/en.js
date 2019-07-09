@@ -69,9 +69,11 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     externalLink: 'External Link',
+    password: 'password',
     profile: 'Profile'
   },
   navbar: {
+    password: 'ChangePassword',
     dashboard: 'Dashboard',
     github: 'Github',
     logOut: 'Log Out',

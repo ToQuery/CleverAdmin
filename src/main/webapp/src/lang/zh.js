@@ -69,9 +69,11 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '国际化',
     externalLink: '外链',
+    password: '修改密码',
     profile: '个人中心'
   },
   navbar: {
+    password: '修改密码',
     dashboard: '首页',
     github: '项目地址',
     logOut: '退出登录',

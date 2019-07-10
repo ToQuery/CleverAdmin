@@ -4,7 +4,7 @@
       <div slot="header" class="clearfix">
         <span>{{ $t('navbar.password') }}</span>
       </div>
-      <div>
+      <div style="width: 40%;min-width:500px;margin-left: auto;margin-right: auto;">
         <el-form ref="ruleForm" :model="changePasswordForm" status-icon :rules="rules" label-width="100px">
           <el-form-item label="原密码" prop="sourcePassword">
             <el-input v-model.number="changePasswordForm.sourcePassword" type="password" clearable show-password />

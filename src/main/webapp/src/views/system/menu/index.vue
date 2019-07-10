@@ -95,6 +95,7 @@ export default {
     handleDelete(id) {
       sysMenuApi.deleteById(id).then(response => {
         this.$notify({ title: '成功', message: response.message || '删除成功', type: 'success', duration: 2000 })
+        this.queryContent()
       }).catch(e => {
         this.$notify({ title: '错误', message: e.message || '错误', type: 'error', duration: 2000 })
       })

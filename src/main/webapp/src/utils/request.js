@@ -42,33 +42,22 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code.
    */
   response => {
-    const res = response.data
-
-    if (response.status >= 200 && response.status < 300) {
-      return res
-    } else {
-      Message({ message: res.message || 'error', type: 'error', duration: 5 * 1000 })
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        // to re-login
-        MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-          confirmButtonText: 'Re-Login',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject(new Error(res.message || 'Error'))
-    }
+    return response.data
   },
-  (error, b, c) => {
-    console.info(b, c)
-    console.log('err' + error) // for debug
-    Message({ message: error.message, type: 'error', duration: 5 * 1000 })
+  error => {
+    console.error('服务器响应错误, axios-interceptors-response', error.response)
+    if (error.response.status === 401) {
+      // to re-login
+      MessageBox.confirm('你的登录好像过期了, 继续浏览该页面，或者登录？', '登录超时', {
+        confirmButtonText: '重新登录',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        store.dispatch('user/resetToken').then(() => { location.reload() })
+      })
+    } else {
+      Message({ message: error.response.data.message, type: 'error', duration: 5 * 1000 })
+    }
     return Promise.reject(error)
   }
 )

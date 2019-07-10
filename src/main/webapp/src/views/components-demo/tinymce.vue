@@ -5,18 +5,18 @@
       <a target="_blank" class="link-type" href="https://panjiachen.github.io/vue-element-admin-site/component/rich-editor.html"> {{ $t('components.documentation') }}</a>
     </aside>
     <div>
-      <tinymce v-model="content" :height="300" />
+      <tinymce-editor v-model="content" :height="300" />
     </div>
     <div class="editor-content" v-html="content" />
   </div>
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce'
-
+// import Tinymce from '@/components/Tinymce'
+import TinymceEditor from '@/components/TinymceEditor'
 export default {
   name: 'TinymceDemo',
-  components: { Tinymce },
+  components: { TinymceEditor },
   data() {
     return {
       content:

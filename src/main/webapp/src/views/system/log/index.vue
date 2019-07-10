@@ -29,6 +29,12 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
+            <el-form-item :label="$t('system.log.logType')">
+              <span v-if="props.row.logType === 'CREA'">创建</span>
+              <span v-if="props.row.logType === 'MODF'">修改</span>
+              <span v-if="props.row.logType === 'DEL'">删除</span>
+              <span v-if="props.row.logType === 'SEARCH'">查看</span>
+            </el-form-item>
             <el-form-item :label="$t('system.log.moduleName')">
               <span>{{ props.row.moduleName }}</span>
             </el-form-item>
@@ -37,12 +43,6 @@
             </el-form-item>
             <el-form-item :label="$t('system.log.rawData')">
               <span>{{ props.row.rawData }}</span>
-            </el-form-item>
-            <el-form-item :label="$t('system.log.logType')">
-              <span v-if="props.row.logType === 'CREA'">创建</span>
-              <span v-if="props.row.logType === 'MODF'">修改</span>
-              <span v-if="props.row.logType === 'DEL'">删除</span>
-              <span v-if="props.row.logType === 'SEARCH'">查看</span>
             </el-form-item>
             <el-form-item :label="$t('system.log.targetData')">
               <span>{{ props.row.targetData }}</span>
@@ -148,7 +148,7 @@ export default {
         this.data.query.filter_createDateLT = null
       }
       console.info(this.data.query)
-      this.data.page.pageNumber = 0
+      this.data.page.pageNumber = 1
       this.queryContent()
     },
     handleDelete(id) {

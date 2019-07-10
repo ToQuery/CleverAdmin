@@ -30,10 +30,10 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-            :key="passwordType"
             ref="password"
             v-model="loginForm.password"
-            :type="passwordType"
+            show-password
+            type="password"
             :placeholder="$t('login.password')"
             name="password"
             tabindex="2"
@@ -42,9 +42,6 @@
             @blur="capsTooltip = false"
             @keyup.enter.native="handleLogin"
           />
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-          </span>
         </el-form-item>
       </el-tooltip>
 
@@ -97,7 +94,6 @@ export default {
         username: [{ required: true, trigger: 'blur', message: '请输入用户名！' }],
         password: [{ required: true, trigger: 'blur', message: '请输入密码！' }]
       },
-      passwordType: 'password',
       capsTooltip: false,
       loading: false,
       showDialog: false,
@@ -142,16 +138,6 @@ export default {
       if (key === 'CapsLock' && this.capsTooltip === true) {
         this.capsTooltip = false
       }
-    },
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
-      })
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {

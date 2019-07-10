@@ -17,6 +17,9 @@
 <script>
 import { scrollTo } from '@/utils/scroll-to'
 
+/**
+ * 第一页从1开始（page = 1）
+ */
 export default {
   name: 'Pagination',
   props: {

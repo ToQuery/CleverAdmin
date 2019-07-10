@@ -117,7 +117,7 @@ export default {
       this.queryContent()
     },
     handleFilter() {
-      this.data.page.pageNumber = 0
+      this.data.page.pageNumber = 1
       this.queryContent()
     },
     handleDelete(id) {

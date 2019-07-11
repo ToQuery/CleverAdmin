@@ -1,5 +1,5 @@
 <template>
-  <div class="tinymce-editor">
+  <div>
     <tinymce-vue
       :id="id"
       v-model="myValue"
@@ -92,14 +92,14 @@ export default {
     plugins: {
       type: [Array, String],
       default() {
-        return ['advlist anchor autolink autosave code codesample colorpicker colorpicker contextmenu directionality fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount']
+        return ['advlist quickbars autoresize bbcode fullpage importcss toc anchor autolink autosave code codesample colorpicker colorpicker contextmenu directionality fullscreen hr image imagetools insertdatetime link lists media nonbreaking noneditable pagebreak paste preview print save searchreplace spellchecker tabfocus table template textcolor textpattern visualblocks visualchars wordcount']
       }
       // default: 'lists image media table wordcount'
     },
     toolbar: {
       type: [Array, String],
       default() {
-        return ['undo redo |  searchreplace bold italic underline strikethrough | alignleft aligncenter alignright outdent indent | blockquote removeformat subscript superscript code codesample', 'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table forecolor backcolor fullscreen']
+        return ['undo redo toc quickbars autoresize bbcode fullpage | importcss searchreplace formatselect bold italic underline strikethrough | alignleft aligncenter alignright outdent indent | blockquote removeformat subscript superscript code codesample', 'hr bullist numlist link image charmap preview anchor pagebreak insertdatetime media table forecolor backcolor fullscreen']
       }
       // default: 'undo redo |  formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table | removeformat'
     }
@@ -155,9 +155,10 @@ export default {
       this.myValue = ''
     },
     destroyTinymce() {
-      if (Tinymce) {
-        Tinymce.destroy()
-      }
+      // debugger
+      // if (Tinymce) {
+      //   Tinymce.destroy()
+      // }
     }
   }
 }

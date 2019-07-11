@@ -45,8 +45,10 @@ service.interceptors.response.use(
     return response.data
   },
   error => {
+    // 获取当前url，如果不为登录页面则提示
+    const url = window.location.href.substring(window.location.href.indexOf('#') + 1, window.location.href.indexOf('?'))
     console.error('服务器响应错误, axios-interceptors-response', error.response)
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && url.indexOf('/login') < 0) {
       // to re-login
       MessageBox.confirm('你的登录好像过期了, 继续浏览该页面，或者登录？', '登录超时', {
         confirmButtonText: '重新登录',

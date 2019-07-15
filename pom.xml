@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.github.toquery</groupId>
         <artifactId>clever-framework</artifactId>
-        <version>1.0.5-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
         <!--
         如果启用，则每次去请求maven仓库，获取最新版本
         <relativePath/>
@@ -22,7 +22,7 @@
     <properties>
 
         <java.version>1.8</java.version>
-        <clever-framework.version>1.0.5-SNAPSHOT</clever-framework.version>
+        <clever-framework.version>1.0.6-SNAPSHOT</clever-framework.version>
         <revision>${clever-framework.version}</revision>
 
         <!-- Build properties -->

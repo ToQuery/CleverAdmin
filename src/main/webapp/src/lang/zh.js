@@ -199,8 +199,8 @@ export default {
       sortNum: '配置排序'
     },
     user: {
-      loginName: '登录名',
-      userName: '用户昵称',
+      username: '用户名',
+      nickname: '用户昵称',
       enabled: '是否启用',
       password: '密码',
       email: '邮箱',

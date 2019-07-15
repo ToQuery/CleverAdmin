@@ -199,8 +199,8 @@ export default {
       sortNum: 'sortNum'
     },
     user: {
-      loginName: 'loginName',
-      userName: 'userName',
+      username: 'username',
+      nickname: 'nickname',
       enabled: 'enabled',
       password: 'password',
       email: 'email',

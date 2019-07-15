@@ -47,6 +47,7 @@ service.interceptors.response.use(
   error => {
     // 获取当前url，如果不为登录页面则提示
     const url = window.location.href.substring(window.location.href.indexOf('#') + 1, window.location.href.indexOf('?'))
+    console.debug('响应错误，当前页面地址：' + window.location.href + ' ，解析后地址：' + url)
     console.error('服务器响应错误, axios-interceptors-response', error.response)
     if (error.response.status === 401 && url.indexOf('/login') < 0) {
       // to re-login

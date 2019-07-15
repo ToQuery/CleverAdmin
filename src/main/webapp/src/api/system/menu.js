@@ -18,9 +18,6 @@ function list(queryParam) {
 function treeList() {
   return request({ url: biz_path + 'tree', method: 'get' })
 }
-function permissionList() {
-  return request({ url: biz_path + 'permission', method: 'get' })
-}
 
 function get(id) {
   return request({ url: biz_path + id, method: 'get' })
@@ -50,7 +47,6 @@ export default {
   query,
   list,
   treeList,
-  permissionList,
   get,
   save,
   update,

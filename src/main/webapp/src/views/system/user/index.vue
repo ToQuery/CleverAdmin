@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="data.filter.filter_loginNameLike" clearable :placeholder="$t('system.user.loginName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
-      <el-input v-model="data.filter.filter_userNameLike" clearable :placeholder="$t('system.user.userName')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_usernameLike" clearable :placeholder="$t('system.user.username')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="data.filter.filter_nicknameLike" clearable :placeholder="$t('system.user.nickname')" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         {{ $t('table.search') }}
       </el-button>
@@ -19,14 +19,14 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column :label="$t('system.user.loginName')" prop="loginName" align="center">
+      <el-table-column :label="$t('system.user.username')" prop="username" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.loginName }}</span>
+          <span>{{ scope.row.username }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('system.user.userName')" align="center">
+      <el-table-column :label="$t('system.user.nickname')" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.userName }}</span>
+          <span>{{ scope.row.nickname }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('system.user.lastPasswordResetDate')" width="200px" align="center">
@@ -79,8 +79,8 @@ export default {
       tableKey: 0,
       data: {
         filter: {
-          filter_loginNameLike: '',
-          filter_userNameLike: ''
+          filter_nicknameLike: '',
+          filter_usernameLike: ''
         },
         page: {
           pageSize: 10,

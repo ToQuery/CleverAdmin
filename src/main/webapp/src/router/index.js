@@ -124,7 +124,7 @@ export const constantRoutes = [
       },
       {
         path: 'password',
-        component: () => import('@/views/password/index'),
+        component: () => import('@/views/profile2/index'),
         name: 'password',
         meta: { title: 'password', icon: 'password', noCache: true }
       }

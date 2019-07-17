@@ -90,10 +90,12 @@
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-ueditor</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-swagger</artifactId>
         </dependency>
+        -->
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-security-jwt</artifactId>

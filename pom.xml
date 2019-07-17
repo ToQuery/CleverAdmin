@@ -184,6 +184,7 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+                    <!--
                     <execution>
                         <id>npm install</id>
                         <goals>
@@ -194,8 +195,9 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+                    -->
                     <execution>
-                        <id>vue-cli-service build</id>
+                        <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>

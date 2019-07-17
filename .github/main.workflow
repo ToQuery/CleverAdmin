@@ -6,6 +6,6 @@ workflow "maven install and package" {
 action "GitHub Action for Maven" {
   uses = "LucaFeger/action-maven-cli@765e218a50f02a12a7596dc9e7321fc385888a27"
   runs = "mvn clean install package"
-  args = "-DskipTests -f pom.xml"
+  args = "-X -DskipTests"
   secrets = ["GITHUB_TOKEN"]
 }

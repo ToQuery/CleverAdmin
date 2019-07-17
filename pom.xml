@@ -25,6 +25,8 @@
         <clever-framework.version>1.0.6-SNAPSHOT</clever-framework.version>
         <revision>${clever-framework.version}</revision>
 
+        <docker.image.prefix>toquery</docker.image.prefix>
+
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
         <java.version>1.8</java.version>
@@ -39,6 +41,9 @@
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
+
+
+        <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
     </properties>
 
     <repositories>
@@ -87,6 +92,10 @@
         </dependency>
         <dependency>
             <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-security-jwt</artifactId>
         </dependency>
         <dependency>
@@ -132,6 +141,17 @@
                 </configuration>
             </plugin>
 
+            <!--
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${dockerfile-maven-plugin.version}</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                </configuration>
+            </plugin>
+            -->
+
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -157,24 +177,21 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
                         <phase>generate-resources</phase>
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
-                    <!--
-                    <execution>
-                        <id>webpack build test</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <arguments>run webpack:test</arguments>
-                            <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                        </configuration>
-                    </execution>
-                    -->
                     <execution>
                         <id>vue-cli-service build</id>
                         <goals>

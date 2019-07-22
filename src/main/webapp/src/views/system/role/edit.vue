@@ -16,7 +16,7 @@
       </el-form-item>
       <el-form-item :label="$t('system.role.user')">
         <div v-if="content.users.length > 0">
-          <el-tag v-for="user in content.users" :key="user.id" :label="user.loginName" :value="user.id">{{ user.loginName }}</el-tag>
+          <el-tag v-for="user in content.users" :key="user.id" :label="user.username" :value="user.id"> {{ user.username }} : {{ user.nickname }} </el-tag> &nbsp;&nbsp;
         </div>
         <div v-else>暂无用户</div>
       </el-form-item>

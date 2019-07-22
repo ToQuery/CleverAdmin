@@ -8,11 +8,11 @@
       label-width="90px"
       style="width: 400px; margin-left:50px;"
     >
-      <el-form-item :label="$t('system.user.loginName')" prop="loginName">
-        <el-input v-model="content.loginName" />
+      <el-form-item :label="$t('system.user.username')" prop="username">
+        <el-input v-model="content.username" />
       </el-form-item>
-      <el-form-item :label="$t('system.user.userName')" prop="userName">
-        <el-input v-model="content.userName" />
+      <el-form-item :label="$t('system.user.nickname')" prop="nickname">
+        <el-input v-model="content.nickname" />
       </el-form-item>
       <el-form-item v-if="dialogStatus === 'create'" :label="$t('system.user.password')" prop="password">
         <el-input v-model="content.password" />
@@ -60,18 +60,18 @@ export default {
       },
       content: {
         id: undefined,
-        loginName: '',
-        userName: '',
+        username: '',
+        nickname: '',
         enabled: true,
         authorities: []
       },
       rules: {
-        loginName: [{ required: true, message: 'loginName is required', trigger: 'change' }],
-        userName: [{ required: true, message: 'userName is required', trigger: 'change' }],
-        password: [{ required: true, message: 'password is required', trigger: 'change' }],
-        email: [{ required: true, message: 'email is required', trigger: 'change' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
+        nickname: [{ required: true, message: '请输入用户昵称', trigger: 'change' }],
+        password: [{ required: true, message: '请输入用户登录密码', trigger: 'change' }],
+        email: [{ required: true, message: '请输入用户邮箱地址', trigger: 'change' }],
         enabled: [{ required: true, message: 'enabled is required', trigger: 'change' }],
-        authorities: [{ required: true, message: 'role is required', trigger: 'change' }]
+        authorities: [{ required: true, message: '请选择角色', trigger: 'change' }]
       },
       roleLoading: false,
       enabledOptions: [{
@@ -110,8 +110,8 @@ export default {
     resetContent() {
       this.content = {
         id: undefined,
-        loginName: '',
-        userName: '',
+        username: '',
+        nickname: '',
         enabled: true,
         roles: []
       }

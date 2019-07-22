@@ -76,8 +76,13 @@ export default {
       if (this.dialogStatus === 'update') {
         menuApi.get(id).then((reponses) => {
           this.content = reponses.content
+          this.handleParent(reponses.content.parentId)
         })
+      } else {
+        this.handleParent(parentId)
       }
+    },
+    handleParent(parentId = 1) {
       const _this = this
       menuApi.get(parentId).then((reponses) => {
         Vue.set(_this.content, 'parentId', reponses.content.id)

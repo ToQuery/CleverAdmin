@@ -16,6 +16,7 @@
       <el-table-column :label="$t('system.menu.name')" prop="name" />
       <el-table-column :label="$t('system.menu.code')" prop="code" align="center" />
       <el-table-column :label="$t('system.menu.level')" prop="level" align="center" />
+      <el-table-column :label="$t('system.menu.sortNum')" prop="sortNum" align="center" />
       <el-table-column v-if="showButton" :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" style="width: 70px" @click="handleShowEdit(row.level === 0 ? 1 : row.id, null)">

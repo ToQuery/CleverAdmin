@@ -7,10 +7,10 @@ app:
       - /error
       - /h2-console/**
       - /app/ueditor
-      - /app/files
-      - /app/files/**
+      - /app/files/download
   jwt:
     secret: 123456
+    expiration: 6000
   page:
     param:
       page-size: ps

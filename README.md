@@ -1,10 +1,13 @@
 # CleverWeb
 
+[![GitHub License](https://img.shields.io/github/license/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb)
 [![Build Status](https://travis-ci.org/ToQuery/CleverWeb.svg?branch=master)](https://travis-ci.org/ToQuery/CleverWeb)
-[![GitHub last commit](https://img.shields.io/github/last-commit/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb)
-[![GitHub license](https://img.shields.io/github/license/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb)
-[![GitHub issues](https://img.shields.io/github/issues/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb)
+[![GitHub Issues](https://img.shields.io/github/issues/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb/issues)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/toquery/CleverWeb.svg)](https://travis-ci.org/ToQuery/CleverWeb)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/ToQuery/CleverWeb.svg)](https://github.com/ToQuery/CleverWeb)
+[![GitHub Commit Activity](https://img.shields.io/github/commit-activity/w/ToQuery/CleverWeb.svg)](https://travis-ci.org/ToQuery/CleverWeb)
 
+[![Jwt Status](http://jwt.io/img/badge.svg)](https://github.com/ToQuery/CleverWeb)
 
 CleverWeb 即敏捷的Web，可能是最符合中国国情的首个前后端结合的项目。项目只包含基本的用户，菜单，和权限控制，可用于CMS 等后台管理端的快速成型。
 

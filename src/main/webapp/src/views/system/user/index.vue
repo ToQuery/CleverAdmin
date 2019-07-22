@@ -29,14 +29,14 @@
           <span>{{ scope.row.nickname }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('system.user.lastPasswordResetDate')" width="200px" align="center">
+      <el-table-column v-if="false" :label="$t('system.user.lastPasswordResetDate')" width="200px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.lastPasswordResetDate | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('system.user.enabled')" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.enabled }}</span>
+          <span>{{ scope.row.enabled ? '启用' : '禁用' }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('system.user.role')" align="center">

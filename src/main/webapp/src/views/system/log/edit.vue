@@ -16,8 +16,8 @@
       <el-form-item :label="$t('system.log.targetData')" prop="targetData">
         <el-input v-model="content.targetData" type="textarea" disabled />
       </el-form-item>
-      <el-form-item :label="$t('system.log.createDate')" prop="createDate">
-        <el-input v-model="content.createDate" disabled />
+      <el-form-item :label="$t('system.log.createDatetime')" prop="createDatetime">
+        <el-input v-model="content.createDatetime" disabled />
       </el-form-item>
     </el-form>
     <div v-if="false" slot="footer" class="dialog-footer">
@@ -43,7 +43,7 @@ export default {
         logType: '',
         rawData: '',
         targetData: '',
-        createDate: new Date(),
+        createDatetime: new Date(),
         id: undefined
       },
       rules: {
@@ -52,7 +52,7 @@ export default {
         logType: [{ required: true, message: 'logType is required', trigger: 'change' }],
         rawData: [{ required: true, message: 'rawData is required', trigger: 'change' }],
         targetData: [{ required: true, message: 'targetData is required', trigger: 'change' }],
-        createDate: [{ required: true, message: 'createDate is required', trigger: 'change' }]
+        createDatetime: [{ required: true, message: 'createDatetime is required', trigger: 'change' }]
       }
     }
   },
@@ -66,7 +66,7 @@ export default {
         logType: '',
         rawData: '',
         targetData: '',
-        createDate: new Date(),
+        createDatetime: new Date(),
         id: undefined
       }
     },

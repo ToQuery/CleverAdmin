@@ -11,8 +11,8 @@
         clearable
         type="daterange"
         range-separator="至"
-        :start-placeholder="$t('system.log.createDate')"
-        :end-placeholder="$t('system.log.createDate')"
+        :start-placeholder="$t('system.log.createDatetime')"
+        :end-placeholder="$t('system.log.createDatetime')"
         style="width: 370px;"
         class="filter-item"
         :default-time="['00:00:00','23:59:59']"
@@ -47,12 +47,13 @@
             <el-form-item :label="$t('system.log.targetData')">
               <span>{{ props.row.targetData }}</span>
             </el-form-item>
-            <el-form-item :label="$t('system.log.createDate')">
-              <span>{{ props.row.createDate }}</span>
+            <el-form-item :label="$t('system.log.createDatetime')">
+              <span>{{ props.row.createDatetime }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('system.log.username')" prop="sysUser.username" align="center" />
       <el-table-column :label="$t('system.log.moduleName')" prop="moduleName" align="center" />
       <el-table-column :label="$t('system.log.bizName')" prop="bizName" align="center" />
       <el-table-column :label="$t('system.log.logType')" prop="logType" align="center">
@@ -65,7 +66,7 @@
       </el-table-column>
       <el-table-column v-if="false" :label="$t('system.log.rawData')" prop="rawData" align="center" />
       <el-table-column v-if="false" :label="$t('system.log.targetData')" prop="targetData" align="center" />
-      <el-table-column :label="$t('system.log.createDate')" prop="createDate" align="center" />
+      <el-table-column :label="$t('system.log.createDatetime')" prop="createDatetime" align="center" />
       <el-table-column v-if="false" :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">{{ $t('table.edit') }}</el-button>
@@ -141,11 +142,11 @@ export default {
     },
     handleFilter() {
       if (this.createDateArray && this.createDateArray.length > 0) {
-        this.data.query.filter_createDateGT = this.createDateArray[0]
-        this.data.query.filter_createDateLT = this.createDateArray[1]
+        this.data.query.filter_createDatetimeGT = this.createDateArray[0]
+        this.data.query.filter_createDatetimeLT = this.createDateArray[1]
       } else {
-        this.data.query.filter_createDateGT = null
-        this.data.query.filter_createDateLT = null
+        this.data.query.filter_createDatetimeGT = null
+        this.data.query.filter_createDatetimeLT = null
       }
       console.info(this.data.query)
       this.data.page.pageNumber = 1

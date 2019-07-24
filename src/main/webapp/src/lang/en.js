@@ -184,13 +184,14 @@ export default {
   },
   system: {
     log: {
+      username: 'username',
       userId: 'userId',
       moduleName: 'moduleName',
       bizName: 'bizName',
       logType: 'logType',
       rawData: 'rawData',
       targetData: 'targetData',
-      createDate: 'createDate'
+      createDatetime: 'createDatetime'
     },
     config: {
       configGroup: 'configGroup',

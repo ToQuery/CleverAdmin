@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { MessageBox, Message } from 'element-ui'
+import { Message } from 'element-ui' // MessageBox,
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 // import router from '@/router'
@@ -50,6 +50,8 @@ service.interceptors.response.use(
         // Message({ message: '用户登录超时，请重新登录', type: 'error', duration: 5 * 1000 })
         location.reload()
       })
+    } else {
+      Message({ message: error.response.data.message || '系统错误！', type: 'error', duration: 5 * 1000 })
     }
     // 获取当前url，如果不为登录页面则提示
     // const url = window.location.href

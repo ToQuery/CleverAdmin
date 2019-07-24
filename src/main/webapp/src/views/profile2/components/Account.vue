@@ -1,7 +1,7 @@
 <template>
   <el-form>
-    <el-form-item label="Name">
-      <el-input v-model.trim="user.name" />
+    <el-form-item label="昵称">
+      <el-input v-model.trim="user.nickname" />
     </el-form-item>
     <el-form-item label="Email">
       <el-input v-model.trim="user.email" />
@@ -13,24 +13,29 @@
 </template>
 
 <script>
+import sysUserApi from '@/api/system/user'
 export default {
-  props: {
-    user: {
-      type: Object,
-      default: () => {
-        return {
-          name: '',
-          email: ''
-        }
-      }
+  data() {
+    return {
+      user: {}
     }
   },
+  created() {
+    this.getUser()
+  },
   methods: {
+    getUser() {
+      this.$store.dispatch('user/getInfo').then(reponse => {
+        this.user = reponse
+      })
+    },
     submit() {
-      this.$message({
-        message: 'User information has been updated successfully',
-        type: 'success',
-        duration: 5 * 1000
+      sysUserApi.saveOrUpdate(this.user).then(reponse => {
+        this.$message({
+          message: '修改用户信息成功！',
+          type: 'success',
+          duration: 5 * 1000
+        })
       })
     }
   }

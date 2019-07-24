@@ -77,8 +77,12 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           password(this.changePasswordForm).then(response => {
-            this.$notify({ title: '成功', message: response.message || '操作成功', type: 'success', duration: 2000 })
+            this.$notify({ title: '成功', message: response.message || '修改密码成功，请重新登录', type: 'success', duration: 2000 })
             this.resetForm('ruleForm')
+            const _this = this
+            setTimeout(() => {
+              _this.$store.dispatch('user/resetToken').then(() => location.reload())
+            }, 1500)
           }).catch(error => {
             this.$notify({ title: '错误', message: error.response.data.message || '修改失败', type: 'error', duration: 2000 })
           })

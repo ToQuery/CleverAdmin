@@ -9,7 +9,7 @@
       style="width: 400px; margin-left:50px;"
     >
       <el-form-item :label="$t('system.user.username')" prop="username">
-        <el-input v-model="content.username" />
+        <el-input v-model="content.username" :disabled="dialogStatus === 'update'" />
       </el-form-item>
       <el-form-item :label="$t('system.user.nickname')" prop="nickname">
         <el-input v-model="content.nickname" />

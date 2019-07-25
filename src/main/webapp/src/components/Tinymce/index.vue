@@ -3,6 +3,7 @@
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
       <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+      <editor-media color="#1890ff" class="editor-upload-btn" @success="mediaSuccess" />
     </div>
   </div>
 </template>
@@ -12,6 +13,7 @@
  * docs:
  * https://panjiachen.github.io/vue-element-admin-site/feature/component/rich-editor.html#tinymce
  */
+import EditorMedia from './components/EditorMedia'
 import editorImage from './components/EditorImage'
 import plugins from './plugins'
 import toolbar from './toolbar'
@@ -22,7 +24,7 @@ const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymc
 
 export default {
   name: 'Tinymce',
-  components: { editorImage },
+  components: { editorImage, EditorMedia },
   props: {
     id: {
       type: String,
@@ -203,6 +205,18 @@ export default {
     },
     getContent() {
       window.tinymce.get(this.tinymceId).getContent()
+    },
+    mediaSuccess(arr) {
+      const _this = this
+      arr.forEach(v => {
+        if (v.mediaType === 'image') {
+          window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
+        } else if (v.mediaType === 'video') {
+          window.tinymce.get(_this.tinymceId).insertContent(`<video class="wscnph" src="${v.url}" controls="controls" >您的浏览器不支持视频播放</video>`)
+        } else if (v.mediaType === 'audio') {
+          window.tinymce.get(_this.tinymceId).insertContent(`<audio class="wscnph" controls="controls" autoplay="autoplay"><source  src="${v.url}" /></audio>`)
+        }
+      })
     },
     imageSuccessCBK(arr) {
       const _this = this

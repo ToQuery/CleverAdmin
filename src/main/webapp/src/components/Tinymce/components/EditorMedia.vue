@@ -64,7 +64,6 @@ export default {
         this.$message('请检测确认所有文件都已上传成功!')
         return
       }
-      console.info('handleSubmit', this.listObj, arr)
       this.$emit('success', arr)
       this.listObj = {}
       this.fileList = []
@@ -74,7 +73,6 @@ export default {
       const uid = file.uid
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
-        console.info(objKeyArr[i], this.listObj[objKeyArr[i]])
         if (this.listObj[objKeyArr[i]].uid === uid) {
           this.listObj[objKeyArr[i]].url = response.content.fullDownloadPath
           this.listObj[objKeyArr[i]].hasSuccess = true
@@ -93,10 +91,14 @@ export default {
       }
     },
     beforeUpload(file) {
+      const mediaType = this.handleMediaType(file.name)
+      if (!mediaType) {
+        this.$message.error('文件 ' + file.name + ' 上传错误，格式不支持！')
+        return false
+      }
       const _this = this
       const fileUid = file.uid
       this.listObj[fileUid] = {}
-      const mediaType = this.handleMediaType(file.name)
       return new Promise((resolve, reject) => {
         _this.listObj[fileUid] = { mediaType: mediaType, hasSuccess: false, uid: file.uid, width: this.width, height: this.height }
         resolve(true)

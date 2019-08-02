@@ -2,7 +2,7 @@
   <div :class="{fullscreen:fullscreen}" class="tinymce-container" :style="{width:containerWidth}">
     <textarea :id="tinymceId" class="tinymce-textarea" />
     <div class="editor-custom-btn-container">
-      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
+      <editorImage v-if="false" color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
       <editor-media color="#1890ff" class="editor-upload-btn" @success="mediaSuccess" />
     </div>
   </div>

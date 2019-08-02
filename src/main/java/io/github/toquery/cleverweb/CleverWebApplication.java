@@ -4,7 +4,7 @@ import io.github.toquery.framework.dao.EnableAppJpaRepositories;
 import io.github.toquery.framework.data.rest.annotation.EnableAppRepositoryRest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+// import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EnableAppRepositoryRest

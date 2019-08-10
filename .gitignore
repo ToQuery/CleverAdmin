@@ -25,3 +25,6 @@ hs_err_pid*
 /node
 /node_modules
 package-lock.json
+
+# file
+/files

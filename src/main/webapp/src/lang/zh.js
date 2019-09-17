@@ -202,7 +202,7 @@ export default {
     user: {
       username: '用户名',
       nickname: '用户昵称',
-      enabled: '是否启用',
+      status: '是否启用',
       password: '密码',
       email: '邮箱',
       lastPasswordResetDate: '最后重置密码时间',

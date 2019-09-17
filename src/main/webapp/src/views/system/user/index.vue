@@ -37,9 +37,9 @@
               <span>{{ scope.row.lastPasswordResetDate | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('system.user.enabled')" align="center">
+          <el-table-column :label="$t('system.user.status')" align="center">
             <template slot-scope="scope">
-              <span>{{ scope.row.enabled ? '启用' : '禁用' }}</span>
+              <span>{{ scope.row.status ? '启用' : '禁用' }}</span>
             </template>
           </el-table-column>
           <el-table-column :label="$t('system.user.role')" align="center">
@@ -52,7 +52,7 @@
               <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">
                 {{ $t('table.edit') }}
               </el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(row.id)">
+              <el-button v-if="row.username!=='admin' && row.username!=='root'" size="mini" type="danger" @click="handleDelete(row.id)">
                 {{ $t('table.delete') }}
               </el-button>
             </template>

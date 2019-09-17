@@ -30,7 +30,7 @@ export default {
       })
     },
     submit() {
-      sysUserApi.saveOrUpdate(this.user).then(reponse => {
+      sysUserApi.saveOrUpdate(this.user, this.$route.query.rootPwd).then(reponse => {
         this.$message({
           message: '修改用户信息成功！',
           type: 'success',

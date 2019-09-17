@@ -37,7 +37,7 @@
               <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">
                 {{ $t('table.edit') }}
               </el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(row.id)">
+              <el-button v-if="row.code!=='admin' && row.code!=='root'" size="mini" type="danger" @click="handleDelete(row.id)">
                 {{ $t('table.delete') }}
               </el-button>
             </template>

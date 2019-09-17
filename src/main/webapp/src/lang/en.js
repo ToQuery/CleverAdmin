@@ -202,7 +202,7 @@ export default {
     user: {
       username: 'username',
       nickname: 'nickname',
-      enabled: 'enabled',
+      status: 'enabled',
       password: 'password',
       email: 'email',
       lastPasswordResetDate: 'lastPasswordResetDate',

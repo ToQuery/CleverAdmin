@@ -72,7 +72,7 @@ export default {
     }
   },
   created() {
-    if (this.$route.query.password === '123456') {
+    if (this.$route.query.rootPwd === '123456') {
       this.showButton = true
     }
     this.queryContent()

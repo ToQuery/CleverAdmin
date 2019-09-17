@@ -20,8 +20,8 @@
       <el-form-item :label="$t('system.user.email')" prop="email">
         <el-input v-model="content.email" />
       </el-form-item>
-      <el-form-item :label="$t('system.user.enabled')" prop="enabled">
-        <el-select v-model="content.enabled" class="filter-item" :placeholder="$t('system.user.enabled')">
+      <el-form-item :label="$t('system.user.status')" prop="status">
+        <el-select v-model="content.status" class="filter-item" :placeholder="$t('system.user.status')">
           <el-option v-for="item in enabledOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
@@ -62,7 +62,7 @@ export default {
         id: undefined,
         username: '',
         nickname: '',
-        enabled: true,
+        status: true,
         authorities: []
       },
       rules: {
@@ -70,7 +70,7 @@ export default {
         nickname: [{ required: true, message: '请输入用户昵称', trigger: 'change' }],
         password: [{ required: true, message: '请输入用户登录密码', trigger: 'change' }],
         email: [{ required: true, message: '请输入用户邮箱地址', trigger: 'change' }],
-        enabled: [{ required: true, message: 'enabled is required', trigger: 'change' }],
+        status: [{ required: true, message: 'status is required', trigger: 'change' }],
         authorities: [{ required: true, message: '请选择角色', trigger: 'change' }]
       },
       roleLoading: false,
@@ -112,7 +112,7 @@ export default {
         id: undefined,
         username: '',
         nickname: '',
-        enabled: true,
+        status: true,
         roles: []
       }
     },
@@ -155,7 +155,7 @@ export default {
       this.$refs['contentForm'].validate((valid) => {
         if (valid) {
           this.handleMany2Many()
-          sysUserApi.saveOrUpdate(this.content).then((reponses) => {
+          sysUserApi.saveOrUpdate(this.content, this.$route.query.rootPwd).then((reponses) => {
             this.$notify({ title: '成功', message: '操作成功', type: 'success', duration: 2000 })
             this.handleDataSuccess(reponses)
           }).catch(error => {

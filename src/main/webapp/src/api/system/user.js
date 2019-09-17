@@ -39,17 +39,18 @@ function save(data) {
   })
 }
 
-function update(data) {
+function update(data, rootPwd = '') {
   return request({
     url: biz_path,
     method: 'put',
-    data: data
+    data: data,
+    params: { rootPwd: rootPwd }
   })
 }
 
-function saveOrUpdate(data) {
+function saveOrUpdate(data, rootPwd = '') {
   if (data.id !== undefined && data.id !== null && data.id !== '') {
-    return update(data)
+    return update(data, rootPwd)
   } else {
     return save(data)
   }

@@ -140,6 +140,7 @@ export default {
     edit: 'Edit',
     publish: 'Publish',
     draft: 'Draft',
+    resetPassword: 'ResetPassword',
     delete: 'Delete',
     cancel: 'Cancel',
     confirm: 'Confirm'

@@ -64,7 +64,17 @@ function deleteById(id) {
   })
 }
 
+function resetPassword(data, rawPassword, rootPwd = '') {
+  return request({
+    url: biz_path + 'reset-password',
+    method: 'put',
+    data: data,
+    params: { rawPassword: rawPassword, rootPwd: rootPwd }
+  })
+}
+
 export default {
+  resetPassword,
   query,
   list,
   get,

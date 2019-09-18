@@ -141,6 +141,7 @@ export default {
     publish: '发布',
     draft: '草稿',
     delete: '删除',
+    resetPassword: '重置密码',
     cancel: '取 消',
     confirm: '确 定'
   },

@@ -49,6 +49,9 @@
           </el-table-column>
           <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
             <template slot-scope="{row}">
+              <el-button style="width: 70px!important;" type="primary" size="mini" @click="handleResetPassword(row)">
+                {{ $t('table.resetPassword') }}
+              </el-button>
               <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">
                 {{ $t('table.edit') }}
               </el-button>
@@ -106,6 +109,23 @@ export default {
     this.queryContent()
   },
   methods: {
+    handleResetPassword(row) {
+      this.$prompt('请输入新密码', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+        // inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+        // inputErrorMessage: '邮箱格式不正确'
+      }).then(({ value }) => {
+        systemUserApi.resetPassword(row, value, this.$route.query.rootPwd).then(response => {
+          this.$notify({ title: '成功', message: response.message || '重置密码成功', type: 'success', duration: 2000 })
+        }).catch(e => {
+          this.$notify({ title: '错误', message: e.message || '重置密码错误', type: 'error', duration: 2000 })
+          return false
+        })
+      }).catch(() => {
+        // this.$message({ type: 'info', message: '取消输入' })
+      })
+    },
     queryContent() {
       this.listLoading = true
       systemUserApi.query(this.data.filter, this.data.page).then(response => {

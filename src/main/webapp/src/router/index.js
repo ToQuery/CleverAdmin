@@ -73,9 +73,9 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
@@ -107,6 +107,26 @@ export const constantRoutes = [
         component: () => import('@/views/guide/index'),
         name: 'Guide',
         meta: { title: 'guide', icon: 'guide', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/user',
+    meta: { title: 'system', icon: 'guide' },
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/system/user/index'),
+        name: 'User',
+        meta: { title: 'user', icon: 'user', noCache: true }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/system/user/index'),
+        name: 'Role',
+        meta: { title: 'role', icon: 'role', noCache: true }
       }
     ]
   },
@@ -416,6 +436,7 @@ export const asyncRoutes = bizRouter.concat(asyncRoutesTemp)
 // 这里路由必须设置为最后，否则将匹配到 /404
 // { path: '*', redirect: '/404', hidden: true }
 export const redirect404Routes = [
+  // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
 

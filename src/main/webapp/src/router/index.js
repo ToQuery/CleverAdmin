@@ -7,6 +7,8 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
+import bizRouter from './modules/biz'
+import systemRouter from './modules/system'
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
@@ -71,9 +73,9 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
-    redirect: 'dashboard',
+    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
@@ -139,6 +141,12 @@ export const constantRoutes = [
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'profile', icon: 'user', noCache: true }
+      },
+      {
+        path: 'password',
+        component: () => import('@/views/profile2/index'),
+        name: 'password',
+        meta: { title: 'password', icon: 'password', noCache: true }
       }
     ]
   }
@@ -148,7 +156,8 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes = [
+const asyncRoutesTemp = [
+  systemRouter,
   {
     path: '/permission',
     component: Layout,
@@ -416,6 +425,15 @@ export const asyncRoutes = [
     ]
   },
 
+export const asyncRoutes = bizRouter.concat(asyncRoutesTemp)
+
+// ,
+// 这里必须增加一个统配路径，否则找不到指定路径
+// 前端项目区分不出因错误路径造成404，还是因未授权造成404
+// 这里路由必须设置为最后，否则将匹配到 /404
+// { path: '*', redirect: '/404', hidden: true }
+export const redirect404Routes = [
+  // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
 

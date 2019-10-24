@@ -9,7 +9,13 @@ function resolve(dir) {
 }
 
 const name = defaultSettings.title || 'Clever Web Index' // page title
-const port = 9527 // dev port
+
+// If your port is set to 80,
+// use administrator privileges to execute the command line.
+// For example, Mac: sudo npm run
+// You can change the port by the following method:
+// port = 9527 npm run dev OR npm run dev --port = 9527
+const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 
 module.exports = {
   /**
@@ -62,11 +68,15 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       // 优先匹配后台服务
       [process.env.VUE_APP_BASE_API]: {
-        target: process.env.NODE_ENV === 'development' ? `http://localhost:8080` : `http://localhost:${port}/mock`,
+        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8080`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
+      },
+      '/app': {
+        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8080`,
+        changeOrigin: true
       }
     },
     after: require('./src/main/webapp/mock/mock-server.js')

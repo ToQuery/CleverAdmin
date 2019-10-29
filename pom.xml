@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.github.toquery</groupId>
         <artifactId>clever-framework</artifactId>
-        <version>1.0.6-SNAPSHOT</version>
+        <version>1.0.7-SNAPSHOT</version>
         <!--
         如果启用，则每次去请求maven仓库，获取最新版本
         <relativePath/>
@@ -14,7 +14,7 @@
     </parent>
 
     <artifactId>clever-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>clever-web</name>
     <description>Demo project for Spring Boot</description>
 
@@ -22,7 +22,7 @@
     <properties>
 
         <java.version>1.8</java.version>
-        <clever-framework.version>1.0.6-SNAPSHOT</clever-framework.version>
+        <clever-framework.version>1.0.7-SNAPSHOT</clever-framework.version>
         <revision>${clever-framework.version}</revision>
 
         <docker.image.prefix>toquery</docker.image.prefix>

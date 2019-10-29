@@ -8,23 +8,27 @@
       label-width="90px"
       style="width: 400px; margin-left:50px;"
     >
-      <el-form-item :label="$t('system.config.configGroup')" prop="configGroup">
-        <el-input v-model="content.configGroup" />
-      </el-form-item>
       <el-form-item :label="$t('system.config.configName')" prop="configName">
         <el-input v-model="content.configName" />
       </el-form-item>
-      <el-form-item :label="$t('system.config.configValue')" prop="configValue">
-        <el-input v-model="content.configValue" />
-      </el-form-item>
       <el-form-item :label="$t('system.config.sortNum')" prop="sortNum">
         <el-input-number v-model="content.sortNum" :min="0" :max="999" :label="$t('system.config.sortNum')" />
+      </el-form-item>
+      <el-form-item
+        v-for="(config, index) in content.configMap"
+        :key="config.id"
+        :label="config.name"
+        :prop="'configMap.' + index + '.value'"
+        :rules="{ required: true, message: config.name + '不能为空', trigger: 'blur' }"
+      >
+        <el-input v-model="config.value" /><el-button @click.prevent="removeConfigMap(config)">删除</el-button>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible = false">
         {{ $t('table.cancel') }}
       </el-button>
+      <el-button @click="addConfigMap">新增配置项</el-button>
       <el-button type="primary" @click="saveOrUpdateData()">
         {{ $t('table.confirm') }}
       </el-button>
@@ -50,9 +54,8 @@ export default {
       content: {
         id: undefined,
         sortNum: 0,
-        configValue: '',
         configName: '',
-        configGroup: ''
+        configMap: [{ name: '', value: '' }]
       },
       rules: {
         sortNum: [{ required: true, message: 'sortNum is required', trigger: 'change' }],
@@ -74,13 +77,21 @@ export default {
   created() {
   },
   methods: {
+    addConfigMap() {
+      this.content.configMap.push({ name: Date.now(), value: '' })
+    },
+    removeConfigMap(item) {
+      const index = this.content.configMap.indexOf(item)
+      if (index !== -1) {
+        this.content.configMap.splice(index, 1)
+      }
+    },
     resetContent() {
       this.content = {
         id: undefined,
         sortNum: 0,
-        configValue: '',
         configName: '',
-        configGroup: ''
+        configMap: [{ name: '', value: '' }]
       }
     },
     handleShowEdit(id = undefined) {

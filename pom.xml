@@ -86,11 +86,11 @@
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-files</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-ueditor</artifactId>
         </dependency>
-        <!--
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-swagger</artifactId>

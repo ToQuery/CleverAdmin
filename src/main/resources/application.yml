@@ -8,6 +8,8 @@ app:
       - /h2-console/**
       - /app/ueditor
       - /app/files/download
+      - /example/**
+      - /test/**
   jwt:
     secret: 123456
     expiration: 6000

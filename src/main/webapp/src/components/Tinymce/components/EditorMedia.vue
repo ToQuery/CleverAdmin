@@ -15,7 +15,7 @@
         :on-success="handleSuccess"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
-        action="/app/files/upload"
+        action="/app/files/upload?fileStoreType=FILE"
       >
         <i class="el-icon-upload">&nbsp;</i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>

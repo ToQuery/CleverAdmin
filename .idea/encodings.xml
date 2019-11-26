@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../clever-framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-curd" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-demo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-files" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-front" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-minio" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-security" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-security-jwt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-swagger" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../clever-framework/clever-framework-webmvc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+  </component>
+</project>

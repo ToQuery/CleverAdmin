@@ -15,7 +15,8 @@ app:
     param:
       page-size: ps
 
-
+  files:
+    show-domain: http://127.0.0.1
 spring:
   main:
     allow-bean-definition-overriding: true

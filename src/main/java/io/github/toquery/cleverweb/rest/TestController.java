@@ -1,4 +1,4 @@
-package io.github.toquery.cleverweb.controller;
+package io.github.toquery.cleverweb.rest;
 
 import io.github.toquery.framework.webmvc.controller.AppBaseWebMvcController;
 import org.springframework.web.bind.annotation.RequestMapping;

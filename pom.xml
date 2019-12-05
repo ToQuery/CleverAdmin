@@ -31,7 +31,7 @@
 
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
-        <java.version>8</java.version>
+        <java.version>13</java.version>
         <node.version>v12.12.0</node.version>
         <npm.version>6.12.1</npm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +43,7 @@
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
+
 
     </properties>
 

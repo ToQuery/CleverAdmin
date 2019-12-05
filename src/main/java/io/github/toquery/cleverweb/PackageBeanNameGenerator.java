@@ -17,7 +17,7 @@ public class PackageBeanNameGenerator extends AnnotationBeanNameGenerator {
   public String generateBeanName(BeanDefinition definition, BeanDefinitionRegistry registry) {
     String beanClassName = Introspector.decapitalize(definition.getBeanClassName());
     if (StringUtils.startsWith(beanClassName, getPackageNamePrefix())) {
-      log.info("初始化Bean: " + beanClassName);
+      log.info("CleverWeb Package Bean Name Generator : " + beanClassName);
       return beanClassName;
     }
     return super.generateBeanName(definition, registry);

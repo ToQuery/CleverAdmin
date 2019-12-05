@@ -15,7 +15,7 @@
 
     <artifactId>clever-web</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>clever-web</name>
+    <name>CleverWeb</name>
     <description>Demo project for Spring Boot</description>
 
     <packaging>jar</packaging>
@@ -31,7 +31,7 @@
 
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
-        <java.version>13</java.version>
+        <java.version>11</java.version>
         <node.version>v12.12.0</node.version>
         <npm.version>6.12.1</npm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,16 +68,26 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
+        -->
         <dependency>
             <groupId>io.github.toquery</groupId>
-            <artifactId>clever-framework-curd</artifactId>
+            <artifactId>clever-framework-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-crud</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.toquery</groupId>
@@ -86,6 +96,10 @@
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-files</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-data-rest</artifactId>
         </dependency>
         <!--
         <dependency>

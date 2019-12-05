@@ -64,7 +64,7 @@ module.exports = {
       {
         type: 'add',
         path: WEBAPP_PATH + `src/views/biz/${name}/index.vue`,
-        templateFile: 'plop-templates/curd/view/index.hbs',
+        templateFile: 'plop-templates/crud/view/index.hbs',
         data: {
           name: name,
           fieldList: fieldList
@@ -73,7 +73,7 @@ module.exports = {
       {
         type: 'add',
         path: WEBAPP_PATH + `src/views/biz/${name}/edit.vue`,
-        templateFile: 'plop-templates/curd/view/edit.hbs',
+        templateFile: 'plop-templates/crud/view/edit.hbs',
         data: {
           name: name,
           fieldList: fieldList
@@ -82,7 +82,7 @@ module.exports = {
       {
         type: 'add',
         path: WEBAPP_PATH + `src/api/biz/${name}.js`,
-        templateFile: 'plop-templates/curd/view/api.hbs',
+        templateFile: 'plop-templates/crud/view/api.hbs',
         data: {
           name: name
         }
@@ -90,7 +90,7 @@ module.exports = {
       {
         type: 'add',
         path: JAVA_SOURCE_PATH + PACKAGE_PATH + `entity/${nameProperCase}.java`,
-        templateFile: 'plop-templates/curd/java/entity.hbs',
+        templateFile: 'plop-templates/crud/java/entity.hbs',
         data: {
           name: name,
           fieldList: fieldList,
@@ -100,7 +100,7 @@ module.exports = {
 			{
 				type: 'add',
 				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `controller/${nameProperCase}Controller.java`,
-				templateFile: 'plop-templates/curd/java/controller.hbs',
+				templateFile: 'plop-templates/crud/java/controller.hbs',
 				data: {
 					name: name,
 					fieldList: fieldList,
@@ -110,7 +110,7 @@ module.exports = {
 			{
 				type: 'add',
 				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `dao/${nameProperCase}Dao.java`,
-				templateFile: 'plop-templates/curd/java/dao.hbs',
+				templateFile: 'plop-templates/crud/java/dao.hbs',
 				data: {
 					name: name,
 					fieldList: fieldList,
@@ -120,7 +120,7 @@ module.exports = {
 			{
 				type: 'add',
 				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/I${nameProperCase}Service.java`,
-				templateFile: 'plop-templates/curd/java/iservice.hbs',
+				templateFile: 'plop-templates/crud/java/iservice.hbs',
 				data: {
 					name: name,
 					fieldList: fieldList,
@@ -130,7 +130,7 @@ module.exports = {
 			{
 				type: 'add',
 				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/impl/${nameProperCase}ServiceImpl.java`,
-				templateFile: 'plop-templates/curd/java/service.hbs',
+				templateFile: 'plop-templates/crud/java/service.hbs',
 				data: {
 					name: name,
 					fieldList: fieldList,

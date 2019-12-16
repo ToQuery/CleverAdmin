@@ -15,7 +15,6 @@ export default {
     directivePermission: '指令权限',
     icons: '图标',
     components: '组件',
-    ueditor: '百度富文本编辑器',
     tinymce: '富文本编辑器',
     markdown: 'Markdown',
     jsonEditor: 'JSON 编辑器',

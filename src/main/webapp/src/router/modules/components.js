@@ -19,12 +19,6 @@ const componentsRouter = {
       meta: { title: 'tinymce' }
     },
     {
-      path: 'ueditor',
-      component: () => import('@/views/components-demo/ueditor'),
-      name: 'UeditorDemo',
-      meta: { title: 'ueditor' }
-    },
-    {
       path: 'markdown',
       component: () => import('@/views/components-demo/markdown'),
       name: 'MarkdownDemo',

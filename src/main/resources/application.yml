@@ -7,7 +7,6 @@ app:
       - /static/**
       - /error
       - /h2-console/**
-      - /app/ueditor
       - /app/files/download
       - /example/**
       - /favicon.ico

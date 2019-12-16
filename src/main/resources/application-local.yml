@@ -34,4 +34,4 @@ mybatis:
   config-location: classpath:mybatis/config/mybatis-config.xml
 
 server:
-  port: 8081
+  port: 8080

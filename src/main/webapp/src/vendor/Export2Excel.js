@@ -145,14 +145,14 @@ export function export_table_to_excel(id) {
 }
 
 export function export_json_to_excel({
-  multiHeader = [],
-  header,
-  data,
-  filename,
-  merges = [],
-  autoWidth = true,
-  bookType = 'xlsx'
-} = {}) {
+                                       multiHeader = [],
+                                       header,
+                                       data,
+                                       filename,
+                                       merges = [],
+                                       autoWidth = true,
+                                       bookType = 'xlsx'
+                                     } = {}) {
   /* original data */
   filename = filename || 'excel-list'
   data = [...data]

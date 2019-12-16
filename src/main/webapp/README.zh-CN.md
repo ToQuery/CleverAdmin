@@ -49,7 +49,10 @@
 - 基础模板建议使用: [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)
 - 桌面端: [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
 - Typescript 版: [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template) (鸣谢: [@Armour](https://github.com/Armour))
+<<<<<<< HEAD
 - [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+=======
+>>>>>>> 2eac622216bd08838a71c4eb1843a0290550876a
 
 **`v4.1.0+`版本之后默认 master 分支将不支持国际化，有需要的请使用[i18n](https://github.com/PanJiaChen/vue-element-admin/tree/i18n)分支，它会和 master 保持同步更新**
 
@@ -165,7 +168,11 @@ cd vue-element-admin
 # 安装依赖
 npm install
 
+<<<<<<< HEAD
 # 建议不要直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
+=======
+# 建议不要直接使用 cnpm 安装以来，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
+>>>>>>> 2eac622216bd08838a71c4eb1843a0290550876a
 npm install --registry=https://registry.npm.taobao.org
 
 # 启动服务

@@ -55,10 +55,13 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
+    debugger
     return new Promise((resolve, reject) => {
+      debugger
       getInfo(state.token).then(response => {
         const { content } = response
 
+        debugger
         if (!content) {
           reject('Verification failed, please Login again.')
         }
@@ -117,10 +120,10 @@ const actions = {
   // dynamically modify permissions
   changeRoles({ commit, dispatch }, role) {
     return new Promise(async resolve => {
-      // const token = role + '-token'
+      const token = role + '-token'
 
-      // commit('SET_TOKEN', token)
-      // setToken(token)
+      commit('SET_TOKEN', token)
+      setToken(token)
 
       const { roles } = await dispatch('getInfo')
 

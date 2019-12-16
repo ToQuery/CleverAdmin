@@ -44,7 +44,7 @@ const elementIcons = [
   'time',
   'bell',
   'mobile-phone',
-  'io.github.toquery.framework.security.system.service',
+  'service',
   'view',
   'menu',
   'more',

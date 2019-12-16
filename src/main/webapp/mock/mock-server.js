@@ -49,7 +49,7 @@ module.exports = app => {
   }).on('all', (event, path) => {
     if (event === 'change' || event === 'add') {
       // eslint-disable-next-line no-mixed-spaces-and-tabs
-	  	try {
+      try {
         // remove mock routes stack
         app._router.stack.splice(mockStartIndex, mockRoutesLength)
 

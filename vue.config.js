@@ -1,8 +1,11 @@
 'use strict'
 
 const path = require('path')
+const utils = require('./webpack/utils.js');
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const defaultSettings = require('./src/main/webapp/src/settings.js')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -26,8 +29,10 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   publicPath: '/',
+  // 相对于 outputDir 的目录
   assetsDir: 'static',
-  outputDir: 'target/classes/static/',
+  outputDir: utils.root('target/classes/static/'),
+  // outputDir: 'target/classes/static/',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
 
@@ -61,6 +66,9 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    watchOptions: {
+      ignored: /node_modules/
+    },
     // hotOnly: true, //热更新（webpack已实现了，这里false即可）
     // proxy: 'http://127.0.0.1:8080',
     proxy: {
@@ -68,14 +76,14 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       // 优先匹配后台服务
       [process.env.VUE_APP_BASE_API]: {
-        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8080`,
+        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8081`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
       },
       '/app': {
-        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8080`,
+        target: process.env.NODE_ENV === 'dev-mock' ? `http://localhost:${port}/mock` : `http://localhost:8081`,
         changeOrigin: true
       }
     },
@@ -119,6 +127,23 @@ module.exports = {
       //     title: 'Clever Web',
       //     contentImage: path.join(__dirname, 'src/main/webapp/favicon.ico')
       // })
+
+      // new CopyWebpackPlugin([
+      //   { from: './node_modules/swagger-ui/dist/css', to: 'swagger-ui/dist/css' },
+      //   { from: './node_modules/swagger-ui/dist/lib', to: 'swagger-ui/dist/lib' },
+      //   { from: './node_modules/swagger-ui/dist/swagger-ui.min.js', to: 'swagger-ui/dist/swagger-ui.min.js' },
+      //   { from: './src/main/webapp//swagger-ui/', to: 'swagger-ui' },
+      //   { from: './src/main/webapp/content/', to: 'content' },
+      //   { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
+      //   { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
+      //   // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
+      //   { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
+      // ]),
+      new HtmlWebpackPlugin({
+        template: './src/main/webapp/index.html',
+        chunksSortMode: 'dependency',
+        inject: 'body'
+      }),
     ]
   },
 

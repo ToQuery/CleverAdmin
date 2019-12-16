@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CleverWebApplication<clever-web>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "io.github.toquery.cleverweb.CleverWebApplication",
+            "projectName": "clever-web",
+            "args": ""
+        }
+    ]
+}

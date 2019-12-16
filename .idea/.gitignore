@@ -13,12 +13,3 @@ workspace.xml
 /dataSources/
 /dataSources.local.xml
 # Default ignored files
-/workspace.xml
-
-compiler.xml
-$PRODUCT_WORKSPACE_FILE$
->>>>>>> upgrade-jhipster
-encodings.xml
-misc.xml
-modules.xml
-vcs.xml

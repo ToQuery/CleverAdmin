@@ -13,6 +13,7 @@ CleverWeb 即敏捷的Web，可能是最符合中国国情的首个前后端结�
 
 ## 项目概要
 
+
 项目第一条：不重复造轮子！市面上存在多个后端管理系统，前后端分离的、普通 thymeleaf 的、以及最基础的jQuery 等等，功能基本相同，互有利弊。
 
 项目采用前后端架构分离但结构结合的设计，前端使用 `vue`、`element-ui` 后端使用`spring-boot`，前端使用 panJiaChen 大神的 [vue-element-admin](github.com/panJiaChen/vue-element-admin) 项目，提供基础vue框架结构，采用 Git SubTree 模式同步更新项目修复BUG 。后端使用 `spring-boot` 全家桶，前后端使用 `JWT` 方式加密认证。同时，受[jhipster](https://www.jhipster.tech/) 项目启发，使用基于maven的插件实现前后段结构结合。

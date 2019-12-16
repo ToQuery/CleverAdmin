@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="components-container">
     <aside>
@@ -42,3 +43,4 @@ export default {
 }
 </style>
 
+-->

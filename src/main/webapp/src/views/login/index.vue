@@ -88,7 +88,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: 'admin'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '请输入用户名！' }],

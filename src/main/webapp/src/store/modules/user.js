@@ -55,13 +55,10 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
-    debugger
     return new Promise((resolve, reject) => {
-      debugger
       getInfo(state.token).then(response => {
         const { content } = response
 
-        debugger
         if (!content) {
           reject('Verification failed, please Login again.')
         }

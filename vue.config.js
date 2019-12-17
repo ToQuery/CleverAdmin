@@ -4,7 +4,7 @@ const path = require('path')
 const utils = require('./webpack/utils.js');
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const defaultSettings = require('./src/main/webapp/src/settings.js')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function resolve(dir) {
@@ -62,6 +62,15 @@ module.exports = {
   devServer: {
     port: port,
     open: true,
+
+    // https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
+    // writeToDisk: true,
+    // output: {
+    //   path: path.resolve(__dirname, './target/classes/static/'),
+    // },
+
+    // hot: true,
+    // contentBase: './target/classes/static/',
     overlay: {
       warnings: false,
       errors: true
@@ -139,32 +148,22 @@ module.exports = {
       //   // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
       //   { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
       // ]),
-      new HtmlWebpackPlugin({
-        template: './src/main/webapp/index.html',
-        chunksSortMode: 'dependency',
-        inject: 'body'
-      }),
+      // new HtmlWebpackPlugin({
+      //   template: './src/main/webapp/index.html',
+      //   chunksSortMode: 'dependency',
+      //   inject: 'body'
+      // })
     ]
   },
 
   chainWebpack: config => {
-    const cdn = {
-      // inject tinymce into index.html
-      // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
-      js: ['https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.2/tinymce.min.js']
-    }
-    config.plugin('html')
-      .tap(args => {
-        args[0].cdn = cdn
-        return args
-      })
     // FIX:
     // 1.preload,prefetch 插件和 pages 配置冲突，如果配置pages,则需要删除这两个插件，否则在项目根目录下增加public目录 index.html文件 （vue-cli默认配置）。
     // 2.如果想自定义main.js位置（默认在 根目录/src/main.js 下），则需要在 configureWebpack.entry.app 配置main.js文件路径
     //
     // TODO: need test
-    // config.plugins.delete('preload')
-    // config.plugins.delete('prefetch')
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
 
     // TODO: Remove this workaround once https://github.com/vuejs/vue-cli/issues/2463 is fixed
     // Remove preload plugins for multi-page build to prevent infinite recursion

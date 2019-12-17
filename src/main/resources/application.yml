@@ -9,6 +9,7 @@ app:
       - /h2-console/**
       - /app/files/download
       - /example/**
+      - /content/**
       - /favicon.ico
       - /test/**
   jwt:
@@ -38,7 +39,8 @@ spring:
 
 logging:
   level:
-    root: debug
-    org.springframework: debug
+    root: warn
+    org.springframework: warn
     org.springframework.security: trace
-    io.github.toquer: debug
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: debug
+    io.github.toquery: debug

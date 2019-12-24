@@ -1,11 +1,11 @@
 'use strict'
 
 const path = require('path')
-const utils = require('./webpack/utils.js');
+const utils = require('./webpack/utils.js')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 const defaultSettings = require('./src/main/webapp/src/settings.js')
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -29,7 +29,7 @@ module.exports = {
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
   publicPath: '/',
-  // 相对于 outputDir 的目录
+  // 相对于outputDir的静态资源(js、css、img、fonts)目录
   assetsDir: 'static',
   outputDir: utils.root('target/classes/static/'),
   // outputDir: 'target/classes/static/',
@@ -46,7 +46,7 @@ module.exports = {
       // page 的入口
       entry: './src/main/webapp/src/main.js',
       // 模板来源
-      template: 'src/main/webapp/public/index.html',
+      template: './src/main/webapp/index.html',
       // 在 dist/index.html 的输出
       filename: 'index.html',
       // 当使用 title 选项时，
@@ -171,6 +171,17 @@ module.exports = {
     //   config.plugins.delete(`preload-${page}`)
     //   config.plugins.delete(`prefetch-${page}`)
     // })
+
+    // 替换 public/index.html 文件位置
+    config.plugin('html')
+      .tap(args => {
+        // template: '/Users/toquery/Projects/ToQuery/clever-web/public/index.html' =>  template: './src/main/webapp/index.html'
+        args[0].template = './src/main/webapp/index.html'
+        return args
+      })
+
+    // 修复HMR
+    config.resolve.symlinks(true)
 
     // set svg-sprite-loader
     config.module

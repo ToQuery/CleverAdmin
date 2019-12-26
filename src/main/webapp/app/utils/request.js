@@ -46,13 +46,22 @@ service.interceptors.response.use(
     return response.data
   },
   error => {
-    if (error.response.status === 401) {
-      store.dispatch('user/resetToken').then(() => {
-        // Message({ message: '用户登录超时，请重新登录', type: 'error', duration: 5 * 1000 })
-        location.reload()
-      })
-    } else {
-      Message({ message: error.response.data.message || '系统错误！', type: 'error', duration: 5 * 1000 })
+    switch (error.response.status) {
+      case 401: {
+        store.dispatch('user/resetToken').then(() => {
+          // Message({ message: '用户登录超时，请重新登录', type: 'error', duration: 5 * 1000 })
+          location.reload()
+        })
+        break
+      }
+      case 404: {
+        Message({ message: '请求地址错误', type: 'error', duration: 3 * 1000 })
+        break
+      }
+      default: {
+        Message({ message: error.response.data.message || '系统错误！', type: 'error', duration: 5 * 1000 })
+        break
+      }
     }
     // 获取当前url，如果不为登录页面则提示
     // const url = window.location.href

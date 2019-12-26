@@ -3,9 +3,9 @@
 const path = require('path')
 const utils = require('./webpack/utils.js')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
-const defaultSettings = require('./src/main/webapp/src/settings.js')
+const defaultSettings = require('./src/main/webapp/app/settings.js')
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -102,12 +102,12 @@ module.exports = {
   configureWebpack: {
     name: name,
     entry: {
-      app: './src/main/webapp/src/main.js'
+      app: './src/main/webapp/app/main.js'
     },
     resolve: {
       alias: {
         '~': resolve('src/main/webapp/'),
-        '@': resolve('src/main/webapp/src/')
+        '@': resolve('src/main/webapp/app/')
       }
     },
     plugins: [
@@ -172,9 +172,11 @@ module.exports = {
     //   config.plugins.delete(`prefetch-${page}`)
     // })
 
+    // console.info(config)
     // 替换 public/index.html 文件位置
     config.plugin('html')
       .tap(args => {
+        // console.info(args)
         // template: '/Users/toquery/Projects/ToQuery/clever-web/public/index.html' =>  template: './src/main/webapp/index.html'
         args[0].template = './src/main/webapp/index.html'
         return args
@@ -186,12 +188,12 @@ module.exports = {
     // set svg-sprite-loader
     config.module
       .rule('svg')
-      .exclude.add(resolve('src/main/webapp/src/icons'))
+      .exclude.add(resolve('src/main/webapp/app/icons'))
       .end()
     config.module
       .rule('icons')
       .test(/\.svg$/)
-      .include.add(resolve('src/main/webapp/src/icons'))
+      .include.add(resolve('src/main/webapp/app/icons'))
       .end()
       .use('svg-sprite-loader')
       .loader('svg-sprite-loader')
@@ -245,7 +247,7 @@ module.exports = {
                 },
                 commons: {
                   name: 'chunk-commons',
-                  test: resolve('src/main/webapp/src/components'), // can customize your rules
+                  test: resolve('src/main/webapp/app/components'), // can customize your rules
                   minChunks: 3, //  minimum common number
                   priority: 5,
                   reuseExistingChunk: true

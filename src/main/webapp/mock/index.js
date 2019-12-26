@@ -1,5 +1,5 @@
 import Mock from 'mockjs'
-import { param2Obj } from '../src/utils'
+import { param2Obj } from '../app/utils'
 
 import systemUser from './system/user'
 import systemRole from './system/role'

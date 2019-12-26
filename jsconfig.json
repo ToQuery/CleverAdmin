@@ -4,11 +4,11 @@
     "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/main/webapp/src/*"]
+      "@/*": ["./src/main/webapp/app/*"]
     }
   },
   "include": [
-    "./src/main/webapp/src/**/*"
+    "./src/main/webapp/app/**/*"
   ],
   "exclude": ["node_modules", "dist"]
 }

@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.github.toquery</groupId>
         <artifactId>clever-framework</artifactId>
-        <version>1.0.7-SNAPSHOT</version>
+        <version>1.0.8-SNAPSHOT</version>
         <!--
         如果启用，则每次去请求maven仓库，获取最新版本
         <relativePath/>
@@ -24,20 +24,15 @@
         <revision>${clever-framework.version}</revision>
 
         <!-- Framework properties-->
-        <clever-framework.version>1.0.7-SNAPSHOT</clever-framework.version>
+        <clever-framework.version>1.0.8-SNAPSHOT</clever-framework.version>
 
         <!-- Docker properties -->
         <docker.image.prefix>toquery</docker.image.prefix>
         <dockerfile-maven-plugin.version>1.4.10</dockerfile-maven-plugin.version>
 
-        <!-- plugin properties -->
-        <frontend-maven.version>1.8.0</frontend-maven.version>
-
         <!-- Build properties -->
         <maven.version>3.0.0</maven.version>
         <java.version>8</java.version>
-        <node.version>v13.5.0</node.version>
-        <npm.version>6.13.4</npm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
@@ -68,7 +63,6 @@
             </snapshots>
         </repository>
     </repositories>
-
 
     <dependencies>
         <dependency>
@@ -108,6 +102,10 @@
         <dependency>
             <groupId>io.github.toquery</groupId>
             <artifactId>clever-framework-files</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.toquery</groupId>
+            <artifactId>clever-framework-dao</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.toquery</groupId>
@@ -156,7 +154,6 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
@@ -173,22 +170,6 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend-maven.version}</version>
-                <!-- optional -->
-                <configuration>
-                    <!--<workingDirectory>src/main/node</workingDirectory>
-                    <outputdir>src/main/resources/templates</outputdir>
-                    <installDirectory>target</installDirectory>-->
-                    <nodeVersion>${node.version}</nodeVersion>
-                    <npmVersion>${npm.version}</npmVersion>
-                    <nodeDownloadRoot>https://nodejs.org/dist/</nodeDownloadRoot>
-                    <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>
-                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                    <!--
-                    淘宝npm sha值不一致
-                    <npmRegistryURL>https://registry.npm.taobao.org</npmRegistryURL>
-                    -->
-                </configuration>
                 <executions>
                     <!-- install node and npm -->
                     <execution>

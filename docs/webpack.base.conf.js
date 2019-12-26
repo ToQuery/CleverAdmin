@@ -14,7 +14,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '~': resolve('src/main/webapp/'),
-      '@': resolve('src/main/webapp/src')
+      '@': resolve('src/main/webapp/app')
     }
   }
 }

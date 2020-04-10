@@ -1,3 +1,5 @@
+# 引入 Spring Cloud 才能使用 bootstrap.yml
+
 spring:
   output:
     ansi:

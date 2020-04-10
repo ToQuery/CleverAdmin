@@ -46,6 +46,8 @@ service.interceptors.response.use(
     return response.data
   },
   error => {
+    console.log(error)
+    debugger
     switch (error.response.status) {
       case 401: {
         store.dispatch('user/resetToken').then(() => {

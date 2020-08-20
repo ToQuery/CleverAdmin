@@ -1,4 +1,4 @@
-package {{ packageSources }}.controller;
+package {{ packageSources }}.rest;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +26,7 @@ import java.util.Set;
 */
 @RestController
 @RequestMapping("{{ dashCase name }}")
-public class {{ properCase name }}Controller extends AppBaseCurdController<I{{ properCase name }}Service, {{ properCase name }}, Long> {
+public class {{ properCase name }}Controller extends AppBaseCrudController<I{{ properCase name }}Service, {{ properCase name }}, Long> {
 
     @GetMapping
     public ResponseParam query() {

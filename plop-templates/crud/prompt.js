@@ -12,7 +12,7 @@ const PACKAGE_PATH = 'io/github/toquery/cleverweb/'
  * @returns {string}
  */
 function getPackageSources() {
-	return PACKAGE_PATH.replace(new RegExp('/',"gm"),'.').substring(0, PACKAGE_PATH.length - 1)
+  return PACKAGE_PATH.replace(new RegExp('/', 'gm'), '.').substring(0, PACKAGE_PATH.length - 1)
 }
 
 function fillField(fieldName = '', fieldType = 'String') {
@@ -38,7 +38,7 @@ function fillFields(fieldsStr) {
 }
 
 module.exports = {
-  description: '快速生成CURD功能。',
+  description: '快速生成CRUD功能。',
   prompts: [
     {
       type: 'input',
@@ -49,21 +49,21 @@ module.exports = {
     {
       type: 'input',
       name: 'fields',
-      message: '请输入字段,多个字段以逗号分隔，一个字段内以#区分类型(默认String)',
+      message: '请输入字段,多个字段以逗号分隔，一个字段内指定类型以#区分类型(默认String)',
       validate: notEmpty('fields')
     }
   ],
   actions: data => {
     const name = '{{name}}'
-		const nameProperCase = '{{properCase name}}'
+    const nameProperCase = '{{properCase name}}'
     const fieldList = fillFields(data.fields)
-		const packageSources = getPackageSources()
+    const packageSources = getPackageSources()
     console.info('成功获取到字段信息:\n', JSON.stringify(fieldList))
 
     const actions = [
       {
         type: 'add',
-        path: WEBAPP_PATH + `src/views/biz/${name}/index.vue`,
+        path: WEBAPP_PATH + `app/views/biz/${name}/index.vue`,
         templateFile: 'plop-templates/crud/view/index.hbs',
         data: {
           name: name,
@@ -72,7 +72,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: WEBAPP_PATH + `src/views/biz/${name}/edit.vue`,
+        path: WEBAPP_PATH + `app/views/biz/${name}/edit.vue`,
         templateFile: 'plop-templates/crud/view/edit.hbs',
         data: {
           name: name,
@@ -81,7 +81,7 @@ module.exports = {
       },
       {
         type: 'add',
-        path: WEBAPP_PATH + `src/api/biz/${name}.js`,
+        path: WEBAPP_PATH + `app/api/biz/${name}.js`,
         templateFile: 'plop-templates/crud/view/api.hbs',
         data: {
           name: name
@@ -94,49 +94,49 @@ module.exports = {
         data: {
           name: name,
           fieldList: fieldList,
-					packageSources: packageSources
+          packageSources: packageSources
         }
       },
-			{
-				type: 'add',
-				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `controller/${nameProperCase}Controller.java`,
-				templateFile: 'plop-templates/crud/java/controller.hbs',
-				data: {
-					name: name,
-					fieldList: fieldList,
-					packageSources: packageSources
-				}
-			},
-			{
-				type: 'add',
-				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `dao/${nameProperCase}Dao.java`,
-				templateFile: 'plop-templates/crud/java/dao.hbs',
-				data: {
-					name: name,
-					fieldList: fieldList,
-					packageSources: packageSources
-				}
-			},
-			{
-				type: 'add',
-				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/I${nameProperCase}Service.java`,
-				templateFile: 'plop-templates/crud/java/iservice.hbs',
-				data: {
-					name: name,
-					fieldList: fieldList,
-					packageSources: packageSources
-				}
-			},
-			{
-				type: 'add',
-				path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/impl/${nameProperCase}ServiceImpl.java`,
-				templateFile: 'plop-templates/crud/java/service.hbs',
-				data: {
-					name: name,
-					fieldList: fieldList,
-					packageSources: packageSources
-				}
-			}
+      {
+        type: 'add',
+        path: JAVA_SOURCE_PATH + PACKAGE_PATH + `rest/${nameProperCase}Rest.java`,
+        templateFile: 'plop-templates/crud/java/rest.hbs',
+        data: {
+          name: name,
+          fieldList: fieldList,
+          packageSources: packageSources
+        }
+      },
+      {
+        type: 'add',
+        path: JAVA_SOURCE_PATH + PACKAGE_PATH + `dao/${nameProperCase}Dao.java`,
+        templateFile: 'plop-templates/crud/java/dao.hbs',
+        data: {
+          name: name,
+          fieldList: fieldList,
+          packageSources: packageSources
+        }
+      },
+      {
+        type: 'add',
+        path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/I${nameProperCase}Service.java`,
+        templateFile: 'plop-templates/crud/java/iservice.hbs',
+        data: {
+          name: name,
+          fieldList: fieldList,
+          packageSources: packageSources
+        }
+      },
+      {
+        type: 'add',
+        path: JAVA_SOURCE_PATH + PACKAGE_PATH + `service/impl/${nameProperCase}ServiceImpl.java`,
+        templateFile: 'plop-templates/crud/java/service.hbs',
+        data: {
+          name: name,
+          fieldList: fieldList,
+          packageSources: packageSources
+        }
+      }
     ]
     return actions
   }

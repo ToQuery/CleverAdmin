@@ -1,4 +1,4 @@
-import defaultSettings from '@/settings'
+import defaultSettings from '@/config/settings'
 import i18n from '@/lang'
 
 const title = defaultSettings.title || 'Vue Element Admin'

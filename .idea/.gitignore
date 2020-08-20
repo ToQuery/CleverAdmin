@@ -13,3 +13,5 @@ workspace.xml
 /dataSources/
 /dataSources.local.xml
 # Default ignored files
+/jarRepositories.xml
+/inspectionProfiles/Project_Default.xml

@@ -3,7 +3,7 @@
 const path = require('path')
 const utils = require('./webpack/utils.js')
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
-const defaultSettings = require('./src/main/webapp/app/settings.js')
+const defaultSettings = require('./src/main/webapp/app/config/settings.js')
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 

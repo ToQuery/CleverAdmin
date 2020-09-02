@@ -57,7 +57,7 @@ export default {
         },
         page: {
           pageSize: 10,
-          pageNumber: 1,
+          pageNum: 1,
           totalElements: 0,
           totalPages: 0
         },

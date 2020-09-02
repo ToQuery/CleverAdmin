@@ -62,7 +62,7 @@
           </el-table-column>
         </el-table>
 
-        <pagination v-show="data.page.totalElements > 0" :total="data.page.totalElements" :page.sync="data.page.pageNumber" :limit.sync="data.page.pageSize" @pagination="queryContent" />
+        <pagination v-show="data.page.totalElements > 0" :total="data.page.totalElements" :page.sync="data.page.pageNum" :limit.sync="data.page.pageSize" @pagination="queryContent" />
         <edit-vue ref="editVue" @success="handleEditSuccess" />
       </div>
     </el-card>
@@ -92,7 +92,7 @@ export default {
         },
         page: {
           pageSize: 10,
-          pageNumber: 1,
+          pageNum: 1,
           totalElements: 0,
           totalPages: 0
         },
@@ -145,7 +145,7 @@ export default {
       this.queryContent()
     },
     handleFilter() {
-      this.data.page.pageNumber = 1
+      this.data.page.pageNum = 1
       this.queryContent()
     },
     handleDelete(id) {

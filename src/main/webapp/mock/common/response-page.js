@@ -1,7 +1,7 @@
-function allPage(pageSize, pageNumber, totalElements, totalPages) {
+function allPage(pageSize, pageNum, totalElements, totalPages) {
   return {
     pageSize: pageSize,
-    pageNumber: pageNumber,
+    pageNum: pageNum,
     totalElements: totalElements,
     totalPages: totalPages
   }
@@ -10,7 +10,7 @@ function allPage(pageSize, pageNumber, totalElements, totalPages) {
 function page(page) {
   return {
     pageSize: page.pageSize,
-    pageNumber: page.pageNumber,
+    pageNum: page.pageNum,
     totalElements: page.totalElements,
     totalPages: page.totalPages
   }

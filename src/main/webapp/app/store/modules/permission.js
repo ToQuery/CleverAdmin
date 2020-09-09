@@ -53,7 +53,25 @@ const actions = {
     return new Promise(resolve => {
       let accessedRoutes
       // 同时具有这两个角色才能显示前端所有菜单
-      if (roles.includes('admin') && roles.includes('root')) {
+      if (roles.includes('admin')) {
+        accessedRoutes = asyncRoutes || []
+      } else {
+        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles, false)
+      }
+      // 最后添加 404 通配符跳转
+      accessedRoutes = accessedRoutes.concat(redirect404Routes)
+      commit('SET_ROUTES', accessedRoutes)
+      resolve(accessedRoutes)
+    })
+  },
+  generateAuthorities({ commit }, authorities) {
+    const roles = authorities.map(function(cur, index, arr) {
+      return cur.code
+    })
+    return new Promise(resolve => {
+      let accessedRoutes
+      // 同时具有这两个角色才能显示前端所有菜单
+      if (roles.includes('admin')) {
         accessedRoutes = asyncRoutes || []
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles, false)

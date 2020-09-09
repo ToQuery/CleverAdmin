@@ -27,11 +27,6 @@
               <span>{{ scope.row.name }}</span>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('system.role.code')" prop="code" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.code }}</span>
-            </template>
-          </el-table-column>
           <el-table-column :label="$t('table.actions')" align="center" class-name="small-padding fixed-width">
             <template slot-scope="{row}">
               <el-button type="primary" size="mini" @click="handleShowEdit(row.id)">

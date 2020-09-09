@@ -16,7 +16,6 @@ public class CleverWebApplication {
 
   public static void main(String[] args) {
     new SpringApplicationBuilder(CleverWebApplication.class)
-      .beanNameGenerator(new PackageBeanNameGenerator())
       .run(args);
 //     SpringApplication.run(CleverWebApplication.class, args);
   }

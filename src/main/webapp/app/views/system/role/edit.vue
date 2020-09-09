@@ -11,9 +11,6 @@
       <el-form-item :label="$t('system.role.name')" prop="name">
         <el-input v-model="content.name" />
       </el-form-item>
-      <el-form-item :label="$t('system.role.code')" prop="code">
-        <el-input v-model="content.code" />
-      </el-form-item>
       <el-form-item :label="$t('system.role.user')">
         <div v-if="content.users.length > 0">
           <el-tag v-for="user in content.users" :key="user.id" :label="user.username" :value="user.id"> {{ user.username }} : {{ user.nickname }} </el-tag> &nbsp;&nbsp;
@@ -58,14 +55,12 @@ export default {
         menuIds: [],
         id: undefined,
         name: '',
-        code: '',
         menus: [],
         users: []
       },
       menuTreeList: [],
       rules: {
-        name: [{ required: true, message: 'loginName is required', trigger: 'change' }],
-        code: [{ required: true, message: 'userName is required', trigger: 'change' }]
+        name: [{ required: true, message: 'loginName is required', trigger: 'change' }]
       }
     }
   },
@@ -88,7 +83,6 @@ export default {
         menuIds: [],
         id: undefined,
         name: '',
-        code: '',
         menus: [],
         users: []
       }

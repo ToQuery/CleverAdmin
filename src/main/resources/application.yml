@@ -1,6 +1,6 @@
 app:
   security:
-    whitelist:
+    ignoring:
       - /
       - /management/**
       - /manifest.webapp
@@ -58,33 +58,66 @@ management:
         all: 0, 0.5, 0.75, 0.95, 0.99, 1.0
     tags:
       application: ${spring.application.name}
-    web:
-      server:
-        auto-time-requests: true
-
-
+#    web:
+#      server:
+#        auto-time-requests: true
 
 spring:
   application:
     name: CleverWeb
-  thymeleaf:
-    mode: HTML
-  output:
-    ansi:
-      console-available: true
-  main:
-    allow-bean-definition-overriding: true
+
   profiles:
     active: local
+
+  thymeleaf:
+    mode: HTML
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+  main:
+    allow-bean-definition-overriding: true
+
   servlet:
     multipart:
       maxFileSize: "200MB"
       maxRequestSize: "200MB"
+
   mvc:
-    date-format: yyyy-MM-dd HH:mm:ss
+    format:
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+      date-time: yyyy-MM-dd HH:mm:ss
+
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        enable_lazy_load_no_trans: true
+
+  data:
+    rest:
+      defaultMediaType: application/json
+
+  hateoas:
+    use-hal-as-default-json-media-type: false
+
+
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/config/mybatis-config.xml
 
 logging:
   level:

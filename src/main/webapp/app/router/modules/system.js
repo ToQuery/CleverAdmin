@@ -6,7 +6,7 @@ const systemRouter = {
   path: '/system',
   component: Layout,
   redirect: '/system/user',
-  meta: { title: 'system', icon: 'guide', roles: ['root', 'system', 'user', 'role', 'menu'] },
+  meta: { title: 'system', icon: 'guide', roles: ['root', 'system', 'user', 'role', 'menu', 'log', 'config'] },
   children: [
     {
       path: 'user',
@@ -36,7 +36,7 @@ const systemRouter = {
       path: 'log',
       component: () => import('@/views/system/log/index'),
       name: 'Log',
-      meta: { title: 'log', icon: 'form', noCache: true, roles: ['root', 'config'] }
+      meta: { title: 'log', icon: 'form', noCache: true, roles: ['root', 'log'] }
     }
   ]
 }

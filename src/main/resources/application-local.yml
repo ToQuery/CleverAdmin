@@ -2,7 +2,7 @@
 spring:
   datasource:
     # type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/clever_web?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
@@ -20,3 +20,5 @@ logging:
 
 server:
   port: 8081
+  servlet:
+    context-path: /api

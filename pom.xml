@@ -13,9 +13,9 @@
         -->
     </parent>
 
-    <artifactId>clever-web</artifactId>
+    <artifactId>clever-admin</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <name>CleverWeb</name>
+    <name>CleverAdmin</name>
     <description>Demo project for Spring Boot</description>
 
     <packaging>jar</packaging>
